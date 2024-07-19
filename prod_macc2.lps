@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectSession>
+    <PathDelim Value="\"/>
+    <Version Value="12"/>
+    <BuildModes Active="Default"/>
+    <Units>
+      <Unit>
+        <Filename Value="prod_macc2.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="7"/>
+        <CursorPos X="66" Y="23"/>
+        <UsageCount Value="44"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="main.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Fmain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="2581"/>
+        <CursorPos X="38" Y="2599"/>
+        <UsageCount Value="44"/>
+        <Bookmarks Count="1">
+          <Item0 X="11" Y="2600" ID="1"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="dm.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="fd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="141"/>
+        <CursorPos X="17" Y="155"/>
+        <UsageCount Value="44"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\units\units.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="6"/>
+        <TopLine Value="35"/>
+        <CursorPos Y="35"/>
+        <UsageCount Value="44"/>
+        <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="helps.lfm"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="44"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit>
+      <Unit>
+        <Filename Value="helps.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Fel"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="44"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="login.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Flog"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="44"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\prod_macch\dm.pas"/>
+        <ComponentName Value="fd"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="DataModule"/>
+        <EditorIndex Value="3"/>
+        <TopLine Value="536"/>
+        <CursorPos Y="553"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\prod_macch\main.pas"/>
+        <ComponentName Value="Fmain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="2178"/>
+        <CursorPos X="20" Y="2182"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\Users\produzione2\AppData\Local\lazarus\onlinepackagemanager\packages\jvcllaz\design\JvCustomControls\jvoutlookbarform.pas"/>
+        <UnitName Value="JvOutlookBarForm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="60"/>
+        <CursorPos X="59" Y="79"/>
+        <UsageCount Value="8"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\Users\produzione2\AppData\Local\lazarus\onlinepackagemanager\packages\ct4laz\pl_components\pl_graphics32\source\GR32_PolygonsAggLite.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="9"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\prod\lazarus\prgs\prod_macch\oldvers\prod_macch_2023_08_25\main.pas"/>
+        <ComponentName Value="Fmain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
+      <Unit>
+        <Filename Value="C:\prod\lazarus\prgs\prod_macch\oldvers\21-12-2023\main.pas"/>
+        <ComponentName Value="Fmain"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
+      </Unit>
+    </Units>
+    <JumpHistory HistoryIndex="29">
+      <Position>
+        <Filename Value="..\prod_macch\main.pas"/>
+        <Caret Line="675" Column="21" TopLine="655"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="2641" Column="12" TopLine="2631"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="2044" Column="15" TopLine="2009"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="2598" Column="19" TopLine="2582"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="255" Column="13" TopLine="221"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="257" Column="13" TopLine="225"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="259" Column="13" TopLine="227"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="261" Column="13" TopLine="229"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="263" Column="13" TopLine="231"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="303" Column="15" TopLine="271"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="318" Column="17" TopLine="286"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="363" Column="16" TopLine="331"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="447" Column="83" TopLine="414"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="478" Column="29" TopLine="444"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="969" Column="55" TopLine="936"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1014" Column="69" TopLine="976"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="568" Column="43" TopLine="536"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="587" Column="48" TopLine="555"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="591" Column="50" TopLine="559"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="612" Column="39" TopLine="580"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="649" Column="39" TopLine="617"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="681" Column="22" TopLine="649"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="725" Column="53" TopLine="693"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="754" Column="23" TopLine="722"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="792" Column="48" TopLine="760"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1221" Column="22" TopLine="1188"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="151" Column="163" TopLine="131"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="154" Column="17" TopLine="140"/>
+      </Position>
+    </JumpHistory>
+    <RunParams>
+      <FormatVersion Value="2"/>
+      <Modes ActiveMode="default">
+        <Mode Name="default">
+          <local>
+            <CommandLineParams Value="macc=2 ut=mat §§ çaplanexmoi"/>
+          </local>
+        </Mode>
+      </Modes>
+    </RunParams>
+    <HistoryLists>
+      <List Name="LaunchingApplication" Type="File" Count="1">
+        <Item1 Value="C:\WINDOWS\system32\cmd.exe /C ${TargetCmdLine}"/>
+      </List>
+      <List Name="CommandLineParameters" Count="2">
+        <Item1 Value="macc=2 ut=mat §§ çaplanexmoi"/>
+        <Item2 Value="mac=2 ut=mat §§ çaplanexmoi"/>
+      </List>
+    </HistoryLists>
+  </ProjectSession>
+</CONFIG>

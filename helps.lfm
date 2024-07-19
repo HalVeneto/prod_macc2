@@ -1,0 +1,256 @@
+object Fel: TFel
+  Left = 412
+  Height = 433
+  Top = 205
+  Width = 520
+  BorderIcons = [biSystemMenu]
+  Caption = 'Fel'
+  ClientHeight = 433
+  ClientWidth = 520
+  Constraints.MinHeight = 350
+  Constraints.MinWidth = 520
+  OnShow = FormShow
+  LCLVersion = '3.4.0.0'
+  object dbgH: TRxDBGrid
+    Left = 3
+    Height = 391
+    Top = 0
+    Width = 514
+    ColumnDefValues.BlobText = '(blob)'
+    TitleButtons = False
+    AutoSort = True
+    KeyStrokes = <    
+      item
+        Command = rxgcShowFindDlg
+        ShortCut = 16454
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowColumnsDlg
+        ShortCut = 16471
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowFilterDlg
+        ShortCut = 16468
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowSortDlg
+        ShortCut = 16467
+        Enabled = True
+      end    
+      item
+        Command = rxgcShowQuickFilter
+        ShortCut = 16465
+        Enabled = True
+      end    
+      item
+        Command = rxgcHideQuickFilter
+        ShortCut = 16456
+        Enabled = True
+      end    
+      item
+        Command = rxgcSelectAll
+        ShortCut = 16449
+        Enabled = True
+      end    
+      item
+        Command = rxgcDeSelectAll
+        ShortCut = 16429
+        Enabled = True
+      end    
+      item
+        Command = rxgcInvertSelection
+        ShortCut = 16426
+        Enabled = True
+      end    
+      item
+        Command = rxgcOptimizeColumnsWidth
+        ShortCut = 16427
+        Enabled = True
+      end    
+      item
+        Command = rxgcCopyCellValue
+        ShortCut = 16451
+        Enabled = True
+      end>
+    FooterOptions.Color = clWhite
+    FooterOptions.DrawFullLine = True
+    SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+    SearchOptions.FromStart = True
+    OptionsRx = [rdgAllowColumnsForm, rdgHighlightFocusCol, rdgAllowSortForm, rdgCaseInsensitiveSort, rdgWordWrap]
+    FooterColor = clWhite
+    AlternateColor = clForm
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    AutoAdvance = aaNone
+    AutoEdit = False
+    Color = clSilver
+    DrawFullLine = True
+    FocusColor = clRed
+    SelectedColor = clHighlight
+    DataSource = dsZqH
+    DefaultColWidth = 200
+    FixedCols = 0
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgAlwaysShowSelection, dgCancelOnExit, dgDisableDelete, dgDisableInsert, dgDisplayMemoText]
+    ParentFont = False
+    ReadOnly = True
+    Scrollbars = ssVertical
+    TabOrder = 0
+    TitleFont.CharSet = ANSI_CHARSET
+    TitleFont.Color = clBlack
+    TitleFont.Height = -15
+    TitleFont.Name = 'Calibri'
+    TitleFont.Pitch = fpVariable
+    TitleFont.Quality = fqDraft
+    TitleFont.Style = [fsItalic]
+    OnDblClick = dbgHDblClick
+    OnKeyDown = dbgHKeyDown
+  end
+  object Ecerca: TEdit
+    Left = 3
+    Height = 27
+    Top = 395
+    Width = 164
+    Anchors = [akLeft, akRight, akBottom]
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+  end
+  object Bcerca: TButton
+    Left = 167
+    Height = 28
+    Top = 394
+    Width = 104
+    Anchors = [akRight, akBottom]
+    Caption = 'cerca'
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+    OnClick = BcercaClick
+  end
+  object Bclose: TSpeedButton
+    Left = 459
+    Height = 28
+    Top = 394
+    Width = 58
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Left = 3
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 3
+    BorderSpacing.Bottom = 3
+    BorderSpacing.Around = 3
+    BorderSpacing.InnerBorder = 3
+    Caption = 'annulla'
+    Color = clBlack
+    Flat = True
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clSilver
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    Transparent = False
+    OnClick = BcloseClick
+    ParentBidiMode = False
+    ParentFont = False
+  end
+  object Bflt: TSpeedButton
+    Left = 272
+    Height = 28
+    Top = 394
+    Width = 82
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Left = 3
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 3
+    BorderSpacing.Bottom = 3
+    BorderSpacing.Around = 3
+    BorderSpacing.InnerBorder = 3
+    Caption = 'filtra'
+    Color = clSilver
+    Flat = True
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    Transparent = False
+    OnClick = BfltClick
+    ParentBidiMode = False
+    ParentFont = False
+  end
+  object Lhint: TLabel
+    Left = 3
+    Height = 15
+    Top = 418
+    Width = 292
+    Anchors = [akLeft, akBottom]
+    Caption = 'la ricerca viene fatta nella parte iniziale della descrizione'
+    ParentColor = False
+    Visible = False
+  end
+  object Bflt1: TSpeedButton
+    Left = 369
+    Height = 28
+    Top = 394
+    Width = 82
+    Anchors = [akRight, akBottom]
+    BorderSpacing.Left = 3
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 3
+    BorderSpacing.Bottom = 3
+    BorderSpacing.Around = 3
+    BorderSpacing.InnerBorder = 3
+    Caption = 'conferma'
+    Color = clBlack
+    Flat = True
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clWhite
+    Font.Height = -16
+    Font.Name = 'Calibri'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    Font.Style = [fsBold]
+    Transparent = False
+    OnClick = Bok
+    ParentBidiMode = False
+    ParentFont = False
+  end
+  object dsZqH: TDataSource
+    DataSet = zqH
+    Left = 232
+    Top = 208
+  end
+  object zqH: TSQLQuery
+    FieldDefs = <>
+    Database = fd.PQConn
+    Transaction = fd.SQLTransact
+    Params = <>
+    Macros = <>
+    Left = 168
+    Top = 208
+  end
+end

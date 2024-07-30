@@ -81,13 +81,14 @@ type
     Ttempi: TSQLQuery;
     Trtem: TSQLQuery;
     Ttempi1: TSQLQuery;
+    Ttempi1DesLav: TStringField;
     Ttempialle1: TTimeField;
     Ttempicod1: TFloatField;
     Ttempictrmin1: TFloatField;
     Ttempictrore1: TFloatField;
     Ttempidalle1: TTimeField;
     Ttempidata1: TDateField;
-    TtempiDesLav1: TWideStringField;
+    TtempiDesLav: TStringField;
     TtempiDesNote1: TWideStringField;
     Ttempidessost1: TMemoField;
     Ttempilav1: TStringField;
@@ -111,7 +112,6 @@ type
     Ttempictrore: TFloatField;
     Ttempidalle: TTimeField;
     Ttempidata: TDateField;
-    TtempiDesLav: TWideStringField;
     TtempiDesNote: TWideStringField;
     Ttempidessost: TMemoField;
     Ttempilav: TStringField;
@@ -159,15 +159,20 @@ var
   clOrange:TColor;
   stop_timer:boolean;
   rcfg:cfg_type;
+  reg_rapida_attiva:boolean;
 
+  //procedure sqgo(sq:TSqlQuery; tr:TSqlTransaction; s:WideString; az:string);
   procedure zgo(sq:TSqlQuery; s:widestring; az:string);
   function maxCodNum(tblName,campo:string; tbl:TSqlQuery):longint;
 
 implementation
 
+uses
+  Dialogs; //solo per showmessage e per debug
+
 {$R *.lfm}
 
-procedure zgo(sq:TSqlQuery; s:WideString; az:string);
+(* old: procedure zgo(sq:TSqlQuery; s:WideString; az:string);
 begin
   sq.Close;
   sq.SQL.Clear;
@@ -179,6 +184,63 @@ begin
   else
     if az='ex' then
       sq.ExecSQL
+    else
+      mess('impossibile eseguire query - azione "'+az+'" sconosciuta','attenzione',_icons);
+end; *)
+
+(*procedure sqgo(sq:TSqlQuery; tr:TSqlTransaction; s:WideString; az:string);
+begin
+  if tr.Active then
+    tr.Rollback;
+  sq.Close;
+  sq.SQL.Clear;
+  sq.SQL.Add(s);
+  if az='op' then begin
+    sq.Open;
+    sq.First;
+    end
+  else
+    if az='ex' then begin
+      try
+        sq.SQLTransaction.StartTransaction;
+        sq.ExecSQL;
+        sq.SQLTransaction.Commit;
+      except
+        on E: Exception do begin
+          tr.Rollback;
+          showMessage('SQL error: ' + E.Message);
+        end;
+      end;
+      end
+    else
+      mess('impossibile eseguire query - azione "'+az+'" sconosciuta','attenzione',_icons);
+end;*)
+
+
+procedure zgo(sq:TSqlQuery; s:WideString; az:string);
+begin
+  //if fd.SQLTransact.Active then
+    //fd.SQLTransact.Rollback;
+  //fd.SQLTransact.StartTransaction;
+  sq.Close;
+  sq.SQL.Clear;
+  sq.SQL.Add(s);
+  if az='op' then begin
+    sq.Open;
+    sq.First;
+    end
+  else
+    if az='ex' then begin
+      try
+        sq.ExecSQL;
+        //sq.SQLTransaction.Commit;
+      except
+        on E: Exception do begin
+          //fd.SQLTransact.Rollback;
+          showMessage('SQL error: ' + E.Message);
+        end;
+      end;
+      end
     else
       mess('impossibile eseguire query - azione "'+az+'" sconosciuta','attenzione',_icons);
 end;
@@ -237,13 +299,14 @@ var
   cod:string;
   des,s:widestring;
 begin
+  (* nb2: dà err. quando si rientra da Fmot, sia in desnote che deslav
   des:=trim(TtempiNote.AsString);
   if length(des)>1 then
     if des[length(des)]='[' then //a volte resta...
       des:=copy(des,1,length(des)-1);
-  TtempiDesNote.Value:=des;
+  TtempiDesNote.Value:=des; *)
 
-  cod:=TtempiLav.Text;
+  (* cod:=TtempiLav.Text;
   if trim(cod)='' then
     TtempiDesLav.Value:=''
   else
@@ -252,13 +315,19 @@ begin
       TtempiDesLav.Value:=TopDescr.Text
     else
       TtempiDesLav.Value:=cod+' ???';}
-    s:='select descr from op where cod='+qs(TtempiLav.Text);
-    zgo(zq,s,'op');
+    s:='select descr from op where cod='+qs(cod);
+    deb(s);
+    zq.Close;
+    zq.SQL.Clear;
+    zq.SQL.Add(s);
+    zq.Open;
+    deb('query ok');
     if zq.IsEmpty then
       TtempiDesLav.Value:=''
     else
       TtempiDesLav.Value:=vts(zq['descr']);
   end;
+  deb('fine'); *)
 end;
 
 function maxCodNum(tblName,campo:string; tbl:TSqlQuery):longint;

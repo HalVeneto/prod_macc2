@@ -165,6 +165,7 @@ object Fmain: TFmain
       ClientHeight = 711
       ClientWidth = 1274
       object dbgInd: TDBGrid
+        Tag = 88
         Left = 0
         Height = 536
         Top = 0
@@ -191,7 +192,7 @@ object Fmain: TFmain
             MaxSize = 400
             Title.Caption = 'note'
             Width = 450
-            FieldName = 'Des2'
+            FieldName = 'Note'
           end        
           item
             Alignment = taCenter
@@ -207,19 +208,6 @@ object Fmain: TFmain
             Width = 100
             FieldName = 'Comm'
             DisplayFormat = '#######'
-          end        
-          item
-            Font.CharSet = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -21
-            Font.Name = 'Tahoma'
-            Font.Pitch = fpVariable
-            Font.Quality = fqDraft
-            Font.Style = [fsBold]
-            Title.Caption = 'disegno'
-            Width = 0
-            Visible = False
-            FieldName = 'Des2'
           end        
           item
             Font.CharSet = ANSI_CHARSET
@@ -266,6 +254,36 @@ object Fmain: TFmain
           end        
           item
             Alignment = taCenter
+            Tag = 77
+            Title.Alignment = taCenter
+            Title.Font.CharSet = ANSI_CHARSET
+            Title.Font.Color = clBlack
+            Title.Font.Height = -13
+            Title.Font.Name = 'Calibri'
+            Title.Font.Pitch = fpVariable
+            Title.Font.Quality = fqDraft
+            Title.Font.Style = [fsItalic]
+            Title.MultiLine = True
+            Title.Caption = 'mis. da fare'
+            FieldName = 'CtrlTodo'
+          end        
+          item
+            Alignment = taCenter
+            Tag = 88
+            Title.Alignment = taCenter
+            Title.Font.CharSet = ANSI_CHARSET
+            Title.Font.Color = clBlack
+            Title.Font.Height = -13
+            Title.Font.Name = 'Calibri'
+            Title.Font.Pitch = fpVariable
+            Title.Font.Quality = fqDraft
+            Title.Font.Style = [fsItalic]
+            Title.MultiLine = True
+            Title.Caption = 'mis. fatte'
+            FieldName = 'CtrlDone'
+          end        
+          item
+            Alignment = taCenter
             Font.CharSet = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -16
@@ -286,6 +304,10 @@ object Fmain: TFmain
           item
             Title.Caption = 'reg. del planner (sched.pas)'
             FieldName = 'Cod'
+          end        
+          item
+            Title.Caption = 'RigaLav'
+            FieldName = 'RigaLav'
           end        
           item
             ButtonStyle = cbsButtonColumn
@@ -317,6 +339,8 @@ object Fmain: TFmain
         TitleFont.Quality = fqDraft
         TitleFont.Style = [fsItalic]
         OnCellClick = dbgIndCellClick
+        OnEditButtonClick = dbgIndEditButtonClick
+        OnKeyDown = dbgIndKeyDown
         OnPrepareCanvas = dbgIndPrepareCanvas
       end
       object pNav: TBCPanel
@@ -1562,10 +1586,10 @@ object Fmain: TFmain
           ParentFont = False
         end
         object dbtLav: TDBText
-          Left = 88
-          Height = 19
-          Top = 40
-          Width = 47
+          Left = 16
+          Height = 1
+          Top = 24
+          Width = 1
           DataField = 'DesLav'
           DataSource = fd.dsTempi
           Font.CharSet = ANSI_CHARSET
@@ -1577,6 +1601,7 @@ object Fmain: TFmain
           Font.Style = [fsBold]
           ParentColor = False
           ParentFont = False
+          Visible = False
         end
         object dbtNoteLav: TDBText
           Left = 8
@@ -1613,6 +1638,7 @@ object Fmain: TFmain
           ChildSizing.ControlsPerLine = 3
           Columns = 3
           DataField = 'tipo'
+          DataSource = fd.dsTempi
           Font.CharSet = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -15
@@ -1784,6 +1810,8 @@ object Fmain: TFmain
             ParentFont = False
             TabOrder = 0
             Text = 'Ec1'
+            OnEnter = Ec1Enter
+            OnExit = Ec1Exit
           end
           object Ec2: TEdit
             Tag = 2
@@ -1801,6 +1829,8 @@ object Fmain: TFmain
             ParentFont = False
             TabOrder = 1
             Text = 'Ec2'
+            OnEnter = Ec2Enter
+            OnExit = Ec1Exit
           end
           object Ec3: TEdit
             Tag = 3
@@ -1818,6 +1848,8 @@ object Fmain: TFmain
             ParentFont = False
             TabOrder = 2
             Text = 'Ec3'
+            OnEnter = Ec3Enter
+            OnExit = Ec1Exit
           end
           object Ec4: TEdit
             Tag = 4
@@ -1835,6 +1867,8 @@ object Fmain: TFmain
             ParentFont = False
             TabOrder = 3
             Text = 'Ec4'
+            OnEnter = Ec4Enter
+            OnExit = Ec1Exit
           end
           object Ec5: TEdit
             Tag = 5
@@ -1852,6 +1886,8 @@ object Fmain: TFmain
             ParentFont = False
             TabOrder = 4
             Text = 'Ec5'
+            OnEnter = Ec5Enter
+            OnExit = Ec1Exit
           end
           object Ec6: TEdit
             Tag = 6
@@ -1869,6 +1905,8 @@ object Fmain: TFmain
             ParentFont = False
             TabOrder = 5
             Text = 'Ec6'
+            OnEnter = Ec6Enter
+            OnExit = Ec1Exit
           end
           object Ldis1: TLabel
             Left = 104
@@ -2399,6 +2437,7 @@ object Fmain: TFmain
             }
             GlyphAlignment = bcaLeftCenter
             GlyphMargin = 0
+            OnClick = BokC1Click
             ParentColor = False
             Rounding.RoundX = 12
             Rounding.RoundY = 12
@@ -2828,6 +2867,7 @@ object Fmain: TFmain
             }
             GlyphAlignment = bcaLeftCenter
             GlyphMargin = 0
+            OnClick = BokC1Click
             ParentColor = False
             Rounding.RoundX = 12
             Rounding.RoundY = 12
@@ -3053,6 +3093,7 @@ object Fmain: TFmain
             }
             GlyphAlignment = bcaLeftCenter
             GlyphMargin = 0
+            OnClick = BokC1Click
             ParentColor = False
             Rounding.RoundX = 12
             Rounding.RoundY = 12
@@ -3278,6 +3319,7 @@ object Fmain: TFmain
             }
             GlyphAlignment = bcaLeftCenter
             GlyphMargin = 0
+            OnClick = BokC1Click
             ParentColor = False
             Rounding.RoundX = 12
             Rounding.RoundY = 12
@@ -3503,6 +3545,7 @@ object Fmain: TFmain
             }
             GlyphAlignment = bcaLeftCenter
             GlyphMargin = 0
+            OnClick = BokC1Click
             ParentColor = False
             Rounding.RoundX = 12
             Rounding.RoundY = 12
@@ -3728,6 +3771,7 @@ object Fmain: TFmain
             }
             GlyphAlignment = bcaLeftCenter
             GlyphMargin = 0
+            OnClick = BokC1Click
             ParentColor = False
             Rounding.RoundX = 12
             Rounding.RoundY = 12
@@ -3772,6 +3816,8 @@ object Fmain: TFmain
           Font.Style = [fsBold]
           ItemHeight = 23
           MaxLength = 0
+          OnEnter = cbLavEnter
+          OnExit = cbLavExit
           ParentFont = False
           Sorted = True
           TabOrder = 5
@@ -3994,6 +4040,7 @@ object Fmain: TFmain
           GlyphAlignment = bcaCenterTop
           GlyphOldPlacement = False
           GlyphMargin = 0
+          OnClick = BokLavClick
           ParentColor = False
           Rounding.RoundX = 12
           Rounding.RoundY = 12
@@ -4035,6 +4082,7 @@ object Fmain: TFmain
           Font.Quality = fqDraft
           Font.Style = [fsBold]
           Transparent = False
+          OnClick = BatteseClick
           ShowHint = True
           ParentFont = False
           ParentShowHint = False
@@ -4061,6 +4109,7 @@ object Fmain: TFmain
           Font.Quality = fqDraft
           Font.Style = [fsBold]
           Transparent = False
+          OnClick = BproduttClick
           ShowHint = True
           ParentFont = False
           ParentShowHint = False
@@ -4081,6 +4130,7 @@ object Fmain: TFmain
           Font.Quality = fqDraft
           Font.Style = [fsBold]
           Transparent = False
+          OnClick = BnonProduttClick
           ShowHint = True
           ParentFont = False
           ParentShowHint = False
@@ -4101,6 +4151,7 @@ object Fmain: TFmain
           Font.Quality = fqDraft
           Font.Style = [fsBold]
           Transparent = False
+          OnClick = BallLavClick
           ShowHint = True
           ParentFont = False
           ParentShowHint = False
@@ -4324,6 +4375,7 @@ object Fmain: TFmain
           GlyphAlignment = bcaCenterTop
           GlyphOldPlacement = False
           GlyphMargin = 0
+          OnClick = BokOreClick
           ParentColor = False
           Rounding.RoundX = 12
           Rounding.RoundY = 12
@@ -4640,6 +4692,7 @@ object Fmain: TFmain
           GlyphAlignment = bcaCenterTop
           GlyphOldPlacement = False
           GlyphMargin = 0
+          OnClick = BokNoteClick
           ParentColor = False
           Rounding.RoundX = 12
           Rounding.RoundY = 12
@@ -4867,6 +4920,7 @@ object Fmain: TFmain
           GlyphAlignment = bcaCenterTop
           GlyphOldPlacement = False
           GlyphMargin = 0
+          OnClick = BokTipoPzClick
           ParentColor = False
           Rounding.RoundX = 12
           Rounding.RoundY = 12
@@ -4874,6 +4928,22 @@ object Fmain: TFmain
           RoundingDropDown.RoundY = 1
           TextApplyGlobalOpacity = False
           MemoryUsage = bmuHigh
+        end
+        object LdesLav: TLabel
+          Left = 87
+          Height = 19
+          Top = 36
+          Width = 53
+          Caption = 'LdesLav'
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Calibri'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
         end
       end
     end
@@ -6365,6 +6435,7 @@ object Fmain: TFmain
         TitleFont.Pitch = fpVariable
         TitleFont.Quality = fqDraft
         TitleFont.Style = [fsBold]
+        OnButtonClick = sgButtonClick
       end
       object pAssenza: TJvNavPaneToolPanel
         Left = 190
@@ -6451,6 +6522,7 @@ object Fmain: TFmain
           OriginY = 88
           ParentColor = False
           ShadowedText = False
+          OnClick = rlMotClick
         end
       end
       object Lno_anom: TLabel
@@ -8414,9 +8486,9 @@ object Fmain: TFmain
   end
   object pImmInd: TJvMovablePanel
     Cursor = crCross
-    Left = 896
+    Left = 1472
     Height = 226
-    Top = 296
+    Top = 80
     Width = 398
     BevelColor = clSilver
     ClientHeight = 226
@@ -8447,6 +8519,7 @@ object Fmain: TFmain
       ParentBackground = False
       ParentFont = False
       TabOrder = 0
+      OnClick = pCloseImmClick
     end
     object imageInd: TJvThumbImage
       Tag = 1
@@ -8512,9 +8585,9 @@ object Fmain: TFmain
     end
   end
   object pReg1: TBCPanel
-    Left = 0
+    Left = 72
     Height = 360
-    Top = 272
+    Top = 232
     Width = 1859
     Background.Color = clBtnFace
     Background.Gradient1.StartColor = clGray
@@ -8663,6 +8736,7 @@ object Fmain: TFmain
       Font.Quality = fqDraft
       Font.Style = [fsBold]
       MaxLength = 5
+      OnExit = Eini1Exit
       ParentFont = False
       ShowSecond = False
       TabOrder = 5
@@ -8685,9 +8759,9 @@ object Fmain: TFmain
     end
     object dbtLav1: TDBText
       Left = 8
-      Height = 19
+      Height = 1
       Top = 48
-      Width = 55
+      Width = 1
       DataField = 'DesLav'
       DataSource = fd.dsTempi1
       Font.CharSet = ANSI_CHARSET
@@ -8907,6 +8981,7 @@ object Fmain: TFmain
         ParentFont = False
         TabOrder = 0
         Text = 'Ec1a'
+        OnEnter = Ec1aEnter
       end
       object Ec2a: TEdit
         Tag = 2
@@ -8924,6 +8999,7 @@ object Fmain: TFmain
         ParentFont = False
         TabOrder = 1
         Text = 'Ec2a'
+        OnEnter = Ec2aEnter
       end
       object Ec3a: TEdit
         Tag = 3
@@ -8941,6 +9017,7 @@ object Fmain: TFmain
         ParentFont = False
         TabOrder = 2
         Text = 'Ec3a'
+        OnEnter = Ec3aEnter
       end
       object Ec4a: TEdit
         Tag = 4
@@ -8958,6 +9035,7 @@ object Fmain: TFmain
         ParentFont = False
         TabOrder = 3
         Text = 'Ec4a'
+        OnEnter = Ec4aEnter
       end
       object Ec5a: TEdit
         Tag = 5
@@ -8975,6 +9053,7 @@ object Fmain: TFmain
         ParentFont = False
         TabOrder = 4
         Text = 'Ec5a'
+        OnEnter = Ec5aEnter
       end
       object Ec6a: TEdit
         Tag = 6
@@ -8992,6 +9071,8 @@ object Fmain: TFmain
         ParentFont = False
         TabOrder = 5
         Text = 'Ec6a'
+        OnChange = Ec6aChange
+        OnEnter = Ec6aEnter
       end
       object Ldis1a: TLabel
         Left = 114
@@ -9326,7 +9407,6 @@ object Fmain: TFmain
         Font.Style = [fsItalic]
         ParentColor = False
         ParentFont = False
-        Visible = False
       end
       object LcodPlann1a: TLabel
         Left = 219
@@ -9343,7 +9423,6 @@ object Fmain: TFmain
         Font.Style = [fsItalic]
         ParentColor = False
         ParentFont = False
-        Visible = False
       end
       object LrigaLav2a: TLabel
         Left = 147
@@ -9732,6 +9811,7 @@ object Fmain: TFmain
         }
         GlyphAlignment = bcaLeftCenter
         GlyphMargin = 0
+        OnClick = BokC1aClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -9957,6 +10037,7 @@ object Fmain: TFmain
         }
         GlyphAlignment = bcaLeftCenter
         GlyphMargin = 0
+        OnClick = BokC1aClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -10182,6 +10263,7 @@ object Fmain: TFmain
         }
         GlyphAlignment = bcaLeftCenter
         GlyphMargin = 0
+        OnClick = BokC1aClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -10407,6 +10489,7 @@ object Fmain: TFmain
         }
         GlyphAlignment = bcaLeftCenter
         GlyphMargin = 0
+        OnClick = BokC1aClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -10632,6 +10715,7 @@ object Fmain: TFmain
         }
         GlyphAlignment = bcaLeftCenter
         GlyphMargin = 0
+        OnClick = BokC1aClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -10857,6 +10941,7 @@ object Fmain: TFmain
         }
         GlyphAlignment = bcaLeftCenter
         GlyphMargin = 0
+        OnClick = BokC1aClick
         ParentColor = False
         Rounding.RoundX = 12
         Rounding.RoundY = 12
@@ -10887,6 +10972,7 @@ object Fmain: TFmain
       Font.Style = [fsBold]
       ItemHeight = 19
       MaxLength = 0
+      OnExit = cbLav1Exit
       ParentFont = False
       TabOrder = 3
     end
@@ -10921,6 +11007,7 @@ object Fmain: TFmain
       Font.Quality = fqDraft
       Font.Style = [fsBold]
       MaxLength = 5
+      OnExit = Efine1Exit
       ParentFont = False
       ShowSecond = False
       TabOrder = 6
@@ -11630,6 +11717,7 @@ object Fmain: TFmain
       GlyphAlignment = bcaCenterTop
       GlyphOldPlacement = False
       GlyphMargin = 0
+      OnClick = BokLav1Click
       ParentColor = False
       Rounding.RoundX = 12
       Rounding.RoundY = 12
@@ -11654,6 +11742,7 @@ object Fmain: TFmain
       Font.Quality = fqDraft
       Font.Style = [fsBold]
       Transparent = False
+      OnClick = Battese1Click
       ShowHint = True
       ParentFont = False
       ParentShowHint = False
@@ -11680,6 +11769,7 @@ object Fmain: TFmain
       Font.Quality = fqDraft
       Font.Style = [fsBold]
       Transparent = False
+      OnClick = Bprodutt1Click
       ShowHint = True
       ParentFont = False
       ParentShowHint = False
@@ -11700,6 +11790,7 @@ object Fmain: TFmain
       Font.Quality = fqDraft
       Font.Style = [fsBold]
       Transparent = False
+      OnClick = BnonProdutt1Click
       ShowHint = True
       ParentFont = False
       ParentShowHint = False
@@ -11720,6 +11811,7 @@ object Fmain: TFmain
       Font.Quality = fqDraft
       Font.Style = [fsBold]
       Transparent = False
+      OnClick = BallLav1Click
       ShowHint = True
       ParentFont = False
       ParentShowHint = False
@@ -11943,6 +12035,7 @@ object Fmain: TFmain
       GlyphAlignment = bcaCenterTop
       GlyphOldPlacement = False
       GlyphMargin = 0
+      OnClick = BokOre1Click
       ParentColor = False
       Rounding.RoundX = 12
       Rounding.RoundY = 12
@@ -11959,7 +12052,6 @@ object Fmain: TFmain
       Width = 111
       ButtonWidth = 23
       DialogTitle = 'Select a Date'
-      Enabled = False
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = -16
@@ -11972,7 +12064,8 @@ object Fmain: TFmain
       PasswordChar = #0
       PopupColor = clWindow
       TabOrder = 4
-      Text = '  /  /    '
+      Text = '24/11/2015'
+      OnEnter = Edata1Enter
       DataField = 'data'
       DataSource = fd.dsTempi1
     end
@@ -12480,6 +12573,24 @@ object Fmain: TFmain
       FieldKind = fkData
       FieldName = 'Ctrmin'
       Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TlavCtrlTodo: TLongintField
+      FieldKind = fkData
+      FieldName = 'CtrlTodo'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TlavCtrlDone: TLongintField
+      FieldKind = fkData
+      FieldName = 'CtrlDone'
+      Index = 18
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -13328,5 +13439,12 @@ object Fmain: TFmain
     DataSet = qEl
     Left = 672
     Top = 256
+  end
+  object SQLQuery1: TSQLQuery
+    FieldDefs = <>
+    Params = <>
+    Macros = <>
+    Left = 909
+    Top = 663
   end
 end

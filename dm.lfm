@@ -10,12 +10,12 @@ object fd: Tfd
     DatabaseName = 'prod'
     KeepConnection = False
     Params.Strings = (
-      'port=5432'
+      'port=5434'
     )
     Password = 'postgres'
     Transaction = SQLTransact
     UserName = 'postgres'
-    HostName = '192.168.1.11'
+    HostName = 'localhost'
     Role = 'postgres'
     Left = 48
     Top = 32
@@ -138,6 +138,7 @@ object fd: Tfd
         DataType = ftInteger
         Precision = -1
       end>
+    Active = True
     AfterDelete = TtempiAfterPost
     AfterPost = TtempiAfterPost
     BeforePost = TtempiBeforePost
@@ -209,19 +210,10 @@ object fd: Tfd
       Required = False
       Size = 30
     end
-    object TtempiDesLav: TWideStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesLav'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
     object Ttempinote: TMemoField
       FieldKind = fkData
       FieldName = 'note'
-      Index = 6
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -232,7 +224,7 @@ object fd: Tfd
     object TtempiDesNote: TWideStringField
       FieldKind = fkCalculated
       FieldName = 'DesNote'
-      Index = 7
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -241,7 +233,7 @@ object fd: Tfd
     object Ttempinoteint: TMemoField
       FieldKind = fkData
       FieldName = 'noteint'
-      Index = 8
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -252,7 +244,7 @@ object fd: Tfd
     object Ttempincr: TLongintField
       FieldKind = fkData
       FieldName = 'ncr'
-      Index = 9
+      Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -261,7 +253,7 @@ object fd: Tfd
     object Ttempitipo: TStringField
       FieldKind = fkData
       FieldName = 'tipo'
-      Index = 10
+      Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -271,7 +263,7 @@ object fd: Tfd
     object Ttempidalle: TTimeField
       FieldKind = fkData
       FieldName = 'dalle'
-      Index = 11
+      Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -280,7 +272,7 @@ object fd: Tfd
     object Ttempialle: TTimeField
       FieldKind = fkData
       FieldName = 'alle'
-      Index = 12
+      Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -289,7 +281,7 @@ object fd: Tfd
     object Ttempitipoman: TLongintField
       FieldKind = fkData
       FieldName = 'tipoman'
-      Index = 13
+      Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -298,7 +290,7 @@ object fd: Tfd
     object Ttempiolio: TLongintField
       FieldKind = fkData
       FieldName = 'olio'
-      Index = 14
+      Index = 13
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -307,7 +299,7 @@ object fd: Tfd
     object Ttempisost: TLongintField
       FieldKind = fkData
       FieldName = 'sost'
-      Index = 15
+      Index = 14
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -316,7 +308,7 @@ object fd: Tfd
     object Ttempioliog: TFloatField
       FieldKind = fkData
       FieldName = 'oliog'
-      Index = 16
+      Index = 15
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -326,7 +318,7 @@ object fd: Tfd
     object Ttempioliod: TFloatField
       FieldKind = fkData
       FieldName = 'oliod'
-      Index = 17
+      Index = 16
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -336,7 +328,7 @@ object fd: Tfd
     object Ttempidessost: TMemoField
       FieldKind = fkData
       FieldName = 'dessost'
-      Index = 18
+      Index = 17
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -347,7 +339,7 @@ object fd: Tfd
     object Ttempisugg: TMemoField
       FieldKind = fkData
       FieldName = 'sugg'
-      Index = 19
+      Index = 18
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -358,7 +350,7 @@ object fd: Tfd
     object Ttempictrore: TFloatField
       FieldKind = fkData
       FieldName = 'ctrore'
-      Index = 20
+      Index = 19
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -368,7 +360,7 @@ object fd: Tfd
     object Ttempictrmin: TFloatField
       FieldKind = fkData
       FieldName = 'ctrmin'
-      Index = 21
+      Index = 20
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -378,6 +370,15 @@ object fd: Tfd
     object Ttempirigalav: TLongintField
       FieldKind = fkData
       FieldName = 'rigalav'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TtempiDesLav: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'DesLav'
       Index = 22
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
@@ -393,7 +394,7 @@ object fd: Tfd
   object SQLTransact: TSQLTransaction
     Active = True
     Database = PQConn
-    Options = [stoExplicitStart]
+    Options = [stoUseImplicit]
     Left = 48
     Top = 112
   end
@@ -574,7 +575,7 @@ object fd: Tfd
     )
     Params = <>
     Macros = <>
-    Left = 296
+    Left = 360
     Top = 32
     object Trtemcod: TFloatField
       FieldKind = fkData
@@ -657,7 +658,7 @@ object fd: Tfd
   end
   object dsRtem: TDataSource
     DataSet = Trtem
-    Left = 344
+    Left = 408
     Top = 32
   end
   object qImm: TSQLQuery
@@ -759,7 +760,7 @@ object fd: Tfd
     )
     Params = <>
     Macros = <>
-    Left = 296
+    Left = 360
     Top = 88
     object Trtemcod1: TFloatField
       FieldKind = fkData
@@ -842,7 +843,7 @@ object fd: Tfd
   end
   object dsRtem1: TDataSource
     DataSet = Trtem1
-    Left = 344
+    Left = 408
     Top = 88
   end
   object Ttempi1: TSQLQuery
@@ -958,6 +959,7 @@ object fd: Tfd
         DataType = ftInteger
         Precision = -1
       end>
+    Active = True
     Database = PQConn
     Transaction = SQLTransact
     SQL.Strings = (
@@ -1024,19 +1026,10 @@ object fd: Tfd
       Required = False
       Size = 30
     end
-    object TtempiDesLav1: TWideStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesLav'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
     object Ttempinote1: TMemoField
       FieldKind = fkData
       FieldName = 'note'
-      Index = 6
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1047,7 +1040,7 @@ object fd: Tfd
     object TtempiDesNote1: TWideStringField
       FieldKind = fkCalculated
       FieldName = 'DesNote'
-      Index = 7
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1056,7 +1049,7 @@ object fd: Tfd
     object Ttempinoteint1: TMemoField
       FieldKind = fkData
       FieldName = 'noteint'
-      Index = 8
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1067,7 +1060,7 @@ object fd: Tfd
     object Ttempincr1: TLongintField
       FieldKind = fkData
       FieldName = 'ncr'
-      Index = 9
+      Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1076,7 +1069,7 @@ object fd: Tfd
     object Ttempitipo1: TStringField
       FieldKind = fkData
       FieldName = 'tipo'
-      Index = 10
+      Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1086,7 +1079,7 @@ object fd: Tfd
     object Ttempidalle1: TTimeField
       FieldKind = fkData
       FieldName = 'dalle'
-      Index = 11
+      Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1095,7 +1088,7 @@ object fd: Tfd
     object Ttempialle1: TTimeField
       FieldKind = fkData
       FieldName = 'alle'
-      Index = 12
+      Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1104,7 +1097,7 @@ object fd: Tfd
     object Ttempitipoman1: TLongintField
       FieldKind = fkData
       FieldName = 'tipoman'
-      Index = 13
+      Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1113,7 +1106,7 @@ object fd: Tfd
     object Ttempiolio1: TLongintField
       FieldKind = fkData
       FieldName = 'olio'
-      Index = 14
+      Index = 13
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1122,7 +1115,7 @@ object fd: Tfd
     object Ttempisost1: TLongintField
       FieldKind = fkData
       FieldName = 'sost'
-      Index = 15
+      Index = 14
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1131,7 +1124,7 @@ object fd: Tfd
     object Ttempioliog1: TFloatField
       FieldKind = fkData
       FieldName = 'oliog'
-      Index = 16
+      Index = 15
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1141,7 +1134,7 @@ object fd: Tfd
     object Ttempioliod1: TFloatField
       FieldKind = fkData
       FieldName = 'oliod'
-      Index = 17
+      Index = 16
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1151,7 +1144,7 @@ object fd: Tfd
     object Ttempidessost1: TMemoField
       FieldKind = fkData
       FieldName = 'dessost'
-      Index = 18
+      Index = 17
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1162,7 +1155,7 @@ object fd: Tfd
     object Ttempisugg1: TMemoField
       FieldKind = fkData
       FieldName = 'sugg'
-      Index = 19
+      Index = 18
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1173,7 +1166,7 @@ object fd: Tfd
     object Ttempictrore1: TFloatField
       FieldKind = fkData
       FieldName = 'ctrore'
-      Index = 20
+      Index = 19
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1183,12 +1176,21 @@ object fd: Tfd
     object Ttempictrmin1: TFloatField
       FieldKind = fkData
       FieldName = 'ctrmin'
-      Index = 21
+      Index = 20
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Precision = -1
+    end
+    object Ttempi1DesLav: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'DesLav'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
     end
   end
 end

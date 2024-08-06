@@ -8,7 +8,7 @@ unit dm;
 interface
 
 uses
-  Classes, SysUtils, PQConnection, SQLDB, DB,
+  Classes, SysUtils, PQConnection, SQLDB, SQLDBLib, DB,
   System.UITypes,
   login, //per xUser, 19/07/24, verificare
   units;
@@ -23,8 +23,18 @@ type
     dsTempi1: TDataSource;
     dsZq: TDataSource;
     PQConn: TPQConnection;
-    qImmimm: TBlobField;
+    qImm: TSQLQuery;
+    qImmCli: TStringField;
+    qImmcod: TStringField;
+    qImmCommInt: TLargeintField;
+    qImmDes: TStringField;
+    qImmDiam: TWordField;
+    qImmImm: TBlobField;
+    qImmimm1: TBlobField;
+    qImmimmjpg: TBlobField;
     qImmimmnom: TStringField;
+    qImmimmnom1: TStringField;
+    qImmLungh: TWordField;
     qLavscod: TLongintField;
     qLavscomm: TLongintField;
     qLavsdes: TStringField;
@@ -38,8 +48,8 @@ type
     qLavsqta_as_posiz: TFloatField;
     qLavsrigalav: TFloatField;
     qLavssel: TLongintField;
+    SQLDBLibraryLoader1: TSQLDBLibraryLoader;
     SQLTransact: TSQLTransaction;
-    qImm: TSQLQuery;
     Trtem1: TSQLQuery;
     TrtemCli: TStringField;
     TrtemCli1: TStringField;
@@ -127,7 +137,13 @@ type
     Ttempisugg: TMemoField;
     Ttempitipo: TStringField;
     Ttempitipoman: TLongintField;
+    procedure DataModuleCreate(Sender: TObject);
+    procedure Trtem1AfterPost(DataSet: TDataSet);
+    procedure Trtem1CalcFields(DataSet: TDataSet);
+    procedure TrtemAfterPost(DataSet: TDataSet);
     procedure TrtemCalcFields(DataSet: TDataSet);
+    procedure Ttempi1AfterPost(DataSet: TDataSet);
+    procedure Ttempi1CalcFields(DataSet: TDataSet);
     procedure TtempiAfterPost(DataSet: TDataSet);
     procedure TtempiBeforePost(DataSet: TDataSet);
     procedure TtempiCalcFields(DataSet: TDataSet);
@@ -252,6 +268,8 @@ var
   ok:Boolean;
   s:WideString;
 begin
+  if Trtem.State=dsInactive then
+    exit;
   if trim(TrtemComm.Text)<>'' then begin
     if trim(TrtemRigaLav.Text)='' then
       ok:=false
@@ -270,6 +288,64 @@ begin
       TrtemPz.Value:=vts(zq['qta']);
     end;
   end;
+end;
+
+procedure Tfd.TrtemAfterPost(DataSet: TDataSet);
+begin
+  Trtem.ApplyUpdates();
+end;
+
+procedure Tfd.Trtem1AfterPost(DataSet: TDataSet);
+begin
+  Trtem1.ApplyUpdates();
+end;
+
+procedure Tfd.DataModuleCreate(Sender: TObject);
+begin
+
+end;
+
+procedure Tfd.Trtem1CalcFields(DataSet: TDataSet);
+var
+  ok:Boolean;
+  s:WideString;
+begin
+  if Trtem1.State=dsInactive then
+    exit;
+  if trim(TrtemComm1.Text)<>'' then begin
+    if trim(TrtemRigaLav1.Text)='' then
+      ok:=false
+    else
+      begin
+      s:='select rc.dis,rc.qta,tc.descr as nome';
+      agg(s,'from rcomm rc');
+      agg(s,'left join tcomm tc on rc.anno=tc.anno and rc.cod=tc.cod');
+      agg(s,'where rc.commint='+TrtemComm1.Text);
+      zgo(zq,s,'op');
+      ok:=zq.RecordCount>0;
+    end;
+    if ok then begin
+      TrtemCli1.Value:=vts(zq['nome']);
+      TrtemDis1.Value:=vts(zq['dis']);
+      TrtemPz1.Value:=vts(zq['qta']);
+    end;
+  end;
+end;
+
+procedure Tfd.Ttempi1AfterPost(DataSet: TDataSet);
+begin
+  Ttempi1.ApplyUpdates();
+end;
+
+procedure Tfd.Ttempi1CalcFields(DataSet: TDataSet);
+var
+  des:string;
+begin
+  des:=trim(TtempiNote1.AsString);
+  if length(des)>1 then
+    if des[length(des)]='[' then //a volte resta...
+      des:=copy(des,1,length(des)-1);
+  TtempiDesNote1.Value:=des;
 end;
 
 procedure Tfd.TtempiAfterPost(DataSet: TDataSet);
@@ -299,12 +375,12 @@ var
   cod:string;
   des,s:widestring;
 begin
-  (* nb2: dà err. quando si rientra da Fmot, sia in desnote che deslav
+  //nb2: ctrl se dà err. quando si rientra da Fmot, sia in desnote che deslav
   des:=trim(TtempiNote.AsString);
   if length(des)>1 then
     if des[length(des)]='[' then //a volte resta...
       des:=copy(des,1,length(des)-1);
-  TtempiDesNote.Value:=des; *)
+  TtempiDesNote.Value:=des;
 
   (* cod:=TtempiLav.Text;
   if trim(cod)='' then

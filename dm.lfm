@@ -1,11 +1,12 @@
 object fd: Tfd
+  OnCreate = DataModuleCreate
   OldCreateOrder = True
   Height = 647
   HorizontalOffset = 362
   VerticalOffset = 199
   Width = 836
   object PQConn: TPQConnection
-    Connected = True
+    Connected = False
     LoginPrompt = False
     DatabaseName = 'prod'
     KeepConnection = False
@@ -138,7 +139,6 @@ object fd: Tfd
         DataType = ftInteger
         Precision = -1
       end>
-    Active = True
     AfterDelete = TtempiAfterPost
     AfterPost = TtempiAfterPost
     BeforePost = TtempiBeforePost
@@ -157,6 +157,25 @@ object fd: Tfd
       'rigalav'
       'from tempi t'
       'limit 1'
+      ''
+    )
+    UpdateSQL.Strings = (
+      'update tempi'
+      'set'
+      'data=    :data,'
+      'macch=   :macch,'
+      'pers=    :pers,'
+      'lav=     :lav,'
+      'note=    :note,'
+      'noteint= :noteint,'
+      'ncr=     :ncr,'
+      'tipo=    :tipo,'
+      'dalle=   :dalle,'
+      'alle=    :alle'
+      ''
+      'where cod= :old_cod'
+      ''
+      ''
       ''
     )
     Params = <>
@@ -226,7 +245,7 @@ object fd: Tfd
       FieldName = 'DesNote'
       Index = 6
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
     end
@@ -381,7 +400,7 @@ object fd: Tfd
       FieldName = 'DesLav'
       Index = 22
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
     end
@@ -392,7 +411,7 @@ object fd: Tfd
     Top = 32
   end
   object SQLTransact: TSQLTransaction
-    Active = True
+    Active = False
     Database = PQConn
     Options = [stoUseImplicit]
     Left = 48
@@ -539,32 +558,9 @@ object fd: Tfd
   object Trtem: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'comm'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'tmp'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'riga'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'rigalav'
-        DataType = ftInteger
-        Precision = -1
-      end>
+    FieldDefs = <>
+    AfterDelete = TrtemAfterPost
+    AfterPost = TrtemAfterPost
     OnCalcFields = TrtemCalcFields
     Database = PQConn
     Transaction = SQLTransact
@@ -630,7 +626,7 @@ object fd: Tfd
       FieldName = 'Dis'
       Index = 5
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
       Size = 40
@@ -640,7 +636,7 @@ object fd: Tfd
       FieldName = 'Cli'
       Index = 6
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
       Size = 40
@@ -650,7 +646,7 @@ object fd: Tfd
       FieldName = 'Pz'
       Index = 7
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
       Size = 5
@@ -660,61 +656,6 @@ object fd: Tfd
     DataSet = Trtem
     Left = 408
     Top = 32
-  end
-  object qImm: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'imm'
-        DataType = ftBlob
-        Precision = -1
-      end    
-      item
-        Name = 'immjpg'
-        DataType = ftBlob
-        Precision = -1
-      end    
-      item
-        Name = 'immnom'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end>
-    OnCalcFields = TrtemCalcFields
-    Database = PQConn
-    Transaction = SQLTransact
-    SQL.Strings = (
-      'select imm,immjpg,immnom from dis limit 1'
-    )
-    Params = <>
-    Macros = <>
-    Left = 152
-    Top = 168
-    object qImmimm: TBlobField
-      FieldKind = fkData
-      FieldName = 'imm'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qImmimmnom: TStringField
-      FieldKind = fkData
-      FieldName = 'immnom'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 255
-    end
-  end
-  object dsImm: TDataSource
-    DataSet = qImm
-    Left = 200
-    Top = 168
   end
   object dsTempi1: TDataSource
     DataSet = Ttempi1
@@ -750,7 +691,9 @@ object fd: Tfd
         DataType = ftInteger
         Precision = -1
       end>
-    OnCalcFields = TrtemCalcFields
+    AfterDelete = Trtem1AfterPost
+    AfterPost = Trtem1AfterPost
+    OnCalcFields = Trtem1CalcFields
     Database = PQConn
     Transaction = SQLTransact
     SQL.Strings = (
@@ -815,7 +758,7 @@ object fd: Tfd
       FieldName = 'Dis'
       Index = 5
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
       Size = 40
@@ -825,7 +768,7 @@ object fd: Tfd
       FieldName = 'Cli'
       Index = 6
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
       Size = 40
@@ -835,7 +778,7 @@ object fd: Tfd
       FieldName = 'Pz'
       Index = 7
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
       Size = 5
@@ -959,7 +902,9 @@ object fd: Tfd
         DataType = ftInteger
         Precision = -1
       end>
-    Active = True
+    AfterDelete = Ttempi1AfterPost
+    AfterPost = Ttempi1AfterPost
+    OnCalcFields = Ttempi1CalcFields
     Database = PQConn
     Transaction = SQLTransact
     SQL.Strings = (
@@ -973,6 +918,23 @@ object fd: Tfd
       'conf'
       'from tempi t'
       'limit 1'
+      ''
+    )
+    UpdateSQL.Strings = (
+      'update tempi'
+      'set'
+      'data=    :data,'
+      'macch=   :macch,'
+      'pers=    :pers,'
+      'lav=     :lav,'
+      'note=    :note,'
+      'noteint= :noteint,'
+      'ncr=     :ncr,'
+      'tipo=    :tipo,'
+      'dalle=   :dalle,'
+      'alle=    :alle'
+      ''
+      'where cod= :old_cod'
       ''
     )
     Params = <>
@@ -1042,7 +1004,7 @@ object fd: Tfd
       FieldName = 'DesNote'
       Index = 6
       LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
+      ProviderFlags = []
       ReadOnly = False
       Required = False
     end
@@ -1187,6 +1149,135 @@ object fd: Tfd
       FieldKind = fkCalculated
       FieldName = 'DesLav'
       Index = 21
+      LookupCache = False
+      ProviderFlags = []
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object SQLDBLibraryLoader1: TSQLDBLibraryLoader
+    Enabled = False
+    ConnectionType = 'PostgreSQL'
+    LibraryName = 'C:\Lazarus\prgs\prod_macc2\libpq.dll'
+    Left = 48
+    Top = 203
+  end
+  object dsImm: TDataSource
+    AutoEdit = False
+    DataSet = qImm
+    Left = 200
+    Top = 168
+  end
+  object qImm: TSQLQuery
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'imm'
+        DataType = ftBlob
+        Precision = -1
+      end    
+      item
+        Name = 'immjpg'
+        DataType = ftBlob
+        Precision = -1
+      end    
+      item
+        Name = 'immnom'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end>
+    Database = PQConn
+    Transaction = SQLTransact
+    SQL.Strings = (
+      'select distinct d.cod,'
+      '((replace(d.des,chr(157),''ø''))::character varying) as des,'
+      'd.lungh,d.diam,'
+      'd.immnom,d.immjpg,tc.descr as cli,'
+      'tc.data,rc.commint'
+      'from dis d'
+      'left join rcomm rc on rc.dis=d.cod'
+      'left join tcomm tc on tc.cod=rc.cod'
+      'where cod is not null'
+      'limit 1'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    ParseSQL = False
+    Left = 152
+    Top = 168
+    object qImmimm1: TBlobField
+      FieldKind = fkData
+      FieldName = 'imm'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmimmnom1: TStringField
+      FieldKind = fkData
+      FieldName = 'immnom'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object qImmLungh: TWordField
+      FieldKind = fkData
+      FieldName = 'Lungh'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmDiam: TWordField
+      FieldKind = fkData
+      FieldName = 'Diam'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmCod: TStringField
+      FieldKind = fkData
+      FieldName = 'Cod'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object qImmDes: TStringField
+      FieldKind = fkData
+      FieldName = 'Des'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object qImmCli: TStringField
+      FieldKind = fkData
+      FieldName = 'Cli'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object qImmCommInt: TLargeintField
+      FieldKind = fkData
+      FieldName = 'CommInt'
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False

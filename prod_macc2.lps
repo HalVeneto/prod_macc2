@@ -9,8 +9,8 @@
         <Filename Value="prod_macc2.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="7"/>
-        <CursorPos X="65" Y="20"/>
-        <UsageCount Value="100"/>
+        <CursorPos Y="28"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -20,15 +20,16 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="2867"/>
-        <CursorPos Y="2891"/>
-        <UsageCount Value="100"/>
-        <Bookmarks Count="5">
-          <Item0 X="36" Y="1393" ID="8"/>
-          <Item1 X="30" Y="2639" ID="7"/>
-          <Item2 Y="2408"/>
-          <Item3 X="48" Y="2883" ID="1"/>
-          <Item4 X="27" Y="3268" ID="2"/>
+        <TopLine Value="2461"/>
+        <CursorPos Y="2479"/>
+        <UsageCount Value="138"/>
+        <Bookmarks Count="6">
+          <Item0 X="30" Y="3025" ID="7"/>
+          <Item1 X="24" Y="2563"/>
+          <Item2 X="29" Y="3731" ID="8"/>
+          <Item3 X="7" Y="3385" ID="9"/>
+          <Item4 X="30" Y="2434" ID="1"/>
+          <Item5 X="30" Y="2359" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -39,11 +40,10 @@
         <ComponentName Value="fd"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="DataModule"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="100"/>
-        <Bookmarks Count="1">
-          <Item0 X="5" Y="320" ID="9"/>
-        </Bookmarks>
+        <EditorIndex Value="2"/>
+        <TopLine Value="303"/>
+        <CursorPos X="3" Y="305"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -51,9 +51,9 @@
         <Filename Value="..\units\units.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="6"/>
-        <TopLine Value="55"/>
-        <CursorPos X="12" Y="74"/>
-        <UsageCount Value="100"/>
+        <TopLine Value="49"/>
+        <CursorPos X="54" Y="66"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -63,7 +63,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="138"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit>
       <Unit>
@@ -75,7 +75,7 @@
         <EditorIndex Value="5"/>
         <TopLine Value="88"/>
         <CursorPos X="53" Y="119"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -86,7 +86,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="4"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="138"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -96,12 +96,10 @@
         <ComponentName Value="Fmot"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <CursorPos X="26" Y="52"/>
-        <UsageCount Value="76"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
+        <UsageCount Value="114"/>
       </Unit>
       <Unit>
         <Filename Value="..\prod_macch\dm.pas"/>
@@ -110,8 +108,8 @@
         <ResourceBaseClass Value="DataModule"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="232"/>
-        <CursorPos X="29" Y="264"/>
-        <UsageCount Value="50"/>
+        <CursorPos X="36" Y="256"/>
+        <UsageCount Value="51"/>
       </Unit>
       <Unit>
         <Filename Value="..\prod_macch\main.pas"/>
@@ -119,9 +117,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="2682"/>
-        <CursorPos X="28" Y="2715"/>
-        <UsageCount Value="52"/>
+        <TopLine Value="1743"/>
+        <CursorPos X="37" Y="1745"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -131,12 +129,12 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="60"/>
         <CursorPos X="59" Y="79"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="10"/>
       </Unit>
       <Unit>
         <Filename Value="C:\Users\produzione2\AppData\Local\lazarus\onlinepackagemanager\packages\ct4laz\pl_components\pl_graphics32\source\GR32_PolygonsAggLite.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="4"/>
+        <UsageCount Value="1"/>
       </Unit>
       <Unit>
         <Filename Value="C:\prod\lazarus\prgs\prod_macch\oldvers\prod_macch_2023_08_25\main.pas"/>
@@ -144,7 +142,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="2"/>
       </Unit>
       <Unit>
         <Filename Value="C:\prod\lazarus\prgs\prod_macch\oldvers\21-12-2023\main.pas"/>
@@ -152,7 +150,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="2"/>
       </Unit>
       <Unit>
         <Filename Value="..\..\lcl\dialogs.pp"/>
@@ -160,136 +158,140 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="711"/>
         <CursorPos X="11" Y="730"/>
-        <UsageCount Value="6"/>
+        <UsageCount Value="3"/>
       </Unit>
       <Unit>
         <Filename Value="..\quote\main.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="221"/>
         <CursorPos X="36" Y="252"/>
-        <UsageCount Value="9"/>
+        <UsageCount Value="6"/>
+      </Unit>
+      <Unit>
+        <Filename Value="versione.include.pas"/>
+        <EditorIndex Value="3"/>
+        <CursorPos X="16"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="2926" TopLine="2897"/>
+        <Caret Line="1959" Column="7" TopLine="1942"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1972" TopLine="1945"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1966" Column="14" TopLine="1947"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="3700" Column="5" TopLine="3681"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="3699" Column="5" TopLine="3684"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="3756" Column="13" TopLine="3737"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1947" Column="16" TopLine="1929"/>
+      </Position>
+      <Position>
+        <Filename Value="main.pas"/>
+        <Caret Line="1945" Column="67" TopLine="1929"/>
       </Position>
       <Position>
         <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="2787" Column="3" TopLine="2785"/>
+        <Caret Line="3432" Column="12" TopLine="3360"/>
       </Position>
       <Position>
         <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Column="17"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2916" Column="3" TopLine="2898"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2933" TopLine="2902"/>
       </Position>
       <Position>
         <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="2811" TopLine="2802"/>
+        <Caret Line="1745" Column="3" TopLine="1743"/>
       </Position>
       <Position>
         <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Column="17"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2928" TopLine="2909"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2960" TopLine="2958"/>
       </Position>
       <Position>
         <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="2881" TopLine="2846"/>
+        <Caret Line="1762" Column="3" TopLine="1748"/>
       </Position>
       <Position>
         <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Column="17"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="2995" Column="5" TopLine="2957"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="2889" Column="3" TopLine="2887"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="21" Column="17" TopLine="2"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Column="17"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="2898" Column="7" TopLine="2887"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Column="17"/>
+        <Caret Line="1946" Column="67" TopLine="1930"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="3012" Column="59" TopLine="2999"/>
+        <Caret Line="1990" Column="3" TopLine="1988"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="2886" Column="48" TopLine="2870"/>
+        <Caret Line="1975" Column="30" TopLine="1950"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="3260" Column="27" TopLine="3249"/>
+        <Caret Line="1949" TopLine="1942"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="2884" TopLine="2875"/>
+        <Caret Line="2523" Column="3" TopLine="2521"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="3260" Column="27" TopLine="3241"/>
+        <Caret Line="2433" Column="30" TopLine="2415"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="2900" TopLine="2866"/>
+        <Caret Line="2390" Column="33" TopLine="2371"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="268" Column="97" TopLine="253"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="267" Column="101" TopLine="252"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="266" Column="101" TopLine="251"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="271" Column="94" TopLine="251"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="270" Column="94" TopLine="250"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="271" Column="94" TopLine="251"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="306" Column="3" TopLine="304"/>
+      </Position>
+      <Position>
+        <Filename Value="dm.pas"/>
+        <Caret Line="305" Column="3" TopLine="303"/>
       </Position>
       <Position>
         <Filename Value="main.pas"/>
-        <Caret Line="2872" Column="11" TopLine="2869"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2885" TopLine="2864"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2890" Column="76" TopLine="2868"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2873" Column="9" TopLine="2854"/>
-      </Position>
-      <Position>
-        <Filename Value="main.pas"/>
-        <Caret Line="2890" Column="7" TopLine="2869"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Line="2903" Column="3" TopLine="2901"/>
-      </Position>
-      <Position>
-        <Filename Value="..\prod_macch\main.pas"/>
-        <Caret Column="17"/>
+        <Caret Line="2480" TopLine="2459"/>
       </Position>
     </JumpHistory>
     <RunParams>

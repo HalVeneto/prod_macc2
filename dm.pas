@@ -30,8 +30,7 @@ type
     qImmDes: TStringField;
     qImmDiam: TWordField;
     qImmImm: TBlobField;
-    qImmimm1: TBlobField;
-    qImmimmjpg: TBlobField;
+    qImmImmJpg: TGraphicField;
     qImmimmnom: TStringField;
     qImmimmnom1: TStringField;
     qImmLungh: TWordField;

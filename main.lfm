@@ -148,7 +148,7 @@ object Fmain: TFmain
     Height = 757
     Top = 48
     Width = 1518
-    ActivePage = tsDis
+    ActivePage = tsLav
     Align = alClient
     Font.CharSet = ANSI_CHARSET
     Font.Height = -27
@@ -157,7 +157,7 @@ object Fmain: TFmain
     Font.Quality = fqDraft
     Font.Style = [fsBold]
     ParentFont = False
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 1
     OnChange = PageControlChange
     object tsLav: TTabSheet
@@ -6642,9 +6642,9 @@ object Fmain: TFmain
           TabOrder = 1
         end
         object Ldiam_dis: TLabel
-          Left = 441
+          Left = 448
           Height = 15
-          Top = 8
+          Top = 4
           Width = 51
           Caption = 'diametro'
           Font.CharSet = ANSI_CHARSET
@@ -8150,6 +8150,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -8194,6 +8195,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -8269,6 +8271,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10316,6 +10319,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10375,6 +10379,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10493,6 +10498,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10552,6 +10558,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10611,6 +10618,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10670,6 +10678,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10729,6 +10738,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10847,6 +10857,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10906,6 +10917,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -10965,6 +10977,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -11024,6 +11037,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -11083,6 +11097,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -11142,6 +11157,7 @@ object Fmain: TFmain
             AntialiasingMode = amOn
             Align = alCustom
             Center = True
+            OnClick = img1Click
             Proportional = True
             Stretch = True
             IgnoreMouse = False
@@ -11250,6 +11266,1266 @@ object Fmain: TFmain
     end
     object tsMan: TTabSheet
       Caption = 'manutenzioni'
+      ClientHeight = 711
+      ClientWidth = 1510
+      object pTitMan: TBCPanel
+        Left = 0
+        Height = 120
+        Top = 0
+        Width = 1510
+        Align = alTop
+        Background.Color = clBtnFace
+        Background.Gradient1.StartColor = clGray
+        Background.Gradient1.EndColor = clWhite
+        Background.Gradient1.GradientType = gtLinear
+        Background.Gradient1.Point1XPercent = 0
+        Background.Gradient1.Point1YPercent = 0
+        Background.Gradient1.Point2XPercent = 0
+        Background.Gradient1.Point2YPercent = 100
+        Background.Gradient2.StartColor = clWhite
+        Background.Gradient2.EndColor = clGray
+        Background.Gradient2.GradientType = gtLinear
+        Background.Gradient2.Point1XPercent = 0
+        Background.Gradient2.Point1YPercent = 0
+        Background.Gradient2.Point2XPercent = 0
+        Background.Gradient2.Point2YPercent = 100
+        Background.Gradient1EndPercent = 35
+        Background.Style = bbsGradient
+        BevelInner = bvNone
+        BevelOuter = bvRaised
+        BevelWidth = 1
+        Border.Style = bboNone
+        FontEx.Color = clDefault
+        FontEx.FontQuality = fqSystemClearType
+        FontEx.Shadow = False
+        FontEx.ShadowRadius = 5
+        FontEx.ShadowOffsetX = 5
+        FontEx.ShadowOffsetY = 5
+        FontEx.Style = []
+        ParentBackground = False
+        Rounding.RoundX = 1
+        Rounding.RoundY = 1
+        TabOrder = 0
+        object gbTesta: TGroupBox
+          Left = 8
+          Height = 103
+          Top = 8
+          Width = 508
+          Caption = 'selezioni'
+          ClientHeight = 79
+          ClientWidth = 504
+          Color = clScrollBar
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -16
+          Font.Name = 'Calibri'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          Font.Style = [fsBold]
+          ParentBackground = False
+          ParentColor = False
+          ParentFont = False
+          TabOrder = 0
+          object rgTipo: TRadioGroup
+            Left = 8
+            Height = 45
+            Top = -7
+            Width = 352
+            AutoFill = True
+            Caption = 'tipo'
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 3
+            ClientHeight = 22
+            ClientWidth = 348
+            Columns = 3
+            Font.CharSet = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -15
+            Font.Name = 'Tahoma'
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            Font.Style = [fsBold]
+            ItemIndex = 0
+            Items.Strings = (
+              'scadute'
+              'prossime'
+              'effettuate'
+            )
+            ParentBackground = False
+            ParentFont = False
+            TabOrder = 0
+          end
+          object Edal: TRxDateEdit
+            Left = 368
+            Height = 27
+            Top = 4
+            Width = 127
+            ButtonWidth = 23
+            DialogTitle = 'Select a Date'
+            MaxLength = 10
+            PasswordChar = #0
+            PopupColor = clWindow
+            TabOrder = 1
+            Text = '  /  /    '
+          end
+          object Ldal: TLabel
+            Left = 368
+            Height = 15
+            Top = -11
+            Width = 40
+            Caption = 'da data'
+            Font.CharSet = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -13
+            Font.Name = 'Calibri'
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Lal: TLabel
+            Left = 368
+            Height = 15
+            Top = 36
+            Width = 33
+            Caption = 'a data'
+            Font.CharSet = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -13
+            Font.Name = 'Calibri'
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object Eal: TRxDateEdit
+            Left = 368
+            Height = 27
+            Top = 49
+            Width = 127
+            ButtonWidth = 23
+            DialogTitle = 'Select a Date'
+            MaxLength = 10
+            PasswordChar = #0
+            PopupColor = clWindow
+            TabOrder = 2
+            Text = '  /  /    '
+          end
+          object Ldes: TLabel
+            Left = 8
+            Height = 15
+            Top = 36
+            Width = 61
+            Caption = 'descrizione'
+            Font.CharSet = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -13
+            Font.Name = 'Calibri'
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+          end
+          object EdesManFlt: TEdit
+            Left = 8
+            Height = 27
+            Top = 49
+            Width = 352
+            Font.CharSet = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -16
+            Font.Name = 'Arial'
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 3
+          end
+        end
+        object BrunMan: TBCButton
+          Tag = 1
+          Left = 544
+          Height = 40
+          Top = 36
+          Width = 176
+          StateClicked.Background.Gradient1.StartColor = 8404992
+          StateClicked.Background.Gradient1.EndColor = 4194304
+          StateClicked.Background.Gradient1.GradientType = gtRadial
+          StateClicked.Background.Gradient1.Point1XPercent = 50
+          StateClicked.Background.Gradient1.Point1YPercent = 100
+          StateClicked.Background.Gradient1.Point2XPercent = 0
+          StateClicked.Background.Gradient1.Point2YPercent = 0
+          StateClicked.Background.Gradient2.StartColor = clWhite
+          StateClicked.Background.Gradient2.EndColor = clBlack
+          StateClicked.Background.Gradient2.GradientType = gtLinear
+          StateClicked.Background.Gradient2.Point1XPercent = 0
+          StateClicked.Background.Gradient2.Point1YPercent = 0
+          StateClicked.Background.Gradient2.Point2XPercent = 0
+          StateClicked.Background.Gradient2.Point2YPercent = 100
+          StateClicked.Background.Gradient1EndPercent = 100
+          StateClicked.Background.Style = bbsGradient
+          StateClicked.Border.Style = bboNone
+          StateClicked.FontEx.Color = 16770790
+          StateClicked.FontEx.FontQuality = fqSystemClearType
+          StateClicked.FontEx.Shadow = True
+          StateClicked.FontEx.ShadowRadius = 2
+          StateClicked.FontEx.ShadowOffsetX = 1
+          StateClicked.FontEx.ShadowOffsetY = 1
+          StateClicked.FontEx.Style = [fsBold]
+          StateHover.Background.Gradient1.StartColor = 16744448
+          StateHover.Background.Gradient1.EndColor = 8404992
+          StateHover.Background.Gradient1.GradientType = gtRadial
+          StateHover.Background.Gradient1.Point1XPercent = 50
+          StateHover.Background.Gradient1.Point1YPercent = 100
+          StateHover.Background.Gradient1.Point2XPercent = 0
+          StateHover.Background.Gradient1.Point2YPercent = 0
+          StateHover.Background.Gradient2.StartColor = clWhite
+          StateHover.Background.Gradient2.EndColor = clBlack
+          StateHover.Background.Gradient2.GradientType = gtLinear
+          StateHover.Background.Gradient2.Point1XPercent = 0
+          StateHover.Background.Gradient2.Point1YPercent = 0
+          StateHover.Background.Gradient2.Point2XPercent = 0
+          StateHover.Background.Gradient2.Point2YPercent = 100
+          StateHover.Background.Gradient1EndPercent = 100
+          StateHover.Background.Style = bbsGradient
+          StateHover.Border.Style = bboNone
+          StateHover.FontEx.Color = clWhite
+          StateHover.FontEx.FontQuality = fqSystemClearType
+          StateHover.FontEx.Shadow = True
+          StateHover.FontEx.ShadowRadius = 2
+          StateHover.FontEx.ShadowOffsetX = 1
+          StateHover.FontEx.ShadowOffsetY = 1
+          StateHover.FontEx.Style = [fsBold]
+          StateNormal.Background.Gradient1.StartColor = 4194304
+          StateNormal.Background.Gradient1.EndColor = 8405056
+          StateNormal.Background.Gradient1.GradientType = gtLinear
+          StateNormal.Background.Gradient1.Point1XPercent = 0
+          StateNormal.Background.Gradient1.Point1YPercent = 0
+          StateNormal.Background.Gradient1.Point2XPercent = 0
+          StateNormal.Background.Gradient1.Point2YPercent = 100
+          StateNormal.Background.Gradient2.StartColor = 8405056
+          StateNormal.Background.Gradient2.EndColor = 4194304
+          StateNormal.Background.Gradient2.GradientType = gtRadial
+          StateNormal.Background.Gradient2.Point1XPercent = 50
+          StateNormal.Background.Gradient2.Point1YPercent = 100
+          StateNormal.Background.Gradient2.Point2XPercent = 0
+          StateNormal.Background.Gradient2.Point2YPercent = 0
+          StateNormal.Background.Gradient1EndPercent = 60
+          StateNormal.Background.Style = bbsGradient
+          StateNormal.Border.Style = bboNone
+          StateNormal.FontEx.Color = 16770790
+          StateNormal.FontEx.FontQuality = fqSystemClearType
+          StateNormal.FontEx.Height = 18
+          StateNormal.FontEx.Shadow = True
+          StateNormal.FontEx.ShadowRadius = 2
+          StateNormal.FontEx.ShadowOffsetX = 1
+          StateNormal.FontEx.ShadowOffsetY = 1
+          StateNormal.FontEx.Style = [fsBold]
+          Caption = 'elenca'
+          Color = clNone
+          DropDownWidth = 16
+          DropDownArrowSize = 8
+          GlobalOpacity = 255
+          Glyph.Data = {
+            36100000424D3610000000000000360000002800000020000000200000000100
+            2000000000000010000064000000640000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00020000000E000000110000000B000000020000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000B08
+            01163E2A0A783D290A82130C025B000000380000001C00000009000000010000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000006749
+            1160FCD73FFFFCD43EFFF5B931F9AB761CCA50370C8D06040050000000300000
+            0016000000060000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000007C5E
+            1877FFE445FFFFF14CFFFFF04BFFFEE747FFFCCF3BFFEAAB2CF1946618BC3A27
+            097B000000470000002900000011000000040000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000007C5F
+            1877FFD73EFFFFED4AFFFFED49FFFFEC49FFFFEB49FFFFEA48FFFEDC41FFFCC6
+            37FFD99A26E67F5714AD2217056A00000040000000220000000C000000020000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000007A5D
+            186AFFCA38FFFFE948FFFFE948FFFFE847FFFFE747FFFFE646FFFFE545FFFFE3
+            44FFFEE143FFFDD13CFFFABC32FDC38720D86544109D130C025C000000390000
+            001C000000090000000100000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000000000000000000000654D
+            124FFFCC59FFFFEB78FFFFE758FFFFE445FFFFE444FFFFE344FFFFE143FFFFE0
+            42FFFFDE42FFFFDD41FFFFDB40FFFED73EFFFCC636FFF4B02DFAAA721BCB5035
+            0C8E070400510000003100000016000000060000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000003A2B
+            0A24FFD06EFFFFEDACFFFFF1ABFFFFED98FFFFE875FFFFE152FFFFDE41FFFFDC
+            41FFFFDB40FFFFD93FFFFFD83FFFFFD63EFFFFD43DFFFFD23BFFFECB38FFFABA
+            31FFE69E27F2915E16BD3A25087C000000480000002900000011000000040000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0001F9B82EE5FFCD42FFFFE570FFFFEB97FFFFEFAEFFFFEEAAFFFFE994FFFFE2
+            6FFFFFDA4BFFFFD63EFFFFD43DFFFFD23CFFFFD03AFFFFCE39FFFFCC38FFFFCA
+            37FFFFC836FFFCBE32FFF6AD2CFFD18821E77B4D11AE2114046B000000400000
+            00220000000D0000000200000000000000000000000000000000000000000000
+            0000BA8822A6FFC133FFFFDA40FFFFD93FFFFFDB4BFFFFE173FFFFE898FFFFEC
+            ADFFFFEAA8FFFFE48EFFFFDB69FFFFD144FFFFCD39FFFFCB38FFFFC937FFFFC7
+            36FFFFC435FFFFC233FFFFC032FFFEBC30FFFAB02CFFF19E27FDB9711BD95F38
+            0C9E120A025D000000390000001C000000090000000000000000000000000000
+            000079571466FFBF41FFFFDD69FFFFDE68FFFFDC62FFFFD959FFFFD74FFFFFD7
+            55FFFFDD73FFFFE59BFFFFE9ACFFFFE6A6FFFFDE89FFFFD362FFFFC83EFFFFC3
+            34FFFFC132FFFFBF31FFFFBC30FFFFBA2FFFFEB72DFFFCB22BFFF7A929FFEF99
+            25FFE38821FA9C5814CB4928098E0704004C0000000E00000000000000000000
+            000039280823FEB936FFFFD770FFFFDC6FFFFFDB6CFFFFDA69FFFFD965FFFFD7
+            62FFFFD45BFFFFD04CFFFFD050FFFFD876FFFFE19CFFFFE5AAFFFFE2A3FFFFD7
+            83FFFFCA5BFFFFBE37FFFFBA2FFFFEB62DFFFBB12BFFF8AA2AFFF3A228FFEF9A
+            26FFEB9324FFE68921FFE1801FFFCA731BE80A05001500000000000000000000
+            000000000001F5AC29E1FDCF6FFFFFDB76FFFFDA74FFFFD970FFFFD86DFFFFD6
+            69FFFFD466FFFFD262FFFFD05EFFFFCB50FFFFC53CFFFFC84CFFFFD376FFFFDE
+            9FFFFFE0A8FFFFDCA0FFFECF7CFFFBBD53FFF7AA2FFFF3A128FFEF9A25FFEB92
+            24FFE78B22FFEC9825FFFAB62EFFFDBA30FE2F1A052600000000000000000000
+            000000000000B37B1DA3FBC260FFFFDB7DFFFFDA7AFFFFD977FFFFD774FFFFD5
+            71FFFFD46DFFFFD26AFFFFD066FFFFCE62FFFFCB5FFFFFC64FFFFFBD36FFFFBA
+            2FFFFEC04BFFFDCC78FFFCD79FFFFBD8A6FFF8D09CFFF4BC75FFEEA349FFED99
+            29FFF9B12DFFFFBC30FFFFBC30FFFFBB30FD3624082C00000000000000000000
+            000000000000744E1263F7B54EFFFED985FFFFDA82FFFFD87EFFFFD77BFFFFD5
+            78FFFFD375FFFFD272FFFFCF6EFFFFCD6AFFFFCB67FFFFC963FFFEC65EFFFDBC
+            45FFFBB02CFFF8AA2AFFF4A42AFFF3AD4BFFF3BB76FFF7D0A1FFFBDAA7FFFFDC
+            9DFFFFD076FFFFC44FFFFFBA31FFFFB92EFC3726082700000000000000000000
+            00000000000036230723F3A739FFFCD58BFFFFDA89FFFFD886FFFFD783FFFFD5
+            7FFFFFD37CFFFFD279FFFFD076FFFFCE72FFFECB6EFFFEC86BFFFCC467FFFABF
+            63FFF7B654FFF3A32FFFEF9A26FFEE9825FFF7A829FFFEB830FFFFC454FFFFD2
+            81FFFFDEA6FFFFDFA8FFFFDA9AFFFEBB3EFA3928092600000000000000000000
+            00000000000000000001E69423DFFACD8AFFFFDA91FFFFD98DFFFFD78BFFFFD5
+            87FFFFD484FFFFD280FFFED07DFFFECD79FFFCC976FFFBC572FFF8C16EFFF6BC
+            6AFFF4B766FFF2B15EFFF4A837FFFBB12BFFFCB22CFFFDB22CFFFDB22CFFFDB2
+            2CFFFCB330FFFCC058FFFCCB78FFF4AF33E71710030C00000000000000000000
+            00000000000000000000A869189EF4BC74FFFFDA98FFFFD995FFFFD892FFFED6
+            8FFFFED48CFFFDD188FFFCCE85FFFBCA81FFF9C77DFFF7C279FFF5BE76FFF3BA
+            72FFF5BB70FFF9C16EFFFAC169FFF9B039FFF8AB2AFFF8AB2AFFF8AB2AFFF8AB
+            2AFFF8AB2AFFF8AB2AFBB77D1EA1372507210000000000000000000000000000
+            000000000000000000006C400E5FEEAA5BFFFDD99FFFFDD99CFFFDD799FFFCD4
+            96FFFBD293FFFACE90FFF9CC8CFFF7C889FFF6C485FFF4C081FFF4BF7EFFF7C2
+            7CFFF7C279FFF7C276FFF8C174FFF7BD6AFFF5A72EFFF5A529FFF5A529FFF5A4
+            29FBB4791DA13A27082500000000000000000000000000000000000000000000
+            00000000000000000000301C051FE8963DFFF9D5A6FFFBD7A3FFFAD5A0FFF9D3
+            9DFFF8D09AFFF7CD97FFF6CA94FFF5C790FFF4C48DFFF5C48BFFF6C488FFF6C3
+            85FFF6C282FFF6C27EFFF6C17BFFF5BE76FFF2A840FFF19D26F9B1731B9D3925
+            0825000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000001DA7D1FDDF5CFA7FFF9D6ABFFF8D4A8FFF7D1
+            A5FFF7CFA1FFF5CC9EFFF4C99BFFF4C799FFF4C796FFF4C693FFF4C590FFF4C4
+            8DFFF4C28AFFF3C084FFF1AE5CFFEE9B2FF9AD6D19983622071F000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000009F56139EEEBA8BFFF7D6B3FFF7D4AFFFF6D2
+            ACFFF4CEA9FFF3CCA6FFF3CAA3FFF3C9A0FFF3C89DFFF3C79AFFF3C698FFF2C3
+            91FFEEAB61FFE9932DF9AA6817983521051F0000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000005D310B5DE7A36AFFF6D7BAFFF5D4B7FFF3D1
+            B4FFF3CEB1FFF3CDAEFFF3CCABFFF3CBA8FFF3CAA5FFF2C59CFFECA863FFE58C
+            2CF9A7621598351F051F00000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000002512041BDF8743FFF5DBC8FFF3D4BFFFF3D3
+            BCFFF3D2B9FFF3D0B6FFF3CFB3FFF1C9A8FFE9A66AFFE08229F69F5812912F1B
+            031A000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000001C5631BD9F5DDCEFFF3D8C7FFF3D7
+            C4FFF3D5C1FFF1CDB5FFE6A26CFFDC7926F69C5211912F18031A000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000008D410E9AEFCAB6FFF4DDCFFFF1D2
+            BFFFE39D6DFFD77024F6984B0F912E15021A0000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000057260759E3A280FFE09970FFD165
+            1FF3813C0D892310021800000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000180901096834197C662B0973180A
+            0115000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000
+          }
+          GlyphAlignment = bcaLeftCenter
+          GlyphMargin = 0
+          ParentColor = False
+          Rounding.RoundX = 12
+          Rounding.RoundY = 12
+          RoundingDropDown.RoundX = 1
+          RoundingDropDown.RoundY = 1
+          TextApplyGlobalOpacity = False
+          MemoryUsage = bmuHigh
+        end
+        object BsaveMan: TBCButton
+          Tag = 1
+          Left = 1270
+          Height = 40
+          Top = 32
+          Width = 216
+          Anchors = [akTop, akRight]
+          StateClicked.Background.Gradient1.StartColor = 8404992
+          StateClicked.Background.Gradient1.EndColor = 4194304
+          StateClicked.Background.Gradient1.GradientType = gtRadial
+          StateClicked.Background.Gradient1.Point1XPercent = 50
+          StateClicked.Background.Gradient1.Point1YPercent = 100
+          StateClicked.Background.Gradient1.Point2XPercent = 0
+          StateClicked.Background.Gradient1.Point2YPercent = 0
+          StateClicked.Background.Gradient2.StartColor = clWhite
+          StateClicked.Background.Gradient2.EndColor = clBlack
+          StateClicked.Background.Gradient2.GradientType = gtLinear
+          StateClicked.Background.Gradient2.Point1XPercent = 0
+          StateClicked.Background.Gradient2.Point1YPercent = 0
+          StateClicked.Background.Gradient2.Point2XPercent = 0
+          StateClicked.Background.Gradient2.Point2YPercent = 100
+          StateClicked.Background.Gradient1EndPercent = 100
+          StateClicked.Background.Style = bbsGradient
+          StateClicked.Border.Style = bboNone
+          StateClicked.FontEx.Color = 16770790
+          StateClicked.FontEx.FontQuality = fqSystemClearType
+          StateClicked.FontEx.Shadow = True
+          StateClicked.FontEx.ShadowRadius = 2
+          StateClicked.FontEx.ShadowOffsetX = 1
+          StateClicked.FontEx.ShadowOffsetY = 1
+          StateClicked.FontEx.Style = [fsBold]
+          StateHover.Background.Gradient1.StartColor = 16744448
+          StateHover.Background.Gradient1.EndColor = 8404992
+          StateHover.Background.Gradient1.GradientType = gtRadial
+          StateHover.Background.Gradient1.Point1XPercent = 50
+          StateHover.Background.Gradient1.Point1YPercent = 100
+          StateHover.Background.Gradient1.Point2XPercent = 0
+          StateHover.Background.Gradient1.Point2YPercent = 0
+          StateHover.Background.Gradient2.StartColor = clWhite
+          StateHover.Background.Gradient2.EndColor = clBlack
+          StateHover.Background.Gradient2.GradientType = gtLinear
+          StateHover.Background.Gradient2.Point1XPercent = 0
+          StateHover.Background.Gradient2.Point1YPercent = 0
+          StateHover.Background.Gradient2.Point2XPercent = 0
+          StateHover.Background.Gradient2.Point2YPercent = 100
+          StateHover.Background.Gradient1EndPercent = 100
+          StateHover.Background.Style = bbsGradient
+          StateHover.Border.Style = bboNone
+          StateHover.FontEx.Color = clWhite
+          StateHover.FontEx.FontQuality = fqSystemClearType
+          StateHover.FontEx.Shadow = True
+          StateHover.FontEx.ShadowRadius = 2
+          StateHover.FontEx.ShadowOffsetX = 1
+          StateHover.FontEx.ShadowOffsetY = 1
+          StateHover.FontEx.Style = [fsBold]
+          StateNormal.Background.Gradient1.StartColor = 4194304
+          StateNormal.Background.Gradient1.EndColor = 8405056
+          StateNormal.Background.Gradient1.GradientType = gtLinear
+          StateNormal.Background.Gradient1.Point1XPercent = 0
+          StateNormal.Background.Gradient1.Point1YPercent = 0
+          StateNormal.Background.Gradient1.Point2XPercent = 0
+          StateNormal.Background.Gradient1.Point2YPercent = 100
+          StateNormal.Background.Gradient2.StartColor = 8405056
+          StateNormal.Background.Gradient2.EndColor = 4194304
+          StateNormal.Background.Gradient2.GradientType = gtRadial
+          StateNormal.Background.Gradient2.Point1XPercent = 50
+          StateNormal.Background.Gradient2.Point1YPercent = 100
+          StateNormal.Background.Gradient2.Point2XPercent = 0
+          StateNormal.Background.Gradient2.Point2YPercent = 0
+          StateNormal.Background.Gradient1EndPercent = 60
+          StateNormal.Background.Style = bbsGradient
+          StateNormal.Border.Style = bboNone
+          StateNormal.FontEx.Color = 16770790
+          StateNormal.FontEx.FontQuality = fqSystemClearType
+          StateNormal.FontEx.Height = 18
+          StateNormal.FontEx.Shadow = True
+          StateNormal.FontEx.ShadowRadius = 2
+          StateNormal.FontEx.ShadowOffsetX = 1
+          StateNormal.FontEx.ShadowOffsetY = 1
+          StateNormal.FontEx.Style = [fsBold]
+          Caption = 'conferma modifiche'
+          Color = clNone
+          DropDownWidth = 16
+          DropDownArrowSize = 8
+          Enabled = False
+          GlobalOpacity = 255
+          Glyph.Data = {
+            36100000424D3610000000000000360000002800000020000000200000000100
+            2000000000000010000064000000640000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000D000000090000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000100020121006536A2004926840000001300000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00010007032B008645C10AC96DFF07C86CFD0062339D00000019000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000030009
+            043600924AD11CCA75FFB0F1D1FFB4F0D2FF16C770FF006F38AF000201210000
+            0001000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000000000000400150A45009B
+            4CDD22C874FF99EFC3FF8AF2BBFFA5F8CEFFC4F4DCFF1FC571FF007F3EC10006
+            032B000000010000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000007001C0D5400A34DE825C6
+            73FF81ECB2FF6BECA3FF82F1B5FF99F6C7FFB0FAD8FFC6F5DFFF28C473FF008B
+            42D1000904360000000300000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000A0028116500A44BF027C471FF60E8
+            9DFF46E687FF60EA9AFF77EFACFF8BF3BCFF9BF6C9FFA5F8D0FFB5F4D5FF30C3
+            73FF009342DD0014084500000005000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000F0035167800A648F626C46FFF36E182FF1BDE
+            6BFF39E37EFF52E88FFF67ECA0FF78EFADFF85F2B8FF8CF3BDFF8BF3BCFF9CF1
+            C4FF34C274FF009A43E9001B0B55000000070000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000140040198900A645FB20C36BFF21DB71FF00D858FF0ADC
+            60FF27E071FF3FE482FF53E890FF63EB9CFF6DEDA5FF73EEA9FF72EEA8FF6BED
+            A3FF7CEDAEFF35C173FF009D41F100260F650000000A00000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000001A00501E9E00A23FFE18C267FF12D462FF00D251FF00D555FF00D9
+            5AFF10DD63FF28E072FF3BE47FFF49E68AFF53E891FF58E994FF57E994FF51E8
+            8FFF46E687FF54E792FF35C171FF009C3DF6003212780000000F000000000000
+            0000000000000000000000000000000000000000000000000000000000010001
+            0021005B1FB1009D39FF0AC260FF07CD54FF00CB4BFF00CF4FFF00D352FF00D6
+            56FF00D95AFF0CDC61FF1FDF6DFF2DE176FF37E37CFF3BE47FFF3AE47FFF35E2
+            7BFF2AE174FF1BDE6AFF24E074FF2EC16CFF009B38FB003C1489000000140000
+            0000000000000000000000000000000000000000000000000000000601220065
+            1FC1009833FF00BE58FF00C548FF00C544FF00C949FF00CC4CFF00D04FFF04D3
+            55FF14D861FF20DC6AFF2ADF71FF35E178FF3CE27CFF3BE27CFF33E177FF21DF
+            6DFF0BDC61FF01DA5BFF00D858FF10D963FF25C167FF009732FE004B179E0000
+            001A0000000000000000000000000000000000000000000000000043137A0093
+            2DFF00BA4FFF00BD3DFF00BF3EFF00C241FF0BC84CFF31D168FF4FD97DFF61DE
+            8AFF62E08CFF61E18DFF33DC72FF46E07FFF62E590FF62E591FF62E591FF62E5
+            90FF5CE38CFF44DF7DFF23D868FF02D253FF08D157FF1AC161FF00932DFF0055
+            17B10001002200000001000000000000000000000000000000000045147F00B4
+            44FF00B534FF00B837FF11BF46FF4CD073FF70D98DFF72DB90FF72DD92FF72DF
+            94FF6FE093FF2BD66AFF00C34CDE03CF52EA47DE7EFF72E599FF72E599FF72E5
+            98FF72E498FF72E397FF72E196FF68DE8EFF35D46CFF03CA4DFF0BBF59FF008E
+            27FF005F16C30005012D000000020000000000000000000000000053187400AE
+            2BFF02B230FF41C663FF7ED794FF81DA97FF81DB99FF81DD9BFF81DF9CFF7BDF
+            99FF24D061FF00BA45CE00240D1900260E2400C14ADC44DA7AFF81E5A1FF81E5
+            A1FF81E4A1FF81E3A0FF81E29FFF81E19EFF81DF9DFF57D57EFF04C345FF00BC
+            4FFF008A21FF006513D200080138000000030000000000000000000A020B0088
+            1FB01FB743FF8BD89BFF90DBA1FF90DCA2FF90DEA3FF90DFA5FF84DD9DFF1DC9
+            57FF009F38BB0015070F000000000000000000220D1600B843CB3FD673FF8FE4
+            A9FF90E5AAFF90E4A9FF90E4A8FF90E3A8FF90E1A7FF90E0A5FF6ED78BFF0EBE
+            43FF00B645FF00861BFF00680DDF000D01450000000500000000000000000009
+            010300821D9B23B847FF92DAA1FF9FDFADFF9FE0AEFF89DC9EFF16C24CFF0097
+            31A4000B0306000000000000000000000000000000000015070C00A039B834D0
+            69FF9AE5AFFF9FE5B3FF9FE5B2FF9FE4B1FF9FE4B1FF9FE3AFFF9FE1AFFF87DA
+            9BFF1CBB46FF00B03AFF008215FF006B07E90013005600000007000000000000
+            000000000000006918821AB640FF97DCA6FF8ADA9DFF0FBB40FF007B258B0008
+            0201000000000000000000000000000000000000000000000000000B03040097
+            32A02ACA5EFFA3E5B5FFAEE7BCFFAEE7BCFFAEE6BBFFAEE5BBFFAEE4BAFFAEE4
+            B9FF9EDEABFF22B846FF00A92EFF007F0DFF006D00F100170049000000000000
+            000000000000000000000061156812B238FC07B334FC006B1D71000000000000
+            0000000000000000000000000000000000000000000000000000000000000009
+            02010074248620C351FFA7E4B7FFBCEAC6FFBCE9C6FFBCE8C5FFBCE8C5FFBCE7
+            C4FFBCE6C3FFAEE1B7FF2DB649FF00A223FF007F0BFF0038007F000000000000
+            0000000000000000000000000000003A0C4300460F4900000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000006C1F6C17BC45FCA9E3B6FFCBEDD1FFCBECD1FFCBECD0FFCBEB
+            D0FFCBEACFFFCBEACFFFC4E7C9FF40B753FF009D1AFF0041087E000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000004A13540DB337F5A5E0B2FFD8F0DCFFD8F0DCFFD8F0
+            DCFFD8EFDBFFD8EFDBFFD8EEDBFF9AD5A1FF019A13FD003F0550000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000003D0D3D07AA2BED9CDBA8FFE6F5E8FFE6F5
+            E8FFE6F4E8FFE6F4E8FF91D298FF059B16F80045055700000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000002D082B039A1FE38CD398FFF4FA
+            F4FFF4FAF4FF80CB88FF019711F0003604410000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000000001C041D009115D47AC9
+            83FF6DC376FF008D0DE40030022E000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000000000000000170111007F
+            0BC2008B0AD5001A011E00000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000
+          }
+          GlyphAlignment = bcaLeftCenter
+          GlyphMargin = 0
+          ParentColor = False
+          Rounding.RoundX = 12
+          Rounding.RoundY = 12
+          RoundingDropDown.RoundX = 1
+          RoundingDropDown.RoundY = 1
+          TextApplyGlobalOpacity = False
+          MemoryUsage = bmuHigh
+        end
+        object BannMan: TBCButton
+          Tag = 1
+          Left = 950
+          Height = 40
+          Top = 32
+          Width = 216
+          Anchors = [akTop, akRight]
+          StateClicked.Background.Gradient1.StartColor = 8404992
+          StateClicked.Background.Gradient1.EndColor = 4194304
+          StateClicked.Background.Gradient1.GradientType = gtRadial
+          StateClicked.Background.Gradient1.Point1XPercent = 50
+          StateClicked.Background.Gradient1.Point1YPercent = 100
+          StateClicked.Background.Gradient1.Point2XPercent = 0
+          StateClicked.Background.Gradient1.Point2YPercent = 0
+          StateClicked.Background.Gradient2.StartColor = clWhite
+          StateClicked.Background.Gradient2.EndColor = clBlack
+          StateClicked.Background.Gradient2.GradientType = gtLinear
+          StateClicked.Background.Gradient2.Point1XPercent = 0
+          StateClicked.Background.Gradient2.Point1YPercent = 0
+          StateClicked.Background.Gradient2.Point2XPercent = 0
+          StateClicked.Background.Gradient2.Point2YPercent = 100
+          StateClicked.Background.Gradient1EndPercent = 100
+          StateClicked.Background.Style = bbsGradient
+          StateClicked.Border.Style = bboNone
+          StateClicked.FontEx.Color = 16770790
+          StateClicked.FontEx.FontQuality = fqSystemClearType
+          StateClicked.FontEx.Shadow = True
+          StateClicked.FontEx.ShadowRadius = 2
+          StateClicked.FontEx.ShadowOffsetX = 1
+          StateClicked.FontEx.ShadowOffsetY = 1
+          StateClicked.FontEx.Style = [fsBold]
+          StateHover.Background.Gradient1.StartColor = 16744448
+          StateHover.Background.Gradient1.EndColor = 8404992
+          StateHover.Background.Gradient1.GradientType = gtRadial
+          StateHover.Background.Gradient1.Point1XPercent = 50
+          StateHover.Background.Gradient1.Point1YPercent = 100
+          StateHover.Background.Gradient1.Point2XPercent = 0
+          StateHover.Background.Gradient1.Point2YPercent = 0
+          StateHover.Background.Gradient2.StartColor = clWhite
+          StateHover.Background.Gradient2.EndColor = clBlack
+          StateHover.Background.Gradient2.GradientType = gtLinear
+          StateHover.Background.Gradient2.Point1XPercent = 0
+          StateHover.Background.Gradient2.Point1YPercent = 0
+          StateHover.Background.Gradient2.Point2XPercent = 0
+          StateHover.Background.Gradient2.Point2YPercent = 100
+          StateHover.Background.Gradient1EndPercent = 100
+          StateHover.Background.Style = bbsGradient
+          StateHover.Border.Style = bboNone
+          StateHover.FontEx.Color = clWhite
+          StateHover.FontEx.FontQuality = fqSystemClearType
+          StateHover.FontEx.Shadow = True
+          StateHover.FontEx.ShadowRadius = 2
+          StateHover.FontEx.ShadowOffsetX = 1
+          StateHover.FontEx.ShadowOffsetY = 1
+          StateHover.FontEx.Style = [fsBold]
+          StateNormal.Background.Gradient1.StartColor = 4194304
+          StateNormal.Background.Gradient1.EndColor = 8405056
+          StateNormal.Background.Gradient1.GradientType = gtLinear
+          StateNormal.Background.Gradient1.Point1XPercent = 0
+          StateNormal.Background.Gradient1.Point1YPercent = 0
+          StateNormal.Background.Gradient1.Point2XPercent = 0
+          StateNormal.Background.Gradient1.Point2YPercent = 100
+          StateNormal.Background.Gradient2.StartColor = 8405056
+          StateNormal.Background.Gradient2.EndColor = 4194304
+          StateNormal.Background.Gradient2.GradientType = gtRadial
+          StateNormal.Background.Gradient2.Point1XPercent = 50
+          StateNormal.Background.Gradient2.Point1YPercent = 100
+          StateNormal.Background.Gradient2.Point2XPercent = 0
+          StateNormal.Background.Gradient2.Point2YPercent = 0
+          StateNormal.Background.Gradient1EndPercent = 60
+          StateNormal.Background.Style = bbsGradient
+          StateNormal.Border.Style = bboNone
+          StateNormal.FontEx.Color = 16770790
+          StateNormal.FontEx.FontQuality = fqSystemClearType
+          StateNormal.FontEx.Height = 18
+          StateNormal.FontEx.Shadow = True
+          StateNormal.FontEx.ShadowRadius = 2
+          StateNormal.FontEx.ShadowOffsetX = 1
+          StateNormal.FontEx.ShadowOffsetY = 1
+          StateNormal.FontEx.Style = [fsBold]
+          Caption = 'annulla modifiche'
+          Color = clNone
+          DropDownWidth = 16
+          DropDownArrowSize = 8
+          Enabled = False
+          GlobalOpacity = 255
+          Glyph.Data = {
+            36100000424D3610000000000000360000002800000020000000200000000100
+            2000000000000010000064000000640000000000000000000000000000000000
+            00000000000200000019000027580101507C0000144000000010000000010000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000002000000160000
+            104A0101527E0000234D00000012000000010000000000000000000000000000
+            00020000001B000034621111BCDE3F3FDCF70808A6BC0000284F000000130000
+            0002000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000000000000003000000160000295A0808
+            ADCF3D3DD9F81010AECA00003155000000150000000200000000000000030000
+            001E00003A6E0000BBE61A1AD6FF5050E1FF0A0AD3FA0000B0CA000037580000
+            0019000000030000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000030000001F000033640000BBE10E0E
+            D5FF4C4CDEFF1010CDF90000ABD00000375D0000001600000002000000150000
+            446D0000B7E60000CBFF1818D2FF4E4EDFFF1010D5FF0000D1FB0000B1CC0000
+            44610000001A0000000300000000000000000000000000000000000000000000
+            000000000000000000000000000500000022000055740000B5DC0000D0FF1414
+            D2FF4949DCFF0E0ECDFF0000C4FA0000A6D5000031520000000C000039340000
+            B9EC0000C5FF0202C9FF2929E7FF6666F7FF5050E6FF1212D3FF0000CEFC0000
+            B7D80000506B0000002000000004000000000000000000000000000000000000
+            000000000000000000060000032A000060800000BEEA0000CEFF1414D0FF5D5D
+            E6FF7575F6FF2C2CDFFF0101C4FF0000C1FF0000A4C400000C1B00006F4F0000
+            BFFF0101C4FF1818E2FF3939FEFF4B4BFFFF6B6BFBFF5151E7FF1111D0FF0000
+            CCFD0000B2D600005C7500000022000000050000000000000000000000000000
+            0000000000080000042C0000658A0000BCEB0000CBFF1515CFFF6161E8FF8686
+            FEFF6464FFFF4F4FFAFF2222DBFF0101BEFF0000B5EA00002023000078550101
+            BFFF1616E6FF2B2BFFFF3535FFFF3E3EFFFF4D4DFFFF6565FCFF5252E7FF1717
+            CFFF0101C9FE0000B8E300006580000001280000000600000000000000010000
+            000A0000083700006D950000C4F80101C8FF1D1DCFFF6565EBFF7E7EFFFF6565
+            FFFF5959FFFF5050FFFF4040FAFF1E1EDCFF0101B6F300002725020284520F0F
+            E6FF1E1EFFFF2727FFFF2F2FFFFF3838FFFF4141FFFF4D4DFFFF6565FCFF4E4E
+            E6FF1515CDFF0101C6FE0000B3E3000067870000032A000000070000000D0000
+            093B000087AB0000C2FA0101C5FF1B1BCCFF6767EEFF7878FEFF6565FFFF5B5B
+            FFFF5151FFFF4848FFFF3F3FFFFF3535FDFF1616D6F301012C210A0ABE381313
+            FEF71A1AFFFF2121FFFF2929FFFF3131FFFF3A3AFFFF4242FFFF4C4CFFFF5F5F
+            FDFF4B4BE7FF1818CBFF0101C2FF0000B9F300006B920000083C0000184C0000
+            90BC0000BFFC0101C1FF1F1FCCFF6464EFFF6E6EFEFF6161FFFF5959FFFF5151
+            FFFF4949FFFF4141FFFF3838FFFF3030FFFF2727FADF0B0B5610070792071010
+            F7861616FEEE1C1CFFFF2323FFFF2A2AFFFF3232FFFF3A3AFFFF4242FFFF4B4B
+            FFFF5858FCFF4747E7FF1616C8FF0101BEFF0000B5F300006BA900008BC40000
+            BDFE0101BDFF1A1AC7FF6565F4FF6767FFFF5C5CFFFF5656FFFF4F4FFFFF4848
+            FFFF4141FFFF3939FFFF3131FFFF2A2AFEEC2323ED5100000001000000000909
+            AC071212F7771717FDDD1D1DFFFF2424FFFF2B2BFFFF3131FFFF3939FFFF3F3F
+            FFFF4646FFFF5151FEFF4141E8FF1515C6FF0101BAFF0000B6FB0000B9FF0101
+            B9FF1F1FCBFF5B5BF7FF5A5AFFFF5454FFFF4F4FFFFF4A4AFFFF4444FFFF3E3E
+            FFFF3737FFFF3030FFFF2929FDE12323EA420000000100000000000000000000
+            00000B0BB0071313F46C1818FDDE1D1DFFFE2323FFFF2929FFFF3030FFFF3636
+            FFFF3B3BFFFF4141FFFF4949FEFF3D3DECFF0E0EC0FF0000B5FF0101B6FF1A1A
+            C9FF4D4DF7FF5050FFFF4B4BFFFF4848FFFF4444FFFF4040FFFF3A3AFFFF3535
+            FFFF2E2EFFFF2929FCD52323E734070736010000000000000000000000000000
+            00000000000008086B031313F25C1717FDD71C1CFFFE2121FFFF2727FFFF2C2C
+            FFFF3131FFFF3636FFFF3B3BFFFF4141FFFF3636EFFF0C0CBFFF1717CCFF4242
+            FAFF4343FFFF4141FFFF3F3FFFFF3D3DFFFF3939FFFF3434FFFF3030FFFF2B2B
+            FFFE2626FBC52121E32900000000000000000000000000000000000000000000
+            00000000000000000000050552021212EB441616FDDA1A1AFFFD2323FFFF3030
+            FFFF3E3EFFFF4949FFFF5050FFFF5555FFFF4F4FFFFF3333F3FF3D3DFCFF5050
+            FFFF4A4AFFFF4040FFFF3737FFFF3333FFFF2E2EFFFF2B2BFFFF2727FFFE2323
+            FAC41A1ABE110000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000001010E83A1D1DFBCC4747FFFF5555
+            FFFF5858FFFF5A5AFFFF5D5DFFFF5F5FFFFF6060FFFF5454FFFF5D5DFFFF6262
+            FFFF6262FFFF6060FFFF5757FFFF4747FFFF2F2FFFFF2121FFFF1E1EF8A91616
+            B80D000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000000C0CD62A2222F7D24A4A
+            FFFF5959FFFF5B5BFFFF5D5DFFFF5F5FFFFF6060FFFF6161FFFF6161FFFF6262
+            FFFF6161FFFF6161FFFF6060FFFF5E5EFFFF4242FEFC1E1EF19D1111BA0D0000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000030000001D0202617F1616
+            DCF84949FEFF5C5CFFFF5E5EFFFF5F5FFFFF6060FFFF6161FFFF6161FFFF6262
+            FFFF6262FFFF6161FFFF6060FFFF3C3CFCFF0F0FBAD80101284D0000000D0000
+            0001000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000020000001C00002A6700008AE90202
+            A2FF1414DAFF4949FEFF6161FFFF6262FFFF6363FFFF6363FFFF6464FFFF6464
+            FFFF6363FFFF6262FFFF3939FBFF0909C4FF000093F9000074BA000012400000
+            000E000000010000000000000000000000000000000000000000000000000000
+            00000000000000000000000000030000001E00003571000084E8000092FF0000
+            97FF0303D7FF2D2DFFFF6464FFFF6565FFFF6666FFFF6767FFFF6767FFFF6767
+            FFFF6767FFFF5D5DFFFF1A1AF6FF0202B8FF000092FF00008CF700006CB60000
+            1B470000000F0000000100000000000000000000000000000000000000000000
+            00000000000000000003000000200000377000007CE300008DFF000092FF0202
+            CBFF2B2BFFFF6868FFFF6A6AFFFF6B6BFFFF6B6BFFFF6B6BFFFF6B6BFFFF6B6B
+            FFFF6B6BFFFF6A6AFFFF5555FFFF1919F1FF0000B0FF00008DFF000087F60000
+            69B6000015420000000E00000000000000000000000000000000000000000000
+            0000000000040000002000003B7A00007AE6000087FF00008EFF0202D2FF3030
+            FEFF7070FFFF7272FFFF7272FFFF7272FFFF7272FFFF7272FFFF7272FFFF7272
+            FFFF7272FFFF7272FFFF7171FFFF5E5EFFFF1919F1FF0000B5FF000087FF0000
+            81F7000064B5000013460000000E000000000000000000000000000000000000
+            00030000002000003271000077EB000082FF00008EFF0202C9FF3535FFFF7777
+            FFFF7878FFFF7878FFFF7878FFFF7878FFFF7878FFFF7474FFFF7878FFFF7878
+            FFFF7878FFFF7878FFFF7878FFFF7878FFFF6161FFFF1E1EEFFF0000ADFF0000
+            82FF00007CF6000060B6000014420000000D0000000000000000000000010000
+            001A00003577000074EC00007DFF000088FF0505CDFF3C3CFFFF7E7EFFFF8080
+            FFFF8080FFFF8080FFFF8080FFFF8080FFFF7171FFFE3232FBE05656FEFA8080
+            FFFF8080FFFF8080FFFF8080FFFF8080FFFF8080FFFF6767FFFF1F1FEEFF0000
+            ACFF00007DFF000079F700005EB50000133F0000000700000000000000030000
+            2A46000073E500007CFF000082FF0303CBFF4343FCFF8181FFFF8888FFFF8888
+            FFFF8888FFFF8888FFFF8888FFFF7C7CFFFF3131FCD60101E03E1313F5885C5C
+            FEFA8888FFFF8888FFFF8888FFFF8888FFFF8888FFFF8888FFFF6868FFFF2121
+            ECFF0000A6FF00007DFF000078F600005DA20000041300000000000000050000
+            5E7D00007CFD000082FF0303D0FF4949FBFF8989FFFF9090FFFF9090FFFF9090
+            FFFF9090FFFF9090FFFF8383FFFF3535FBCF0202E83200000000000098061515
+            F6845E5EFEF58B8BFFFF9090FFFF9090FFFF9090FFFF9090FFFF9090FFFF7373
+            FFFF2424EDFF0101ABFF00007EFF000076DF0000191E00000000000000050000
+            628600007EFE0000D1FF4949FFFF9090FFFF9797FFFF9797FFFF9797FFFF9797
+            FFFF9797FFFF8F8FFFFF3232FCD80202E2300000000000000000000000000000
+            BD0C2121F88A6969FEE99292FFFF9797FFFF9797FFFF9797FFFF9797FFFF9797
+            FFFF7474FFFF2626ECFF0101A6FF00007AE90000252200000000000000050000
+            68850000DAFD4D4DFFFF9F9FFFFFA0A0FFFFA0A0FFFFA0A0FFFFA0A0FFFFA0A0
+            FFFF9696FFFF3434FCD90202D923000000000000000000000000000000000000
+            00000000C60D2424F7826E6EFEE99A9AFFFFA0A0FFFFA0A0FFFFA0A0FFFFA0A0
+            FFFF9F9FFFFF7F7FFFFF2828ECFF0101A7EB00002D2000000000000000020000
+            D1794949FFFDA5A5FFFFA8A8FFFFA8A8FFFFA8A8FFFFA8A8FFFFA8A8FFFF9B9B
+            FFFF3030FCDB0202E43100000000000000000000000000000000000000000000
+            0000000000000000C40D2424F88E7575FEEDA2A2FFFFA8A8FFFFA8A8FFFFA8A8
+            FFFFA8A8FFFFA7A7FFFF8383FFFF1515EFE30000551500000000000000000101
+            E02C4444FCC89494FFF9AFAFFFFFB0B0FFFFB0B0FFFFB0B0FFFF9C9CFFFF3131
+            FCD80101D9230000000000000000000000000000000000000000000000000000
+            000000000000000000000000BD0C1D1DF6827E7EFEEDAAAAFFFFB0B0FFFFB0B0
+            FFFFB0B0FFFFADADFFFF6767FEF41616F3760000250300000000000000000000
+            00000202E9384848FCC6A1A1FEF8B6B6FFFFB7B7FFFFABABFFFF3737FBD10101
+            D726000000000000000000000000000000000000000000000000000000000000
+            00000000000000000000000000000000B7091B1BF7908383FEEDB2B2FFFFB7B7
+            FFFFB6B6FFFF6E6EFFF70E0EF16D00007B050000000000000000000000000000
+            0000000000000101E02A4141FCC7A3A3FFFFA9A9FFFF3A3AFCD40101D01F0000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000B1081C1CF5848686FEF8BEBE
+            FFFF6767FEF60909F06900004002000000000000000000000000000000000000
+            000000000000000000000101E0231717FBB71B1BFCBE0101E42A000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            000000000000000000000000000000000000000000000000AE071010F8831E1E
+            FDE00303F0550000000200000000000000000000000000000000
+          }
+          GlyphAlignment = bcaLeftCenter
+          GlyphMargin = 0
+          ParentColor = False
+          Rounding.RoundX = 12
+          Rounding.RoundY = 12
+          RoundingDropDown.RoundX = 1
+          RoundingDropDown.RoundY = 1
+          TextApplyGlobalOpacity = False
+          MemoryUsage = bmuHigh
+        end
+        object Lhelp: TLabel
+          Left = 1277
+          Height = 32
+          Top = 75
+          Width = 203
+          Alignment = taCenter
+          Anchors = [akTop, akRight]
+          AutoSize = False
+          Caption = 'come data della manutenzione viene posta la data odierna'
+          Font.CharSet = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = '@Yu Gothic'
+          Font.Pitch = fpVariable
+          Font.Quality = fqDraft
+          ParentColor = False
+          ParentFont = False
+          WordWrap = True
+        end
+      end
+      object dgRes: TRxDBGrid
+        Left = 0
+        Height = 591
+        Top = 120
+        Width = 1217
+        ColumnDefValues.BlobText = '(blob)'
+        TitleButtons = True
+        AutoSort = False
+        Columns = <        
+          item
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'macchina'
+            FieldName = 'macch'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsNone
+            MaxSize = 1024
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'descrizione'
+            Width = 1024
+            FieldName = 'Des_'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+            WordWrap = True
+          end        
+          item
+            Alignment = taCenter
+            ButtonStyle = cbsNone
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'periodicità'
+            Width = 70
+            FieldName = 'scadenza'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Alignment = taCenter
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'scadenza'
+            Width = 66
+            FieldName = 'datascad'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ButtonStyle = cbsCheckboxColumn
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'eseguito'
+            FieldName = 'fatto'
+            EditButtons = <            
+              item
+              end>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'data esecuzione'
+            Width = 66
+            FieldName = 'data'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end        
+          item
+            Font.CharSet = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -12
+            Font.Name = 'Calibri'
+            Font.Pitch = fpVariable
+            Font.Quality = fqDraft
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Font.CharSet = ANSI_CHARSET
+            Title.Font.Color = clBlack
+            Title.Font.Height = -12
+            Title.Font.Name = 'Calibri'
+            Title.Font.Pitch = fpVariable
+            Title.Font.Quality = fqDraft
+            Title.Font.Style = [fsItalic]
+            Title.Orientation = toHorizontal
+            Title.Caption = 'reg.'
+            Width = 0
+            Visible = False
+            FieldName = 'Reg'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Active = True
+        FooterOptions.Color = clAqua
+        FooterOptions.DrawFullLine = True
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu, rdgCaseInsensitiveSort, rdgWordWrap, rdgColSpanning]
+        FooterColor = clAqua
+        Align = alLeft
+        AutoEdit = False
+        Color = clWindow
+        DrawFullLine = True
+        FocusColor = clRed
+        FixedHotColor = clSkyBlue
+        SelectedColor = clHighlight
+        GridLineStyle = psinsideFrame
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -21
+        Font.Name = 'Calibri'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgAlwaysShowEditor, dgMultiselect, dgHeaderPushedLook, dgPersistentMultiSelect, dgDisableDelete, dgDisableInsert, dgRowHighlight, dgDisplayMemoText]
+        OptionsExtra = [dgeCheckboxColumn]
+        ParentFont = False
+        Scrollbars = ssVertical
+        TabOrder = 1
+        TitleFont.CharSet = ANSI_CHARSET
+        TitleFont.Color = clBlack
+        TitleFont.Height = -15
+        TitleFont.Name = 'Calibri'
+        TitleFont.Pitch = fpVariable
+        TitleFont.Quality = fqDraft
+        TitleFont.Style = [fsItalic]
+      end
+      object dgGg: TRxDBGrid
+        Left = 1217
+        Height = 591
+        Top = 120
+        Width = 293
+        ColumnDefValues.BlobText = '(blob)'
+        TitleButtons = True
+        AutoSort = False
+        Columns = <        
+          item
+            ButtonStyle = cbsNone
+            MaxSize = 5000
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Font.CharSet = ANSI_CHARSET
+            Title.Font.Color = clBlack
+            Title.Font.Height = -16
+            Title.Font.Name = 'Calibri'
+            Title.Font.Pitch = fpVariable
+            Title.Font.Quality = fqDraft
+            Title.Font.Style = [fsBold]
+            Title.Orientation = toHorizontal
+            Title.Caption = 'MANUTENZIONI GIORNALIERE'
+            FieldName = 'Des'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+            WordWrap = True
+          end        
+          item
+            Title.Alignment = taCenter
+            Title.Orientation = toHorizontal
+            Title.Caption = 'cod'
+            FieldName = 'cod'
+            EditButtons = <>
+            Filter.DropDownRows = 0
+            Filter.EmptyValue = '(Empty)'
+            Filter.NotEmptyValue = '(Not empty)'
+            Filter.AllValue = '(All values)'
+            Filter.EmptyFont.Style = [fsItalic]
+            Filter.ItemIndex = -1
+            Footers = <>
+          end>
+        KeyStrokes = <        
+          item
+            Command = rxgcShowFindDlg
+            ShortCut = 16454
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowColumnsDlg
+            ShortCut = 16471
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowFilterDlg
+            ShortCut = 16468
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowSortDlg
+            ShortCut = 16467
+            Enabled = True
+          end        
+          item
+            Command = rxgcShowQuickFilter
+            ShortCut = 16465
+            Enabled = True
+          end        
+          item
+            Command = rxgcHideQuickFilter
+            ShortCut = 16456
+            Enabled = True
+          end        
+          item
+            Command = rxgcSelectAll
+            ShortCut = 16449
+            Enabled = True
+          end        
+          item
+            Command = rxgcDeSelectAll
+            ShortCut = 16429
+            Enabled = True
+          end        
+          item
+            Command = rxgcInvertSelection
+            ShortCut = 16426
+            Enabled = True
+          end        
+          item
+            Command = rxgcOptimizeColumnsWidth
+            ShortCut = 16427
+            Enabled = True
+          end        
+          item
+            Command = rxgcCopyCellValue
+            ShortCut = 16451
+            Enabled = True
+          end>
+        FooterOptions.Active = True
+        FooterOptions.Color = clAqua
+        FooterOptions.DrawFullLine = True
+        SearchOptions.QuickSearchOptions = [loCaseInsensitive, loPartialKey]
+        SearchOptions.FromStart = False
+        OptionsRx = [rdgAllowColumnsForm, rdgAllowDialogFind, rdgFooterRows, rdgAllowQuickSearch, rdgAllowQuickFilter, rdgAllowFilterForm, rdgAllowSortForm, rdgAllowToolMenu, rdgCaseInsensitiveSort, rdgWordWrap, rdgColSpanning]
+        FooterColor = clAqua
+        Align = alClient
+        Anchors = [akTop, akLeft, akBottom]
+        AutoEdit = False
+        Color = clSilver
+        DrawFullLine = True
+        FocusColor = clRed
+        FixedHotColor = clSkyBlue
+        SelectedColor = clHighlight
+        GridLineColor = clBlack
+        GridLineStyle = psinsideFrame
+        DataSource = dsGg
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -21
+        Font.Name = 'Calibri'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        Font.Style = [fsBold]
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgMultiselect, dgHeaderPushedLook, dgPersistentMultiSelect, dgDisableDelete, dgDisableInsert, dgRowHighlight]
+        OptionsExtra = [dgeCheckboxColumn]
+        ParentFont = False
+        Scrollbars = ssVertical
+        TabOrder = 2
+        TitleFont.CharSet = ANSI_CHARSET
+        TitleFont.Color = clBlack
+        TitleFont.Height = -15
+        TitleFont.Name = 'Calibri'
+        TitleFont.Pitch = fpVariable
+        TitleFont.Quality = fqDraft
+        TitleFont.Style = [fsItalic]
+      end
     end
     object tsCfg: TTabSheet
       Caption = 'utilità'
@@ -11751,9 +13027,9 @@ object Fmain: TFmain
     end
   end
   object pReg1: TBCPanel
-    Left = 56
+    Left = 64
     Height = 360
-    Top = 480
+    Top = 272
     Width = 1859
     Background.Color = clBtnFace
     Background.Gradient1.StartColor = clGray
@@ -16633,5 +17909,487 @@ object Fmain: TFmain
     DataSet = qImmLoc
     Left = 1000
     Top = 144
+  end
+  object Telc: TRxMemoryData
+    FieldDefs = <    
+      item
+        Name = 'macch'
+        DataType = ftString
+        Precision = -1
+        Size = 80
+      end    
+      item
+        Name = 'notes'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'scadenza'
+        DataType = ftString
+        Precision = -1
+        Size = 30
+      end    
+      item
+        Name = 'datascad'
+        DataType = ftDate
+        Precision = -1
+      end>
+    PacketRecords = 0
+    Left = 448
+    Top = 352
+    object Telcnr: TLongintField
+      FieldKind = fkData
+      FieldName = 'nr'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Telcmacch: TStringField
+      FieldKind = fkData
+      FieldName = 'macch'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 80
+    end
+    object Telcnotes: TMemoField
+      DisplayWidth = 255
+      FieldKind = fkData
+      FieldName = 'notes'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Size = 255
+      Transliterate = False
+    end
+    object TelcDes_: TWideStringField
+      FieldKind = fkCalculated
+      FieldName = 'Des_'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1024
+    end
+    object Telcscadenza: TStringField
+      FieldKind = fkData
+      FieldName = 'scadenza'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object Telcdatascad: TDateField
+      DisplayLabel = 'datascad (v. Scad_)'
+      FieldKind = fkData
+      FieldName = 'datascad'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TelcScad_: TStringField
+      DisplayLabel = 'data scadenza'
+      FieldKind = fkData
+      FieldName = 'Scad_'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 10
+    end
+    object Telcfatto: TLongintField
+      FieldKind = fkData
+      FieldName = 'fatto'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Telcdescr: TStringField
+      FieldKind = fkData
+      FieldName = 'descr'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 5000
+    end
+    object TelcReg: TFloatField
+      FieldKind = fkData
+      FieldName = 'Reg'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Telcdata: TDateField
+      FieldKind = fkData
+      FieldName = 'data'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Telccod: TStringField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Telcperiod: TLongintField
+      FieldKind = fkData
+      FieldName = 'period'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Telctitolo: TStringField
+      FieldKind = fkData
+      FieldName = 'titolo'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 50
+    end
+    object TelctipoP: TLongintField
+      FieldKind = fkData
+      FieldName = 'tipoP'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object dsElc: TDataSource
+    DataSet = Telc
+    Left = 496
+    Top = 352
+  end
+  object dsCal: TDataSource
+    DataSet = qCal
+    Left = 496
+    Top = 288
+  end
+  object qCal: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'tbl'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'macch'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'macchina'
+        DataType = ftString
+        Precision = -1
+        Size = 8192
+      end    
+      item
+        Name = 'note'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'notes'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'data'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'noteint'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'dessimp'
+        DataType = ftString
+        Precision = -1
+        Size = 8192
+      end    
+      item
+        Name = 'scad'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'tipop'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'period'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'i2'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'reg'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'rif'
+        DataType = ftFloat
+        Precision = -1
+      end>
+    OnCalcFields = qElCalcFields
+    Database = fd.PQConn
+    Transaction = fd.SQLTransact
+    SQL.Strings = (
+      'select ''xxx'' as tbl,r.macch,m.des as macchina,m.note,r.notes,r.data,'
+      'm.note as noteint,'
+      'r.dessimp,r.scad,r.tipop,'
+      'r.period,r.i2,r.cod as reg,r.f1 as rif'
+      'from rip r'
+      'right join macch m on r.macch=m.cod'
+      'where coalesce(r.garanzia,'''')<>''x'''
+      'and (tipop<>1)'
+      'and r.macch=''5'''
+      'and r.data>''2022-01-01'''
+      ''
+      'union all'
+      ''
+      'select ''tem'',t.macch,t.opprec as macchina,t.note,t.note as notes,t.data,'
+      't.noteint,'
+      't.opprec as dessimp,t.data,t.fin as tipop,'
+      't.fin as period,t.fin as i2,t.cod as reg,t.ctr1 as rif'
+      'from tempi t'
+      'where'
+      't.macch=''5'''
+      'and t.data>''2022-01-01'''
+      'and (t.lav=''MGU'' or t.lav=''MPR'' or t.lav=''OLI'')'
+      ''
+      'order by scad asc,note'
+      ''
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 448
+    Top = 288
+    object qCalMacchina: TStringField
+      FieldKind = fkData
+      FieldName = 'Macchina'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 360
+    end
+    object qCalNote: TMemoField
+      FieldKind = fkData
+      FieldName = 'Note'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qCalScad: TDateField
+      FieldKind = fkData
+      FieldName = 'Scad'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qCalDesSimp: TStringField
+      FieldKind = fkData
+      FieldName = 'DesSimp'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1020
+    end
+    object qCalMacch: TStringField
+      FieldKind = fkData
+      FieldName = 'Macch'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 80
+    end
+    object qCaltbl: TMemoField
+      FieldKind = fkData
+      FieldName = 'tbl'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qCalnotes: TMemoField
+      FieldKind = fkData
+      FieldName = 'notes'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qCaldata: TDateField
+      FieldKind = fkData
+      FieldName = 'data'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qCalnoteint: TMemoField
+      FieldKind = fkData
+      FieldName = 'noteint'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qCaltipop: TLongintField
+      FieldKind = fkData
+      FieldName = 'tipop'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qCalperiod: TLongintField
+      FieldKind = fkData
+      FieldName = 'period'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qCali2: TLongintField
+      FieldKind = fkData
+      FieldName = 'i2'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qCalreg: TFloatField
+      FieldKind = fkData
+      FieldName = 'reg'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = -1
+    end
+    object qCalrif: TFloatField
+      FieldKind = fkData
+      FieldName = 'rif'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = -1
+    end
+  end
+  object qGg: TZQuery
+    SQL.Strings = (
+      'select cod,notes from rip where garanzia=''x'' and macch=''14'' and tipop=1 and period=1'
+    )
+    Params = <>
+    Left = 448
+    Top = 416
+    object qRescod1: TFloatField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = 8
+    end
+    object qGgDes: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Des'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 5000
+    end
+    object qGgnotes: TWideMemoField
+      DisplayWidth = 1024
+      FieldKind = fkData
+      FieldName = 'notes'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftWideMemo
+      Size = 1024
+    end
+  end
+  object dsGg: TDataSource
+    DataSet = qGg
+    Left = 496
+    Top = 416
   end
 end

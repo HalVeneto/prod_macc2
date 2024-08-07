@@ -11,12 +11,12 @@ object fd: Tfd
     DatabaseName = 'prod'
     KeepConnection = False
     Params.Strings = (
-      'port=5434'
+      'port=5432'
     )
     Password = 'postgres'
     Transaction = SQLTransact
     UserName = 'postgres'
-    HostName = 'localhost'
+    HostName = '192.168.1.11'
     Role = 'postgres'
     Left = 48
     Top = 32
@@ -406,6 +406,7 @@ object fd: Tfd
     end
   end
   object dsTempi: TDataSource
+    Tag = 1
     DataSet = Ttempi
     Left = 200
     Top = 32
@@ -547,13 +548,13 @@ object fd: Tfd
     )
     Params = <>
     Macros = <>
-    Left = 632
-    Top = 32
+    Left = 712
+    Top = 40
   end
   object dsZq: TDataSource
     DataSet = zq
-    Left = 680
-    Top = 32
+    Left = 760
+    Top = 40
   end
   object Trtem: TSQLQuery
     IndexName = 'DEFAULT_ORDER'
@@ -1165,8 +1166,8 @@ object fd: Tfd
   object dsImm: TDataSource
     AutoEdit = False
     DataSet = qImm
-    Left = 200
-    Top = 168
+    Left = 768
+    Top = 112
   end
   object qImm: TSQLQuery
     MaxIndexesCount = 4
@@ -1205,21 +1206,12 @@ object fd: Tfd
     Params = <>
     Macros = <>
     ParseSQL = False
-    Left = 152
-    Top = 168
-    object qImmimm1: TBlobField
-      FieldKind = fkData
-      FieldName = 'imm'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
+    Left = 712
+    Top = 112
     object qImmimmnom1: TStringField
       FieldKind = fkData
       FieldName = 'immnom'
-      Index = 1
+      Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1229,7 +1221,7 @@ object fd: Tfd
     object qImmLungh: TWordField
       FieldKind = fkData
       FieldName = 'Lungh'
-      Index = 2
+      Index = 1
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1238,7 +1230,7 @@ object fd: Tfd
     object qImmDiam: TWordField
       FieldKind = fkData
       FieldName = 'Diam'
-      Index = 3
+      Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1247,7 +1239,7 @@ object fd: Tfd
     object qImmCod: TStringField
       FieldKind = fkData
       FieldName = 'Cod'
-      Index = 4
+      Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1257,7 +1249,7 @@ object fd: Tfd
     object qImmDes: TStringField
       FieldKind = fkData
       FieldName = 'Des'
-      Index = 5
+      Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1267,7 +1259,7 @@ object fd: Tfd
     object qImmCli: TStringField
       FieldKind = fkData
       FieldName = 'Cli'
-      Index = 6
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -1277,11 +1269,21 @@ object fd: Tfd
     object qImmCommInt: TLargeintField
       FieldKind = fkData
       FieldName = 'CommInt'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmImmJpg: TGraphicField
+      FieldKind = fkData
+      FieldName = 'ImmJpg'
       Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+      BlobType = ftGraphic
     end
   end
 end

@@ -10,7 +10,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
-  DBCtrls, Buttons, ExtCtrls, DBGrids, Grids, ZDataset, CheckBoxThemed,
+  DBCtrls, Buttons, ExtCtrls, DBGrids, Grids, CheckBoxThemed,
   JvThumbImage, JvMovableBevel, JvNavigationPane, BCPanel, BCButton,
   BGRAFlashProgressBar, BGRAShape, ovcrlbl, kedits, SqlDb, DB, RxDBTimeEdit,
   rxmemds, RxDBGrid, rxdbdateedit, rxctrls, rxtooledit;
@@ -382,26 +382,21 @@ type
     pTit: TBCPanel;
     pTitDis: TBCPanel;
     pTitMan: TBCPanel;
-    qCal_old: TZQuery;
+    qGg: TSQLQuery;
+    qCaldata: TDateField;
+    qCali2: TLongintField;
+    qCalnoteint: TMemoField;
+    qCalnotes: TMemoField;
+    qCalperiod: TLongintField;
+    qCalreg: TFloatField;
+    qCalrif: TFloatField;
+    qCaltbl: TMemoField;
+    qCaltipop: TLongintField;
     qCalDesSimp: TStringField;
     qCalMacch: TStringField;
     qCalMacchina: TStringField;
     qCalNote: TMemoField;
     qCalScad: TDateField;
-    qCal_olddata: TDateField;
-    qCal_olddessimp: TStringField;
-    qCal_oldi2: TLongintField;
-    qCal_oldmacch: TStringField;
-    qCal_oldmacchina: TStringField;
-    qCal_oldnote: TMemoField;
-    qCal_oldnoteint: TMemoField;
-    qCal_oldnotes: TWideMemoField;
-    qCal_oldperiod: TLongintField;
-    qCal_oldreg: TFloatField;
-    qCal_oldrif: TFloatField;
-    qCal_oldscad: TDateField;
-    qCal_oldTbl: TStringField;
-    qCal_oldtipop: TLongintField;
     qEl: TSQLQuery;
     qCal: TSQLQuery;
     qEladora: TTimeField;
@@ -421,9 +416,9 @@ type
     qElpers: TStringField;
     qElrigalav: TLongintField;
     qEltipo: TStringField;
-    qGg: TZQuery;
+    qGgcod: TFloatField;
     qGgDes: TStringField;
-    qGgnotes: TWideMemoField;
+    qGgnotes: TMemoField;
     qImmLoc: TSQLQuery;
     qImmLocimm: TBlobField;
     qImmLocimmjpg: TBlobField;
@@ -443,7 +438,6 @@ type
     qLavsqta_as_posiz: TFloatField;
     qLavsrigalav: TFloatField;
     qLavssel: TLongintField;
-    qRescod1: TFloatField;
     rgAss: TRxRadioGroup;
     rgTipo: TRadioGroup;
     rgTipoPezzo: TDBRadioGroup;
@@ -525,6 +519,7 @@ type
     zq: TSQLQuery;
     procedure BallLav1Click(Sender: TObject);
     procedure BallLavClick(Sender: TObject);
+    procedure BannManClick(Sender: TObject);
     procedure BannModifClick(Sender: TObject);
     procedure Battese1Click(Sender: TObject);
     procedure BatteseClick(Sender: TObject);
@@ -554,6 +549,8 @@ type
     procedure BokTipoPzClick(Sender: TObject);
     procedure Bprodutt1Click(Sender: TObject);
     procedure BproduttClick(Sender: TObject);
+    procedure BrunManClick(Sender: TObject);
+    procedure BsaveManClick(Sender: TObject);
     procedure BstartClick(Sender: TObject);
     procedure BstopClick(Sender: TObject);
     procedure cbLav1Exit(Sender: TObject);
@@ -567,6 +564,7 @@ type
     procedure dbNavAggIndexClick(Sender: TObject; Button: TDBNavButtonType);
     procedure dgElPrepareCanvas(sender: TObject; DataCol: Integer;
       Column: TColumn; AState: TGridDrawState);
+    procedure dgResCellClick(Column: TColumn);
     procedure Ec1aEnter(Sender: TObject);
     procedure Ec1Enter(Sender: TObject);
     procedure Ec1Exit(Sender: TObject);
@@ -592,9 +590,12 @@ type
     procedure PageControlChange(Sender: TObject);
     procedure pCloseImmClick(Sender: TObject);
     procedure qElCalcFields(DataSet: TDataSet);
+    procedure qGgCalcFields(DataSet: TDataSet);
     procedure qLavsCalcFields(DataSet: TDataSet);
+    procedure rgTipoPezzoClick(Sender: TObject);
     procedure rlMotClick(Sender: TObject);
     procedure sgButtonClick(Sender: TObject; aCol, aRow: Integer);
+    procedure TelcCalcFields(DataSet: TDataSet);
     procedure TimerTimer(Sender: TObject);
     procedure TlavCalcFields(DataSet: TDataSet);
   private
@@ -1211,8 +1212,8 @@ begin
     dbgInd.Columns[4].Width:= 0 * w div 100; //lav.
     dbgInd.Columns[5].Width:= 3 * w div 100; //pz in riga OC old:3
     dbgInd.Columns[6].Width:= 0 * w div 100; //rigalav.? old:0
-    dbgInd.Columns[col_ctrl_da_fare].Width:= 4 * w div 100;
-    dbgInd.Columns[col_ctrl_fatti].Width  := 3 * w div 100;
+    dbgInd.Columns[col_ctrl_da_fare].Width:= 3 * w div 100; dbgInd.Columns[col_ctrl_da_fare].Title.Caption:='controlli'+cr+'da fare';
+    dbgInd.Columns[col_ctrl_fatti].Width  := 3 * w div 100; dbgInd.Columns[col_ctrl_fatti].Title.Caption:='controlli'+cr+'fatti';
     dbgInd.Columns[9].Width := 6 * w div 100; //merce arrivata
     dbgInd.Columns[10].Width:= 2 * w div 100; //lav. iniziato
     dbgInd.Columns[11].Width:= 0 * w div 100;
@@ -1304,21 +1305,26 @@ begin
       TlavCtrlDone.Value:=trunc(vlr(vts(zq['tot'])));
 
       //lavorazione iniziata:
-      s:='select count(*) as tot from rtempi r';
-      agg(s,'left join tempi t on r.cod=t.cod');
-      agg(s,'where r.comm='+qlavsComm.Text);
-      agg(s,'and t.pers='+qs(xUser));
-      agg(s,'and t.macch='+qs(xMacch));
-      agg(s,'and t.lav='+qs(qlavsLav.Text));
-      //deb(s);
-      zq.Close;
-      zq.SQL.Clear;
-      zq.SQL.Add(s);
-      zq.Open;
-      if vts(zq['tot'])='0' then
-        iniz:='no'
+      if qlavsComm.Value=0 then
+        iniz:=''
       else
-        iniz:='Si'; //con Sì si vede solo S, con ìì solo ì
+        begin
+        s:='select count(*) as tot from rtempi r';
+        agg(s,'left join tempi t on r.cod=t.cod');
+        agg(s,'where r.comm='+qlavsComm.Text);
+        agg(s,'and t.pers='+qs(xUser));
+        agg(s,'and t.macch='+qs(xMacch));
+        agg(s,'and t.lav='+qs(qlavsLav.Text));
+        //deb(s);
+        zq.Close;
+        zq.SQL.Clear;
+        zq.SQL.Add(s);
+        zq.Open;
+        if vts(zq['tot'])='0' then
+          iniz:='no'
+        else
+          iniz:='Si'; //con Sì si vede solo S, con ìì solo ì
+      end;
       TlavIniz.Value:=iniz;
 
       Tlav.Post;
@@ -1531,9 +1537,7 @@ begin
     agg(s,'and coalesce(t.lav,'+qs('')+')<>'+qs('NT')); //non trovato
     agg(s,'and t.macch='+qs(xMacch));
     agg(s,'and t.pers='+qs(xUser));
-
     //deb(s);
-
     //zgo(fd.Ttempi,s,'op');
 
     //if fd.trTempi.Active then
@@ -1703,14 +1707,12 @@ begin
   end;
 end;
 
-function elenca_manut(stato_: byte): boolean; //0=scaduto 1=prossime 2=eseguito 3=tutto
+procedure elenca_manut(stato_:byte); //0=scaduto 1=prossime 2=eseguito 3=tutto
 var
-  s,des:WideString;
-  oggi,dal,al:string;
+  s     :WideString;
+  dal,al:String;
+  p     :Integer;
   dat,dal_,al_:TDate;
-  p:integer;
-  n:longint;
-  found:boolean;
 
   procedure registra(periodic: string; dataScad: TDate);
   begin
@@ -1723,20 +1725,20 @@ var
       if (rgTipo.ItemIndex=2) or (dataScad <= Eal.Date) then //2=manut.eff.; al_ then
         with Fmain do begin
           Telc.Insert;
-          TelcCod.Value:=qCal_oldmacch.Text;
-          TelcMacch.Value:=qCal_oldmacchina.Text;
+          TelcCod.Value:=qCalMacch.Text;
+          TelcMacch.Value:=qCalMacchina.Text;
           //if trim(qCal_olddessimp.AsString) <> '' then
             //TelcNotes.Value := qCal_olddessimp.AsString
           //else
-            TelcNotes.Value  :=qCal_oldnotes.AsString;
+            TelcNotes.Value  :=qCalNotes.AsString;
           //deb(qCal_oldnotes.AsString);
           //TelcDes.Value    :=TelcNote.AsString;
-          TelcTipoP.Value    :=qCal_oldtipop.Value;
-          TelcPeriod.Value   :=qCal_oldperiod.Value; //per sort
+          TelcTipoP.Value    :=qCalTipoP.Value;
+          TelcPeriod.Value   :=qCalPeriod.Value; //per sort
           TelcScadenza.Value :=periodic;
           TelcDataScad.Value :=dataScad;
-          TelcReg.Value      :=qCal_oldreg.Value;
-          TelcData.Value     :=qCal_olddata.Value; //data effettuazione
+          TelcReg.Value      :=qCalReg.Value;
+          TelcData.Value     :=qCalData.Value; //data effettuazione
           TelcFatto.Value    :=0;
           //deb('datascad:'+datetostr(datascad));
           TelcTitolo.Value:='dal '+fmtData(dal)+' al '+fmtData(al);
@@ -1784,19 +1786,25 @@ begin
     agg(s,'order by r.macch,r.scad desc');
     //deb(s);
     zgo(qCal,s,'op');
-
-    if qCal_old.recordcount>0 then
+    //deb(s);
+    //deb(i2s(qCal.RecordCount));
+    if qCal.RecordCount>0 then
       if rgTipo.ItemIndex=2 then begin //effettuate
+        //deb('ini');
         dgRes.ColumnByFieldName('macch').Width   :=0; //150; //250;
+        //deb('macch');
         dgRes.ColumnByFieldName('des_').Width    :=799; //650
+        //deb('des_w');
         dgRes.ColumnByFieldName('scadenza').Width:=0; //periodicità
         dgRes.ColumnByFieldName('datascad').Width:=0;
         dgRes.ColumnByFieldName('fatto').Width   :=0; //90
         dgRes.ColumnByFieldName('data').Width    :=120; //data fatto
+        //deb('dataw');
         if cercaParam('debug') then
           dgRes.ColumnByFieldName('reg').Width   :=44 //reg. Prod
         else
           dgRes.ColumnByFieldName('reg').Width   :=0;
+        //deb('regw');
         dgGg.ColumnByFieldName('des').Width      :=600;
         dgGg.ColumnByFieldName('cod').Width      :=0;
         end
@@ -1818,14 +1826,11 @@ begin
 
     Telc.Close;
     Telc.Open;
-    qCal_old.First;
+    qCal.First;
 
-    //deb(i2s(qCal_old.RecordCount));
-    //deb(s);
-
-    while not qCal_old.EOF do begin
+    while not qCal.EOF do begin
       //deb(qCal_oldnotes.AsString);
-      if qCal_oldreg.Text<>'' then begin
+      if qCalReg.Text<>'' then begin
         dat:=Now;
         //dal_; //in mancanza di manut. eseguite, parte dalla data indicata per il calcolo scadenze
         s:='select cod,data';
@@ -1835,12 +1840,10 @@ begin
         agg(s,'and macch=' + qs(xMacch));
         agg(s,'and '+condiz_man_eff);
         if rgTipo.ItemIndex<>2 then
-          agg(s,'and f1='+qCal_oldreg.Text); //f1=rif. a manut. pianif.
+          agg(s,'and f1='+qCalReg.Text); //f1=rif. a manut. pianif.
         agg(s,'order by data desc');
         zgo(zq,s,'op');
-
         //deb(s);
-
         if rgTipo.ItemIndex=2 then
           registra('',dat)
         else
@@ -1851,49 +1854,49 @@ begin
             //deb('last:'+vts(zq['data'])+' period:'+qCal_oldperiod.text);
             dat:=strToDate(vts(zq['data']));
             //se presenti manut. fatte, parte da ultima + periodicità
-            p:=qCal_oldperiod.Value;
-            case qCal_oldtipop.Value of
+            p:=qCalPeriod.Value;
+            case qCalTipop.Value of
               0:; //scadenza unica
-              1:dat:=dat+qCal_oldperiod.Value; //gg.
-              2:dat:=dat+7*qCal_oldperiod.Value; //sett.
-              3:dat:=dat+30*qCal_oldperiod.Value; //mesi
-              4:dat:=dat+365*qCal_oldperiod.Value; //anni
+              1:dat:=dat+qCalPeriod.Value; //gg.
+              2:dat:=dat+7*qCalPeriod.Value; //sett.
+              3:dat:=dat+30*qCalPeriod.Value; //mesi
+              4:dat:=dat+365*qCalPeriod.Value; //anni
             end;
             //deb(datetostr(dat));
           end;
 
-          p:=qCal_oldperiod.Value;
-          case qCal_oldtipop.Value of
+          p:=qCalPeriod.Value;
+          case qCalTipop.Value of
             0:begin
-              if (qCal_oldscad.Value>=dal_) and (qCal_oldscad.Value<=al_) then
+              if (qCalScad.Value>=dal_) and (qCalScad.Value<=al_) then
                 registra('scadenza unica',dat);
             end;
             1:begin
               repeat
                 if dat>=dal_ then
                   registra(i2s(p)+' giorn'+plur(p,'o','i'),dat);
-                dat:=dat+qCal_oldperiod.Value;
+                dat:=dat+qCalPeriod.Value;
               until dat>al_;
             end;
             2:begin
               repeat
                 if (dat>=dal_) and (dat<=al_) then
                   registra(i2s(p)+' settiman'+plur(p,'a','e'),dat);
-                dat:=dat+7*qCal_oldperiod.Value;
+                dat:=dat+7*qCalPeriod.Value;
               until dat>al_;
             end;
             3:begin
               repeat
                 if (dat>=dal_) and (dat<=al_) then
                   registra(i2s(p)+' mes'+plur(p,'e','i'),dat);
-                dat:=dat+30*qCal_oldperiod.Value;
+                dat:=dat+30*qCalPeriod.Value;
               until dat>al_;
             end;
             4:begin
               repeat
                 if (dat>=dal_) and (dat<=al_) then
                   registra(i2s(p)+' ann'+plur(p,'o','i'),dat);
-                dat:=dat+365*qCal_oldperiod.Value;
+                dat:=dat+365*qCalPeriod.Value;
               until dat>al_;
             end;
           end; //case
@@ -1901,11 +1904,10 @@ begin
         end; //else
 
       end; //if
-      qCal_old.Next;
+      qCal.Next;
     end; //while
     Telc.SortOnFields('macch;DataScad;tipop;period',False,False);
   end; //with
-  Result:=found;
 end;
 
 procedure elencaManut();
@@ -2022,10 +2024,10 @@ begin
   if not log_in then
     Halt(0);
 
-  if xHost='' then
+  (*if xHost='' then
     xHost:='serverdell';
   if xDatabase='' then
-    xDatabase:='prod';
+    xDatabase:='prod';*)
   if trim(xMacch)='' then begin
     mess('macchina non definita - impossibile proseguire', _info, _icons);
     exit;
@@ -2296,6 +2298,12 @@ begin
     True :dgEl.Canvas.Brush.Color:=clWindow;
     False:dgEl.Canvas.Brush.Color:=clSilver;
   end;
+end;
+
+procedure TFmain.dgResCellClick(Column: TColumn);
+begin
+  BsaveMan.Enabled:=True;
+  BannMan.Enabled :=True;
 end;
 
 procedure mostraDis(img:TJvThumbImage; dis:String);
@@ -3229,6 +3237,73 @@ begin
   popolaLavorazioni(cbLav,'p');
 end;
 
+procedure TFmain.BrunManClick(Sender: TObject);
+begin
+  elencaManut();
+end;
+
+procedure TFmain.BsaveManClick(Sender: TObject);
+var
+  dat:string;
+  s:widestring;
+  n:longint;
+begin
+  Telc.First;
+  //found := False;
+  while not Telc.EOF do begin
+    //deb(TelcReg.text+'-'+TelcFatto.text);
+    if TelcFatto.Value = 1 then begin
+      //deb(TelcReg.text);
+
+      dat:=formatDateTime('ddmmyyyy',Now);
+      //if not inputQuery(_info,'data di effettuazione (ggmmaaaa)',dat) then
+        //exit;
+      //if not ctrlData(dat,true) then
+        //exit;
+      if fd.TmEff.State=dsInactive then
+        fd.TmEff.Open;
+      s:='select max(cod) as max from rip'; //tbl. e progr. comune per previs. e manut. eff.
+      zgo(zq,s,'op');
+      if not zq.IsEmpty then
+        n:=zq.FieldValues['max']
+      else
+        n:=0;
+      zq.Close;
+      n:=n+1;
+      //deb('reg.'+i2s(n));
+      fd.Tmeff.Insert;
+      fd.TmEffCod.Value:=n;
+      fd.TmEffData.Value:=strToDate(fmtData(dat));
+      fd.TmEffMacch.Value:=xMacch;
+      fd.TmEffApparecchio.Value:=Ltit_macc.Caption; //copy(fd.TmanutDesMacch.Value,1,fd.TmEffApparecchio.Size);
+      fd.TmEffNotes.Value:=TelcNotes.Value;
+      fd.TmEffF1.Value:=TelcReg.Value; //rif. a reg. generante
+      fd.TmEff.Post;
+      //deb('creata registrazione '+i2s(n));
+
+      (*if TelcReg.Value = 0 then
+        mess('impossibile impostare come eseguita - manca rif. registrazione Prod',
+          _info, _icons)
+      else
+      begin
+        s := 'update rip set data=now() where cod=' + TelcReg.Text;
+        deb(s);
+        //zgo(zq,s,'ex');
+      end; *)
+
+      //found := True;
+    end;
+    Telc.Next;
+  end;
+  {if not found then
+    mess('nessuna riga da salvare', _info, _icons)
+  else}
+    //elencaManut();
+  BsaveMan.Enabled:=False;
+  BannMan.Enabled :=False;
+  elenca_manut(0);
+end;
+
 procedure TFmain.BstartClick(Sender: TObject);
 var
   totc,riga:word;
@@ -3238,11 +3313,8 @@ var
   found_diff:boolean;
 begin
   pulsanti(False,True);
-
   rigalav:=TlavRigaLav.Text; //qLavsRigaLav.Text; :=dbgInd.Columns[13]
-
-  deb(rigalav);
-
+  //deb(rigalav);
   if rigalav='' then
     rigalav:='0';
   //deb('rl1:'+rigalav);
@@ -3597,7 +3669,7 @@ end;
 
 procedure TFmain.BstopClick(Sender: TObject);
 var
-  ora,cods,tipoPz:String;
+  ora,cods:String;
   s   :WideString;
   riga:Byte;
 begin
@@ -3606,34 +3678,42 @@ begin
   if messSN('conferma stop?','conferma')<>idYes then //questa istruz. era stranamente in fondo all proc. ...
     exit;
   pulsanti(True,False);
-  (*fd.Ttempi.Edit;
+
+  //deb('a');
+  fd.Ttempi.Edit;
   fd.TtempiPers.Value:=xUser; //per sicurezza
   ora:=formatDateTime('hh:mm',Now);
+  ora+=':00';
   fd.TtempiAlle.Value:=strToTime(ora); //else tiene secondi
-  fd.Ttempi.Post;*)
+  fd.Ttempi.Post;
+  //deb('post ok');
+
   cods:=fd.TtempiCod.Text;
-  ora :=formatDateTime('hh:mm',Now);
+  (*ora :=formatDateTime('hh:mm',Now);
   ora+=':00';
   tipoPz:='';
   if rgTipoPezzo.ItemIndex<>-1 then
     tipoPz:=rgTipoPezzo.Items[rgTipoPezzo.ItemIndex];
-  s   :='update tempi set pers='+qs(xUser)+',alle='+qs(ora)+' where cod='+cods;
-  if tipoPz<>'' then
-    s+=',tipo='+qs(qs(tipoPz));
-
-  deb(s);
-
+  s:='update tempi set pers='+qs(xUser)+',alle='+qs(ora)+' where cod='+cods;
+  //if tipoPz<>'' then s+=',tipo='+qs(qs(tipoPz));
+  //deb(s);
   zq.Close;
   zq.SQL.Clear;
   zq.SQL.Add(s);
   zq.ExecSQL;
-  fd.PQConn.Transaction.Commit;
+  fd.PQConn.Transaction.Commit;*)
 
   //refresh:
-  fd.Ttempi.Close;
-  fd.Ttempi.Open;
+  //fd.Ttempi.Close;
+  //deb('e');
+  //fd.Ttempi.Open;
   //cancella righe attuali per poi riscriverle (NB: comm. a video in TEdit, non TDBEdit):
+  //deb('f');
+  //fd.Trtem.Close;
+  //deb('g');
+
   s:='delete from rtempi where cod='+cods;
+  //deb(s);
   zq.Close;
   zq.SQL.Clear;
   zq.SQL.Add(s);
@@ -4246,6 +4326,13 @@ begin
   popolaLavorazioni(cbLav,#0);
 end;
 
+procedure TFmain.BannManClick(Sender: TObject);
+begin
+  BsaveMan.Enabled:=False;
+  BannMan.Enabled :=False;
+  elenca_manut(0);
+end;
+
 procedure TFmain.Battese1Click(Sender: TObject);
 begin
   popolaLavorazioni(cbLav1,'a');
@@ -4296,6 +4383,38 @@ begin
   pulsanti(True, False);
 end;
 
+procedure manut();
+var
+  s:WideString;
+begin
+  with Fmain do begin
+    BsaveMan.Enabled:=False;
+    BannMan.Enabled :=False;
+    dgRes.ColumnByFieldName('macch').Width   :=0; //150; //250;
+    dgRes.ColumnByFieldName('des_').Width    :=799; //650
+    dgRes.ColumnByFieldName('scadenza').Width:=150; //periodicità (old 120)
+    dgRes.ColumnByFieldName('datascad').Width:=120; //datascad').Width:=120;
+    dgRes.ColumnByFieldName('fatto').Width   :=80; //90
+    dgRes.ColumnByFieldName('data').Width    :=0; //data fatto
+    if cercaParam('debug') then
+      dgRes.ColumnByFieldName('reg').Width   :=44 //reg. Prod
+    else
+      dgRes.ColumnByFieldName('reg').Width   :=0;
+
+    dgGg.ColumnByFieldName('des').Width      :=600; //'des').Width      :=600;
+    dgGg.ColumnByFieldName('cod').Width      :=0;
+
+    //elenca manutenzioni giornaliere:
+    s:='select cod,notes from rip';
+    agg(s,'where garanzia=''x'' and macch='+qs(xMacch)+' and tipop=1 and period=1');
+    zgo(qGg,s,'op');
+
+    rgTipo.ItemIndex:=0;
+    setDate();
+    elenca_manut(0); //scadute
+  end;
+end;
+
 procedure TFmain.PageControlChange(Sender: TObject);
 begin
   tsLav.Caption :=noAstx(tsLav.Caption);
@@ -4334,7 +4453,7 @@ begin
     end;
     4:begin
       tsMan.Caption:=astx(tsMan.Caption);
-      //manut(); nb2
+      manut();
     end;
     5:; //cfg
   end;
@@ -4357,6 +4476,11 @@ begin
   qElDataDes.Value:=nomeGiorno(gds)+' '+formatDateTime('dd/mm',qElData.Value);
 end;
 
+procedure TFmain.qGgCalcFields(DataSet: TDataSet);
+begin
+  qGgDes.Value:=vts(qGgNotes.AsString);
+end;
+
 procedure TFmain.qLavsCalcFields(DataSet: TDataSet);
 var
   dis:string;
@@ -4371,9 +4495,8 @@ begin
     x:=p-1;
     while (x>1) and (s[x]<>'[') do
       dec(x);
-    if s[x]='[' then begin
+    if s[x]='[' then
       s:=copy(s,1,x);
-    end;
   end;
   if pos('{',s)>0 then
     s:=copy(s,1,pos('{',s)-1); //toglie posizione (es.{10})
@@ -4412,6 +4535,11 @@ begin
     end;
     qLavsMater.Value:=merce;
   end;
+end;
+
+procedure TFmain.rgTipoPezzoClick(Sender: TObject);
+begin
+  poniEdit(fd.Ttempi);
 end;
 
 procedure TFmain.rlMotClick(Sender: TObject);
@@ -4620,6 +4748,11 @@ begin
   //non chiamare anomalie() qui perché deve aspettare che le azioni siano compiute
 end;
 
+procedure TFmain.TelcCalcFields(DataSet: TDataSet);
+begin
+  TelcDes_.Value:=TelcNotes.AsString;
+end;
+
 procedure TFmain.TimerTimer(Sender: TObject);
 var
   p:double;
@@ -4661,7 +4794,7 @@ end;
 procedure TFmain.TlavCalcFields(DataSet: TDataSet);
 var
   d,d2:widestring;
-  x,p:word;
+  x,p :word;
 begin
   d:=TlavNote.Value;
   d2:=d; //:='';
@@ -4674,9 +4807,11 @@ begin
     if d2[x]='[' then
       d2:=copy(d2,1,x-1);
   end;
+
   x:=pos('{',d2);
   if x>1 then //else copia da 1 a 0
     d2:=copy(d2,1,x-1); //toglie posizione (es.{10})
+
   TlavDes2.AsString:=d2;
 end;
 

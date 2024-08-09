@@ -30,14 +30,10 @@ type
     procedure cbMaccKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure cbUserExit(Sender: TObject);
     procedure cbUserKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure cbUserKeyPress(Sender: TObject; var Key: char);
-    procedure EpwExit(Sender: TObject);
     procedure EpwKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LutClick(Sender: TObject);
-    procedure pLogClick(Sender: TObject);
   private
 
   public
@@ -211,7 +207,7 @@ begin //Bok
   end;
 
   if utok and maccok then begin
-    if Epw.Text='chpw' then begin
+    if Epw.Text='çava' then begin //'chpw' then begin
       repeat
         pw:='';
         if not inputQuery('cambio password','nuova password:',pw) then
@@ -234,22 +230,22 @@ begin //Bok
       //deb('1');
       found:=false;
       for x:=1 to paramCount do
-        if pos('§§',paramStr(x))>0 then begin
+        if pos('çaplane',paramStr(x))>0 then begin //v. poi
           d:=paramStr(x);
           found:=true;
           break;
         end;
       //deb(d);
-      if found then
-        if d='§§' then //il param. §§ lascia entrare tutti senza pw
+    if found then
+        if d='çaplanexmoi' then //questo param. da solo lascia entrare tutti senza pw (fino al 15/07/24 era §§)
           pwok:=true
         else
-          begin //§§ seguito da cod utente lascia entrare senza pw solo quell'utente
+          begin //"çaplane" seguito da cod utente lascia entrare senza pw solo quell'utente
           if length(d)>1 then
-            ut:=copy(d,5,255);
-            //deb(ut+'/'+xUser);
-            if ut=xUser then
-              pwok:=true;
+            ut:=copy(d,9,255); //5,255);
+          //deb(ut+'/'+xUser);
+          if lowerCase(ut)=lowerCase(xUser) then //v. note a inizio main.pas
+            pwok:=true;
         end;
     //end;
 
@@ -366,25 +362,10 @@ begin
     cbMacc.SetFocus;
 end;
 
-procedure TFlog.cbUserKeyPress(Sender: TObject; var Key: char);
-begin
-
-end;
-
-procedure TFlog.EpwExit(Sender: TObject);
-begin
-
-end;
-
 procedure TFlog.EpwKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key=VK_RETURN then
     BokClick(application);
-end;
-
-procedure TFlog.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  //deb('onclose');
 end;
 
 procedure TFlog.FormCreate(Sender: TObject);
@@ -557,10 +538,6 @@ end;
 procedure TFlog.LutClick(Sender: TObject);
 begin
   deb(decrypt(']bYf'));
-end;
-
-procedure TFlog.pLogClick(Sender: TObject);
-begin
 end;
 
 end.

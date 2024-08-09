@@ -6,7 +6,6 @@ object Flog: TFlog
   Caption = 'Prod_macch login'
   ClientHeight = 210
   ClientWidth = 370
-  OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDesktopCenter
@@ -49,7 +48,6 @@ object Flog: TFlog
     Rounding.RoundX = 1
     Rounding.RoundY = 1
     TabOrder = 0
-    OnClick = pLogClick
     object Lvers: TLabel
       Left = 361
       Height = 1
@@ -115,7 +113,6 @@ object Flog: TFlog
       TabOrder = 0
       OnExit = cbUserExit
       OnKeyDown = cbUserKeyDown
-      OnKeyPress = cbUserKeyPress
     end
     object Bann: TBCButton
       Tag = 1
@@ -589,7 +586,6 @@ object Flog: TFlog
       ParentFont = False
       PasswordChar = '*'
       TabOrder = 2
-      OnExit = EpwExit
       OnKeyDown = EpwKeyDown
     end
     object cbMacc: TComboBox

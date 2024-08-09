@@ -6,7 +6,7 @@ object fd: Tfd
   VerticalOffset = 199
   Width = 836
   object PQConn: TPQConnection
-    Connected = False
+    Connected = True
     LoginPrompt = False
     DatabaseName = 'prod'
     KeepConnection = False
@@ -412,7 +412,7 @@ object fd: Tfd
     Top = 32
   end
   object SQLTransact: TSQLTransaction
-    Active = False
+    Active = True
     Database = PQConn
     Options = [stoUseImplicit]
     Left = 48
@@ -1156,12 +1156,12 @@ object fd: Tfd
       Required = False
     end
   end
-  object SQLDBLibraryLoader1: TSQLDBLibraryLoader
+  object SQLDBLibraryLoader: TSQLDBLibraryLoader
     Enabled = False
     ConnectionType = 'PostgreSQL'
     LibraryName = 'C:\Lazarus\prgs\prod_macc2\libpq.dll'
     Left = 48
-    Top = 203
+    Top = 192
   end
   object dsImm: TDataSource
     AutoEdit = False
@@ -1285,5 +1285,212 @@ object fd: Tfd
       Required = False
       BlobType = ftGraphic
     end
+  end
+  object TmEff: TSQLQuery
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'cod'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'data'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'macch'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'garanzia'
+        DataType = ftString
+        Precision = -1
+        Size = 1
+      end    
+      item
+        Name = 'notes'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'scad'
+        DataType = ftDate
+        Precision = -1
+      end    
+      item
+        Name = 'codcli'
+        DataType = ftString
+        Precision = -1
+        Size = 20
+      end    
+      item
+        Name = 'cliente'
+        DataType = ftString
+        Precision = -1
+        Size = 90
+      end    
+      item
+        Name = 'apparecchio'
+        DataType = ftString
+        Precision = -1
+        Size = 90
+      end    
+      item
+        Name = 'period'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'tipop'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'f1'
+        DataType = ftFloat
+        Precision = -1
+      end>
+    AfterDelete = Trtem1AfterPost
+    AfterPost = Trtem1AfterPost
+    OnCalcFields = Trtem1CalcFields
+    Database = PQConn
+    Transaction = SQLTransact
+    SQL.Strings = (
+      'select cod,data,macch,garanzia,notes,scad,codcli,cliente,apparecchio,'
+      'period,tipop,f1'
+      'from rip'
+      'where garanzia<>''x'''
+      'order by cod'
+      ''
+    )
+    Params = <>
+    Macros = <>
+    Left = 152
+    Top = 192
+    object TmEffcod: TFloatField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = -1
+    end
+    object TmEffdata: TDateField
+      FieldKind = fkData
+      FieldName = 'data'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TmEffmacch: TStringField
+      FieldKind = fkData
+      FieldName = 'macch'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TmEffgaranzia: TStringField
+      FieldKind = fkData
+      FieldName = 'garanzia'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+    object TmEffnotes: TMemoField
+      FieldKind = fkData
+      FieldName = 'notes'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object TmEffscad: TDateField
+      FieldKind = fkData
+      FieldName = 'scad'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TmEffcodcli: TStringField
+      FieldKind = fkData
+      FieldName = 'codcli'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TmEffcliente: TStringField
+      FieldKind = fkData
+      FieldName = 'cliente'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 90
+    end
+    object TmEffapparecchio: TStringField
+      FieldKind = fkData
+      FieldName = 'apparecchio'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 90
+    end
+    object TmEffperiod: TLongintField
+      FieldKind = fkData
+      FieldName = 'period'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TmEfftipop: TLongintField
+      FieldKind = fkData
+      FieldName = 'tipop'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object TmEfff1: TFloatField
+      FieldKind = fkData
+      FieldName = 'f1'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = -1
+    end
+  end
+  object dsMeff: TDataSource
+    DataSet = TmEff
+    Left = 200
+    Top = 192
   end
 end

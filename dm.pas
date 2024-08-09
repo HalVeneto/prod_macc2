@@ -21,6 +21,7 @@ type
     dsTempi: TDataSource;
     dsRtem: TDataSource;
     dsTempi1: TDataSource;
+    dsMeff: TDataSource;
     dsZq: TDataSource;
     PQConn: TPQConnection;
     qImm: TSQLQuery;
@@ -47,9 +48,22 @@ type
     qLavsqta_as_posiz: TFloatField;
     qLavsrigalav: TFloatField;
     qLavssel: TLongintField;
-    SQLDBLibraryLoader1: TSQLDBLibraryLoader;
+    SQLDBLibraryLoader: TSQLDBLibraryLoader;
     SQLTransact: TSQLTransaction;
+    TmEffapparecchio: TStringField;
+    TmEffcliente: TStringField;
+    TmEffcod: TFloatField;
+    TmEffcodcli: TStringField;
+    TmEffdata: TDateField;
+    TmEfff1: TFloatField;
+    TmEffgaranzia: TStringField;
+    TmEffmacch: TStringField;
+    TmEffnotes: TMemoField;
+    TmEffperiod: TLongintField;
+    TmEffscad: TDateField;
+    TmEfftipop: TLongintField;
     Trtem1: TSQLQuery;
+    TmEff: TSQLQuery;
     TrtemCli: TStringField;
     TrtemCli1: TStringField;
     Trtemcod: TFloatField;
@@ -371,8 +385,7 @@ end;
 
 procedure Tfd.TtempiCalcFields(DataSet: TDataSet);
 var
-  cod:string;
-  des,s:widestring;
+  des:widestring;
 begin
   //nb2: ctrl se dà err. quando si rientra da Fmot, sia in desnote che deslav
   des:=trim(TtempiNote.AsString);

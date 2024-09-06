@@ -1,7 +1,7 @@
 object Fel: TFel
-  Left = 412
+  Left = 413
   Height = 433
-  Top = 205
+  Top = 225
   Width = 520
   BorderIcons = [biSystemMenu]
   Caption = 'Fel'
@@ -244,13 +244,10 @@ object Fel: TFel
     Left = 232
     Top = 208
   end
-  object zqH: TSQLQuery
-    FieldDefs = <>
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
+  object zqH: TZQuery
+    Connection = fd.ZConn
     Params = <>
-    Macros = <>
-    Left = 168
+    Left = 170
     Top = 208
   end
 end

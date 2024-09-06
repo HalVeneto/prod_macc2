@@ -1,18 +1,18 @@
 object Fmain: TFmain
   Left = 357
   Height = 805
-  Top = 189
-  Width = 1518
+  Top = 178
+  Width = 1502
   Caption = 'Prod_macch 2'
   ClientHeight = 805
-  ClientWidth = 1518
+  ClientWidth = 1502
   OnShow = FormShow
   LCLVersion = '3.4.0.0'
   object pTit: TBCPanel
     Left = 0
     Height = 48
     Top = 0
-    Width = 1518
+    Width = 1502
     Align = alTop
     Background.Color = clBtnFace
     Background.Gradient1.StartColor = clGray
@@ -47,7 +47,7 @@ object Fmain: TFmain
     Rounding.RoundY = 1
     TabOrder = 0
     object Lvers: TLabel
-      Left = 1407
+      Left = 1391
       Height = 13
       Top = 16
       Width = 103
@@ -126,7 +126,7 @@ object Fmain: TFmain
       ParentFont = False
     end
     object Ldata_sett: TLabel
-      Left = 1158
+      Left = 1142
       Height = 19
       Top = 16
       Width = 88
@@ -147,8 +147,8 @@ object Fmain: TFmain
     Left = 0
     Height = 757
     Top = 48
-    Width = 1518
-    ActivePage = tsLav
+    Width = 1502
+    ActivePage = tsDone
     Align = alClient
     Font.CharSet = ANSI_CHARSET
     Font.Height = -27
@@ -157,19 +157,19 @@ object Fmain: TFmain
     Font.Quality = fqDraft
     Font.Style = [fsBold]
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 1
     OnChange = PageControlChange
     object tsLav: TTabSheet
       Caption = 'lavorazioni oggi'
       ClientHeight = 711
-      ClientWidth = 1510
+      ClientWidth = 1494
       object dbgInd: TDBGrid
         Tag = 98
         Left = 0
         Height = 536
         Top = 0
-        Width = 1510
+        Width = 1494
         Align = alTop
         Color = clBtnFace
         Columns = <        
@@ -251,7 +251,7 @@ object Fmain: TFmain
             Title.Caption = 'cod. reg. planner'
             Width = 0
             Visible = False
-            FieldName = 'Cod'
+            FieldName = 'RigaLav'
           end        
           item
             Alignment = taCenter
@@ -374,7 +374,7 @@ object Fmain: TFmain
         Left = 0
         Height = 56
         Top = 536
-        Width = 1510
+        Width = 1494
         Align = alTop
         Background.Color = clBtnFace
         Background.Gradient1.StartColor = clGray
@@ -449,7 +449,7 @@ object Fmain: TFmain
         end
         object Bstart: TBCButton
           Tag = 1
-          Left = 1326
+          Left = 1310
           Height = 52
           Top = 2
           Width = 176
@@ -677,7 +677,7 @@ object Fmain: TFmain
         end
         object Bfine: TBCButton
           Tag = 1
-          Left = 1050
+          Left = 1034
           Height = 52
           Top = 2
           Width = 130
@@ -905,7 +905,7 @@ object Fmain: TFmain
         end
         object Bstop: TBCButton
           Tag = 1
-          Left = 890
+          Left = 874
           Height = 52
           Top = 2
           Width = 128
@@ -1133,7 +1133,7 @@ object Fmain: TFmain
         end
         object Bcanc: TBCButton
           Tag = 1
-          Left = 628
+          Left = 612
           Height = 52
           Top = 2
           Width = 128
@@ -1360,7 +1360,7 @@ object Fmain: TFmain
           MemoryUsage = bmuHigh
         end
         object Llavorazione_: TLabel
-          Left = 510
+          Left = 494
           Height = 19
           Top = 21
           Width = 101
@@ -1399,7 +1399,7 @@ object Fmain: TFmain
           Left = 272
           Height = 39
           Top = 16
-          Width = 346
+          Width = 330
           Anchors = [akTop, akLeft, akRight]
           Font.CharSet = ANSI_CHARSET
           Font.Color = clBlack
@@ -1451,7 +1451,7 @@ object Fmain: TFmain
         Left = 0
         Height = 119
         Top = 592
-        Width = 1510
+        Width = 1494
         Align = alClient
         Background.Color = clBtnFace
         Background.Gradient1.StartColor = clGray
@@ -1499,6 +1499,7 @@ object Fmain: TFmain
           Font.Quality = fqDraft
           ParentColor = False
           ParentFont = False
+          OnClick = LlavClick
         end
         object LnoteLav: TLabel
           Left = 8
@@ -1621,7 +1622,7 @@ object Fmain: TFmain
           Top = 88
           Width = 488
           AutoSize = False
-          DataField = 'DesNote'
+          DataField = 'note'
           DataSource = fd.dsTempi
           Font.CharSet = ANSI_CHARSET
           Font.Color = clBlack
@@ -1748,9 +1749,10 @@ object Fmain: TFmain
           Left = 1488
           Height = 96
           Top = 8
-          Width = 346
+          Width = 330
           AntialiasingMode = amOn
           Anchors = [akTop, akLeft, akRight, akBottom]
+          OnClick = imgDisClick
           ParentShowHint = False
           Proportional = True
           ShowHint = True
@@ -3829,7 +3831,6 @@ object Fmain: TFmain
           Font.Style = [fsBold]
           ItemHeight = 23
           MaxLength = 0
-          OnEnter = cbLavEnter
           OnExit = cbLavExit
           ParentFont = False
           Sorted = True
@@ -4063,7 +4064,7 @@ object Fmain: TFmain
           MemoryUsage = bmuHigh
         end
         object dbtCodReg: TDBText
-          Left = 409
+          Left = 393
           Height = 13
           Top = 288
           Width = 51
@@ -4716,11 +4717,10 @@ object Fmain: TFmain
         end
         object BokTipoPz: TBCButton
           Tag = 1
-          Left = 420
+          Left = 822
           Height = 33
-          Top = 12
+          Top = 224
           Width = 40
-          Anchors = [akRight, akBottom]
           StateClicked.Background.Gradient1.StartColor = 8404992
           StateClicked.Background.Gradient1.EndColor = 4194304
           StateClicked.Background.Gradient1.GradientType = gtRadial
@@ -4963,16 +4963,16 @@ object Fmain: TFmain
     object tsDone: TTabSheet
       Caption = 'lavorazioni eseguite'
       ClientHeight = 711
-      ClientWidth = 1510
+      ClientWidth = 1494
       object gbLavFin: TGroupBox
         Left = 0
         Height = 711
         Top = 0
-        Width = 1510
+        Width = 1494
         Align = alClient
         Caption = 'lavorazioni concluse'
         ClientHeight = 687
-        ClientWidth = 1506
+        ClientWidth = 1490
         Font.CharSet = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -4986,7 +4986,7 @@ object Fmain: TFmain
           Left = 0
           Height = 639
           Top = 0
-          Width = 1506
+          Width = 1490
           ColumnDefValues.BlobText = '(blob)'
           TitleButtons = True
           AutoSort = True
@@ -5176,7 +5176,8 @@ object Fmain: TFmain
               Title.Font.Style = [fsItalic]
               Title.Orientation = toHorizontal
               Title.Caption = 'operat.'
-              Width = 35
+              Width = 0
+              Visible = False
               FieldName = 'Pers'
               EditButtons = <>
               Filter.DropDownRows = 0
@@ -5188,18 +5189,9 @@ object Fmain: TFmain
               Footers = <>
             end          
             item
-              Alignment = taCenter
               Title.Alignment = taCenter
-              Title.Font.CharSet = ANSI_CHARSET
-              Title.Font.Color = clBlack
-              Title.Font.Height = -13
-              Title.Font.Name = 'Calibri'
-              Title.Font.Pitch = fpVariable
-              Title.Font.Quality = fqDraft
-              Title.Font.Style = [fsItalic]
               Title.Orientation = toHorizontal
-              Title.Caption = 'dalle'
-              Width = 40
+              Title.Caption = 'Dalle'
               FieldName = 'Dalle'
               DisplayFormat = 'hh:mm'
               EditButtons = <>
@@ -5212,18 +5204,9 @@ object Fmain: TFmain
               Footers = <>
             end          
             item
-              Alignment = taCenter
               Title.Alignment = taCenter
-              Title.Font.CharSet = ANSI_CHARSET
-              Title.Font.Color = clBlack
-              Title.Font.Height = -13
-              Title.Font.Name = 'Calibri'
-              Title.Font.Pitch = fpVariable
-              Title.Font.Quality = fqDraft
-              Title.Font.Style = [fsItalic]
               Title.Orientation = toHorizontal
-              Title.Caption = 'alle'
-              Width = 40
+              Title.Caption = 'Alle'
               FieldName = 'Alle'
               DisplayFormat = 'hh:mm'
               EditButtons = <>
@@ -5380,7 +5363,7 @@ object Fmain: TFmain
           Left = 0
           Height = 48
           Top = 639
-          Width = 1506
+          Width = 1490
           Align = alBottom
           Background.Color = clBtnFace
           Background.Gradient1.StartColor = clGray
@@ -6223,7 +6206,7 @@ object Fmain: TFmain
           end
           object dbNavAggLavFin: TDBNavigator
             Cursor = crHandPoint
-            Left = 1457
+            Left = 1441
             Height = 38
             Top = 6
             Width = 43
@@ -6253,6 +6236,7 @@ object Fmain: TFmain
               'annulla'
               'aggiorna'
             )
+            OnClick = dbNavAggLavFinClick
             Options = []
             ParentColor = False
             ParentShowHint = False
@@ -6361,7 +6345,7 @@ object Fmain: TFmain
     object tsAnom: TTabSheet
       Caption = 'anomalie'
       ClientHeight = 711
-      ClientWidth = 1510
+      ClientWidth = 1494
       object sg: TStringGrid
         Left = 544
         Height = 900
@@ -6558,12 +6542,12 @@ object Fmain: TFmain
     object tsDis: TTabSheet
       Caption = 'disegni'
       ClientHeight = 711
-      ClientWidth = 1510
+      ClientWidth = 1494
       object pTitDis: TBCPanel
         Left = 0
         Height = 56
         Top = 0
-        Width = 1510
+        Width = 1494
         Align = alTop
         Background.Color = clBtnFace
         Background.Gradient1.StartColor = clGray
@@ -6898,7 +6882,7 @@ object Fmain: TFmain
         end
         object BgoDis: TBCButton
           Tag = 1
-          Left = 1330
+          Left = 1314
           Height = 40
           Top = 6
           Width = 176
@@ -7158,7 +7142,7 @@ object Fmain: TFmain
         end
         object BdisIni: TBCButton
           Tag = 1
-          Left = 1002
+          Left = 986
           Height = 40
           Top = 6
           Width = 56
@@ -7385,7 +7369,7 @@ object Fmain: TFmain
         end
         object BdisPrec: TBCButton
           Tag = 1
-          Left = 1074
+          Left = 1058
           Height = 40
           Top = 6
           Width = 56
@@ -7612,7 +7596,7 @@ object Fmain: TFmain
         end
         object BdisSucc: TBCButton
           Tag = 1
-          Left = 1146
+          Left = 1130
           Height = 40
           Top = 5
           Width = 56
@@ -7839,7 +7823,7 @@ object Fmain: TFmain
         end
         object BdisFin: TBCButton
           Tag = 1
-          Left = 1218
+          Left = 1202
           Height = 40
           Top = 6
           Width = 56
@@ -8089,7 +8073,7 @@ object Fmain: TFmain
           Left = 8
           Height = 11
           Top = 46
-          Width = 1499
+          Width = 1483
           Anchors = [akTop, akLeft, akRight]
           MinValue = 0
           MaxValue = 100
@@ -8105,10 +8089,10 @@ object Fmain: TFmain
         Left = 0
         Height = 655
         Top = 56
-        Width = 1510
+        Width = 1494
         Align = alClient
         ClientHeight = 655
-        ClientWidth = 1510
+        ClientWidth = 1494
         Color = clActiveCaption
         ParentBackground = False
         ParentColor = False
@@ -11251,12 +11235,12 @@ object Fmain: TFmain
     object tsMan: TTabSheet
       Caption = 'manutenzioni'
       ClientHeight = 711
-      ClientWidth = 1510
+      ClientWidth = 1494
       object pTitMan: TBCPanel
         Left = 0
         Height = 120
         Top = 0
-        Width = 1510
+        Width = 1494
         Align = alTop
         Background.Color = clBtnFace
         Background.Gradient1.StartColor = clGray
@@ -11663,7 +11647,7 @@ object Fmain: TFmain
         end
         object BsaveMan: TBCButton
           Tag = 1
-          Left = 1272
+          Left = 1256
           Height = 40
           Top = 32
           Width = 216
@@ -11892,7 +11876,7 @@ object Fmain: TFmain
         end
         object BannMan: TBCButton
           Tag = 1
-          Left = 950
+          Left = 934
           Height = 40
           Top = 32
           Width = 216
@@ -12120,7 +12104,7 @@ object Fmain: TFmain
           MemoryUsage = bmuHigh
         end
         object Lhelp: TLabel
-          Left = 1277
+          Left = 1261
           Height = 32
           Top = 75
           Width = 203
@@ -12377,7 +12361,7 @@ object Fmain: TFmain
         Left = 1217
         Height = 591
         Top = 120
-        Width = 293
+        Width = 277
         ColumnDefValues.BlobText = '(blob)'
         TitleButtons = True
         AutoSort = False
@@ -12519,7 +12503,7 @@ object Fmain: TFmain
     object tsCfg: TTabSheet
       Caption = 'utilità'
       ClientHeight = 711
-      ClientWidth = 1510
+      ClientWidth = 1494
       Font.CharSet = ANSI_CHARSET
       Font.Height = -27
       Font.Name = 'Tahoma'
@@ -13016,9 +13000,9 @@ object Fmain: TFmain
     end
   end
   object pReg1: TBCPanel
-    Left = 120
+    Left = 24
     Height = 360
-    Top = 392
+    Top = 256
     Width = 1859
     Background.Color = clBtnFace
     Background.Gradient1.StartColor = clGray
@@ -15372,7 +15356,7 @@ object Fmain: TFmain
       Tag = 1
       Left = 8
       Height = 27
-      Top = 24
+      Top = 23
       Width = 249
       AutoComplete = True
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
@@ -15659,7 +15643,7 @@ object Fmain: TFmain
     end
     object BannModif: TBCButton
       Tag = 1
-      Left = 1312
+      Left = 1040
       Height = 48
       Top = 304
       Width = 144
@@ -16640,29 +16624,183 @@ object Fmain: TFmain
       Font.Style = [fsBold]
       ParentFont = False
     end
-  end
-  object zq2: TSQLQuery
-    FieldDefs = <>
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
-    Params = <>
-    Macros = <>
-    Left = 768
-    Top = 192
+    object Bquote: TBCButton
+      Tag = 1
+      Left = 1320
+      Height = 32
+      Top = 312
+      Width = 104
+      Anchors = [akTop, akRight]
+      StateClicked.Background.Gradient1.StartColor = 8404992
+      StateClicked.Background.Gradient1.EndColor = 4194304
+      StateClicked.Background.Gradient1.GradientType = gtRadial
+      StateClicked.Background.Gradient1.Point1XPercent = 50
+      StateClicked.Background.Gradient1.Point1YPercent = 100
+      StateClicked.Background.Gradient1.Point2XPercent = 0
+      StateClicked.Background.Gradient1.Point2YPercent = 0
+      StateClicked.Background.Gradient2.StartColor = clWhite
+      StateClicked.Background.Gradient2.EndColor = clBlack
+      StateClicked.Background.Gradient2.GradientType = gtLinear
+      StateClicked.Background.Gradient2.Point1XPercent = 0
+      StateClicked.Background.Gradient2.Point1YPercent = 0
+      StateClicked.Background.Gradient2.Point2XPercent = 0
+      StateClicked.Background.Gradient2.Point2YPercent = 100
+      StateClicked.Background.Gradient1EndPercent = 100
+      StateClicked.Background.Style = bbsGradient
+      StateClicked.Border.Style = bboNone
+      StateClicked.FontEx.Color = 16770790
+      StateClicked.FontEx.FontQuality = fqSystemClearType
+      StateClicked.FontEx.Shadow = True
+      StateClicked.FontEx.ShadowRadius = 2
+      StateClicked.FontEx.ShadowOffsetX = 1
+      StateClicked.FontEx.ShadowOffsetY = 1
+      StateClicked.FontEx.Style = [fsBold]
+      StateHover.Background.Gradient1.StartColor = 16744448
+      StateHover.Background.Gradient1.EndColor = 8404992
+      StateHover.Background.Gradient1.GradientType = gtRadial
+      StateHover.Background.Gradient1.Point1XPercent = 50
+      StateHover.Background.Gradient1.Point1YPercent = 100
+      StateHover.Background.Gradient1.Point2XPercent = 0
+      StateHover.Background.Gradient1.Point2YPercent = 0
+      StateHover.Background.Gradient2.StartColor = clWhite
+      StateHover.Background.Gradient2.EndColor = clBlack
+      StateHover.Background.Gradient2.GradientType = gtLinear
+      StateHover.Background.Gradient2.Point1XPercent = 0
+      StateHover.Background.Gradient2.Point1YPercent = 0
+      StateHover.Background.Gradient2.Point2XPercent = 0
+      StateHover.Background.Gradient2.Point2YPercent = 100
+      StateHover.Background.Gradient1EndPercent = 100
+      StateHover.Background.Style = bbsGradient
+      StateHover.Border.Style = bboNone
+      StateHover.FontEx.Color = clWhite
+      StateHover.FontEx.FontQuality = fqSystemClearType
+      StateHover.FontEx.Shadow = True
+      StateHover.FontEx.ShadowRadius = 2
+      StateHover.FontEx.ShadowOffsetX = 1
+      StateHover.FontEx.ShadowOffsetY = 1
+      StateHover.FontEx.Style = [fsBold]
+      StateNormal.Background.Gradient1.StartColor = 4194304
+      StateNormal.Background.Gradient1.EndColor = 8405056
+      StateNormal.Background.Gradient1.GradientType = gtLinear
+      StateNormal.Background.Gradient1.Point1XPercent = 0
+      StateNormal.Background.Gradient1.Point1YPercent = 0
+      StateNormal.Background.Gradient1.Point2XPercent = 0
+      StateNormal.Background.Gradient1.Point2YPercent = 100
+      StateNormal.Background.Gradient2.StartColor = 8405056
+      StateNormal.Background.Gradient2.EndColor = 4194304
+      StateNormal.Background.Gradient2.GradientType = gtRadial
+      StateNormal.Background.Gradient2.Point1XPercent = 50
+      StateNormal.Background.Gradient2.Point1YPercent = 100
+      StateNormal.Background.Gradient2.Point2XPercent = 0
+      StateNormal.Background.Gradient2.Point2YPercent = 0
+      StateNormal.Background.Gradient1EndPercent = 60
+      StateNormal.Background.Style = bbsGradient
+      StateNormal.Border.Style = bboNone
+      StateNormal.FontEx.Color = 16770790
+      StateNormal.FontEx.FontQuality = fqSystemClearType
+      StateNormal.FontEx.Height = 18
+      StateNormal.FontEx.Shadow = True
+      StateNormal.FontEx.ShadowRadius = 2
+      StateNormal.FontEx.ShadowOffsetX = 1
+      StateNormal.FontEx.ShadowOffsetY = 1
+      StateNormal.FontEx.Style = [fsBold]
+      Caption = 'quote'
+      Color = clNone
+      DropDownWidth = 16
+      DropDownArrowSize = 8
+      GlobalOpacity = 255
+      Glyph.Data = {
+        36090000424D3609000000000000360000002800000018000000180000000100
+        2000000000000009000064000000640000000000000000000000FFFFFF007575
+        75327C7C7CD372727238FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF007777772DA0A0
+        A0D9D8D8D8FF969696DE7777773EFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF008A8A8AD3FEFE
+        FEFFF3F3F3FFD9D9D9FF8C8C8CE04040404CFFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF007D7D7D37AAAA
+        AADCFFFFFFFFE6E6E6FF777777F33C3C3CEF19191933FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF007B7B
+        7B38A4A4A4E0D7D7D7F2ACACACFF747474FF3C3C3CEE19191933FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF0050505050797979EDE4E4E4FFACACACFF747474FF3D3D3DEC1B1B1B30FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF003131312F7A7A7AEBE4E4E4FFACACACFF747474FF3C3C3CEE1919
+        1933FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF003131312F7A7A7AEBE4E4E4FFACACACFF747474FF3C3C
+        3CEE19191934FFFFFF00FFFFFF00FFFFFF00FFFFFF0000B7E35C00B9E821FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF003131312F7A7A7AEBE4E4E4FFACACACFF7474
+        74FF3C3C3CEE19191934FFFFFF00FFFFFF00FFFFFF0000B6E4FE00B6E57EFFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003131312F7A7A7AEBE4E4E4FFACAC
+        ACFF747474FF3C3C3CEE19191934FFFFFF00FFFFFF0000B6E4FF00B5E380FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003131312F7A7A7AEBE4E4
+        E4FFACACACFF747474FF3C3C3CEE19191934FFFFFF0000B6E4FF00B5E380FFFF
+        FF00FFFFFF0000B8E32400B7E35CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003131312F7A7A
+        7AEBE4E4E4FFACACACFF747474FF3C3C3CEE1919193400B6E4FF00B5E380FFFF
+        FF0000B9E62800B6E5E700B6E4E0FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003535
+        3530797979ECE4E4E4FFACACACFF747474FF3D3D3DEC1293B3FF00B5E38000B5
+        E42600B6E4E500B6E4E900B8E12BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF003131312F7A7A7AEBE4E4E4FFACACACFF737778FA788D91FF28A0C0AB00B6
+        E4E500B6E4E900B8E12BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF003131312F7A7A7AEBD5D9DAFADDDDDEFFD9D9D9FF849AA0FD1FA6
+        C8EE00B8E12BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000B5E45D00B6E4FE00B6
+        E4FF00B6E4FF00B6E4FF1795B4FF8FA4AAFFFFFFFFFFF3F3F3FFD9D9D9FF6B88
+        8FFF00B5E3FF00B6E4FF00B6E4FF00B6E4FF00B6E4FF00B6E4DBFFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000B9E82100B6E37700B6
+        E37700B6E37700B6E37700B6E3772AA3C1A494ABB1FDFFFFFFFF9DB3B9FF29A3
+        C1D300B6E37700B6E37700B6E37700B6E37700B6E37700B7E35CFFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF0000B5E42600B6E4E51DA8CCEE749199FF28A3C4D300B6
+        E4FF00B6E48FFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF0000B5E42600B6E4E500B6E4E900B8E12B00B5E3FF00B5E38000B6
+        E58800B6E4FF00B6E48FFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF0000B3E32500B6E5E700B6E5E700B9E628FFFFFF0000B6E4FF00B5E380FFFF
+        FF0000B6E48F00B6E4FF00B6E48CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF0000B5E45D00B6E4E100B9E628FFFFFF00FFFFFF0000B6E4FF00B5E380FFFF
+        FF00FFFFFF0000B6E38B00B6E4DAFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000B6E4FF00B5E380FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000B6E4FF00B5E380FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0000B6E4DB00B7E45FFFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00
+      }
+      GlyphAlignment = bcaLeftCenter
+      GlyphMargin = 0
+      OnClick = BquoteClick
+      ParentColor = False
+      Rounding.RoundX = 12
+      Rounding.RoundY = 12
+      RoundingDropDown.RoundX = 1
+      RoundingDropDown.RoundY = 1
+      TextApplyGlobalOpacity = False
+      MemoryUsage = bmuHigh
+    end
   end
   object dsZq2: TDataSource
     DataSet = zq2
     Left = 820
     Top = 192
-  end
-  object zq: TSQLQuery
-    FieldDefs = <>
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
-    Params = <>
-    Macros = <>
-    Left = 768
-    Top = 144
   end
   object dsZq: TDataSource
     DataSet = zq
@@ -17062,166 +17200,6 @@ object Fmain: TFmain
     Left = 672
     Top = 144
   end
-  object qLavs: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <>
-    OnCalcFields = qLavsCalcFields
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
-    SQL.Strings = (
-      'select 0 as sel,p.cod,p.note,p.des,p.cli,p.comm,p.lav,rc.qta,'
-      'p.d1 as rigalav,'
-      'p.riserv as evidenz,'
-      'p.qta as qta_as_posiz,'
-      'p.posiz'
-      'from planner p'
-      'left join rcomm rc on p.comm=rc.commint'
-      'where p.i1=0'
-      ''
-      ''
-    )
-    Params = <>
-    Macros = <>
-    Left = 632
-    Top = 192
-    object qLavsDis: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'Dis'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 40
-    end
-    object qLavsMater: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'Mater'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 11
-    end
-    object qLavscod: TLongintField
-      FieldKind = fkData
-      FieldName = 'cod'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qLavssel: TLongintField
-      FieldKind = fkData
-      FieldName = 'sel'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qLavsnote: TMemoField
-      FieldKind = fkData
-      FieldName = 'note'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object qLavsNotes: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'Notes'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1000
-    end
-    object qLavsdes: TStringField
-      FieldKind = fkData
-      FieldName = 'des'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 255
-    end
-    object qLavscomm: TLongintField
-      FieldKind = fkData
-      FieldName = 'comm'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qLavslav: TStringField
-      FieldKind = fkData
-      FieldName = 'lav'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 30
-    end
-    object qLavsqta: TFloatField
-      FieldKind = fkData
-      FieldName = 'qta'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object qLavsrigalav: TFloatField
-      FieldKind = fkData
-      FieldName = 'rigalav'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object qLavsqta_as_posiz: TFloatField
-      FieldKind = fkData
-      FieldName = 'qta_as_posiz'
-      Index = 11
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object qLavsposiz: TLongintField
-      FieldKind = fkData
-      FieldName = 'posiz'
-      Index = 12
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qLavsevidenz: TLongintField
-      FieldKind = fkData
-      FieldName = 'evidenz'
-      Index = 13
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-  end
   object dsLavs: TDataSource
     DataSet = qLavs
     Left = 672
@@ -17459,20 +17437,10 @@ object Fmain: TFmain
       Required = False
       DisplayValues = 'True;False'
     end
-    object TelfDesLav: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesLav'
-      Index = 13
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 40
-    end
     object TelfLav: TStringField
       FieldKind = fkData
       FieldName = 'Lav'
-      Index = 14
+      Index = 13
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -17482,7 +17450,7 @@ object Fmain: TFmain
     object TelfDalle: TTimeField
       FieldKind = fkData
       FieldName = 'Dalle'
-      Index = 15
+      Index = 14
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -17491,7 +17459,7 @@ object Fmain: TFmain
     object TelfAlle: TTimeField
       FieldKind = fkData
       FieldName = 'Alle'
-      Index = 16
+      Index = 15
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -17500,7 +17468,7 @@ object Fmain: TFmain
     object TelfDaOra: TStringField
       FieldKind = fkData
       FieldName = 'DaOra'
-      Index = 17
+      Index = 16
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -17510,321 +17478,17 @@ object Fmain: TFmain
     object TelfAdOra: TStringField
       FieldKind = fkData
       FieldName = 'AdOra'
-      Index = 18
+      Index = 17
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
     end
-  end
-  object qEl: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'data'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'macch'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'pers'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'operat'
-        DataType = ftString
-        Precision = -1
-        Size = 50
-      end    
-      item
-        Name = 'lav'
-        DataType = ftString
-        Precision = -1
-        Size = 30
-      end    
-      item
-        Name = 'lavoraz'
-        DataType = ftString
-        Precision = -1
-        Size = 40
-      end    
-      item
-        Name = 'des'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'note'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'noteint'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'oraini'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'tipo'
-        DataType = ftString
-        Precision = -1
-        Size = 1
-      end    
-      item
-        Name = 'rigalav'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'dalle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'alle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'daora'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'adora'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'commint'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'cli'
-        DataType = ftString
-        Precision = -1
-        Size = 40
-      end    
-      item
-        Name = 'oc'
-        DataType = ftFloat
-        Precision = -1
-      end>
-    OnCalcFields = qElCalcFields
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
-    SQL.Strings = (
-      'select t.cod,t.data,t.macch,t.pers,p.descr as operat,t.lav,o.descr as lavoraz,'
-      ''
-      'case coalesce(t.note,'''')'
-      '  when '''' then o.descr'
-      '  else coalesce(t.note,'''') || coalesce(t.noteint,'''')'
-      'end as des,'
-      't.note,t.noteint,'
-      ''
-      't.dalle as oraini,t.tipo,'
-      't.rigalav,'
-      't.dalle,t.alle,'
-      ''
-      'cast(t.dalle as time) as daora,'
-      'cast(t.alle as time) as adora,'
-      ''
-      'rc.commint,tc.descr as cli,tc.cod as oc'
-      'from tempi t'
-      'left join rtempi rt on rt.cod=t.cod'
-      'left join rcomm rc on rt.comm=rc.commint'
-      'left join tcomm tc on rc.cod=tc.cod'
-      'left join op o on t.lav=o.cod'
-      'left join pers p on t.pers=p.cod'
-      'where alle<>''00:00:00'' and t.lav<>''NP'''
-      'limit 1'
-      ''
-      ''
-      ''
-      ''
-    )
-    Params = <>
-    Macros = <>
-    Left = 632
-    Top = 256
-    object qElcod: TFloatField
+    object TelfDesLav: TStringField
       FieldKind = fkData
-      FieldName = 'cod'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object qEldata: TDateField
-      FieldKind = fkData
-      FieldName = 'data'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qElDataDes: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'DataDes'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 130
-    end
-    object qElmacch: TStringField
-      FieldKind = fkData
-      FieldName = 'macch'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qElpers: TStringField
-      FieldKind = fkData
-      FieldName = 'pers'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qEllav: TStringField
-      FieldKind = fkData
-      FieldName = 'lav'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 30
-    end
-    object qEldes: TMemoField
-      FieldKind = fkData
-      FieldName = 'des'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object qElnote: TMemoField
-      FieldKind = fkData
-      FieldName = 'note'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object qElNotes: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'Notes'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 200
-    end
-    object qElnoteint: TMemoField
-      FieldKind = fkData
-      FieldName = 'noteint'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object qEltipo: TStringField
-      FieldKind = fkData
-      FieldName = 'tipo'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1
-    end
-    object qElrigalav: TLongintField
-      FieldKind = fkData
-      FieldName = 'rigalav'
-      Index = 11
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qEldalle: TTimeField
-      FieldKind = fkData
-      FieldName = 'dalle'
-      Index = 12
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qElalle: TTimeField
-      FieldKind = fkData
-      FieldName = 'alle'
-      Index = 13
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qEldaora: TTimeField
-      FieldKind = fkData
-      FieldName = 'daora'
-      Index = 14
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qEladora: TTimeField
-      FieldKind = fkData
-      FieldName = 'adora'
-      Index = 15
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qElcli: TStringField
-      FieldKind = fkData
-      FieldName = 'cli'
-      Index = 16
+      FieldName = 'DesLav'
+      Index = 18
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -17839,64 +17503,13 @@ object Fmain: TFmain
   end
   object Timer: TTimer
     OnTimer = TimerTimer
-    Left = 1192
-    Top = 168
-  end
-  object qImmLoc: TSQLQuery
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'imm'
-        DataType = ftBlob
-        Precision = -1
-      end    
-      item
-        Name = 'immjpg'
-        DataType = ftBlob
-        Precision = -1
-      end    
-      item
-        Name = 'immnom'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end>
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
-    SQL.Strings = (
-      'select immjpg as imm,immnom'
-      'from dis'
-      'limit 1'
-    )
-    Params = <>
-    Macros = <>
-    ParseSQL = False
-    Left = 936
-    Top = 144
-    object qImmLocimm: TBlobField
-      FieldKind = fkData
-      FieldName = 'imm'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qImmLocimmnom: TStringField
-      FieldKind = fkData
-      FieldName = 'immnom'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 255
-    end
+    Left = 1136
+    Top = 208
   end
   object dsImmLoc: TDataSource
     AutoEdit = False
     DataSet = qImmLoc
-    Left = 1000
+    Left = 1104
     Top = 144
   end
   object Telc: TRxMemoryData
@@ -18085,86 +17698,214 @@ object Fmain: TFmain
     Left = 496
     Top = 288
   end
-  object qCal: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'tbl'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'macch'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'macchina'
-        DataType = ftString
-        Precision = -1
-        Size = 8192
-      end    
-      item
-        Name = 'note'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'notes'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'data'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'noteint'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'dessimp'
-        DataType = ftString
-        Precision = -1
-        Size = 8192
-      end    
-      item
-        Name = 'scad'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'tipop'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'period'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'i2'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'reg'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'rif'
-        DataType = ftFloat
-        Precision = -1
-      end>
-    OnCalcFields = qElCalcFields
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
+  object dsGg: TDataSource
+    DataSet = qGg
+    Left = 496
+    Top = 416
+  end
+  object zq2: TZQuery
+    DisableZFields = True
+    Connection = fd.ZConn
+    Params = <>
+    Left = 768
+    Top = 192
+  end
+  object zq: TZQuery
+    DisableZFields = True
+    Connection = fd.ZConn
+    Params = <>
+    Left = 768
+    Top = 144
+  end
+  object qLavs: TZQuery
+    DisableZFields = True
+    OnCalcFields = qLavsCalcFields
+    Connection = fd.ZConn
+    SQL.Strings = (
+      'select 0 as sel,p.cod,p.note,'
+      'p.des,p.comm,p.lav,rc.qta,'
+      'p.d1 as rigalav,'
+      'p.riserv as evidenz,'
+      'p.qta as qta_as_posiz,'
+      'p.posiz'
+      'from planner p'
+      'left join rcomm rc on p.comm=rc.commint'
+      'where p.i1=0  '
+    )
+    Params = <>
+    Left = 632
+    Top = 192
+    object qLavssel: TLongintField
+      FieldKind = fkData
+      FieldName = 'sel'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+    object qLavscod: TLongintField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qLavsnote: TMemoField
+      FieldKind = fkData
+      FieldName = 'note'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qLavsdes: TStringField
+      FieldKind = fkData
+      FieldName = 'des'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object qLavscomm: TLongintField
+      FieldKind = fkData
+      FieldName = 'comm'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qLavslav: TStringField
+      FieldKind = fkData
+      FieldName = 'lav'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object qLavsqta: TFloatField
+      FieldKind = fkData
+      FieldName = 'qta'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object qLavsrigalav: TFloatField
+      FieldKind = fkData
+      FieldName = 'rigalav'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object qLavsevidenz: TLongintField
+      FieldKind = fkData
+      FieldName = 'evidenz'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qLavsqta_as_posiz: TFloatField
+      FieldKind = fkData
+      FieldName = 'qta_as_posiz'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object qLavsposiz: TLongintField
+      FieldKind = fkData
+      FieldName = 'posiz'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qLavsDis: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Dis'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object qLavsNotes: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Notes'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1000
+    end
+    object qLavsMater: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Mater'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 11
+    end
+  end
+  object qImmLoc: TZQuery
+    DisableZFields = True
+    Connection = fd.ZConn
+    SQL.Strings = (
+      'select immjpg as imm,immnom'
+      'from dis'
+      'limit 1      '
+    )
+    Params = <>
+    Left = 1048
+    Top = 144
+    object qImmLocimm: TBlobField
+      FieldKind = fkData
+      FieldName = 'imm'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmLocimmnom: TStringField
+      FieldKind = fkData
+      FieldName = 'immnom'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+  end
+  object qCal: TZQuery
+    DisableZFields = True
+    Connection = fd.ZConn
     SQL.Strings = (
       'select ''xxx'' as tbl,r.macch,m.des as macchina,m.note,r.notes,r.data,'
       'm.note as noteint,'
@@ -18188,72 +17929,50 @@ object Fmain: TFmain
       't.macch=''5'''
       'and t.data>''2022-01-01'''
       'and (t.lav=''MGU'' or t.lav=''MPR'' or t.lav=''OLI'')'
-      ''
       'order by scad asc,note'
-      ''
       ''
     )
     Params = <>
-    Macros = <>
     Left = 448
     Top = 288
-    object qCalMacchina: TStringField
+    object qCaltbl: TMemoField
       FieldKind = fkData
-      FieldName = 'Macchina'
+      FieldName = 'tbl'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 360
-    end
-    object qCalNote: TMemoField
-      FieldKind = fkData
-      FieldName = 'Note'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
       BlobType = ftMemo
       Transliterate = False
     end
-    object qCalScad: TDateField
+    object qCalmacch: TStringField
       FieldKind = fkData
-      FieldName = 'Scad'
+      FieldName = 'macch'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+    end
+    object qCalmacchina: TMemoField
+      FieldKind = fkData
+      FieldName = 'macchina'
       Index = 2
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
+      BlobType = ftMemo
+      Transliterate = False
     end
-    object qCalDesSimp: TStringField
+    object qCalnote: TMemoField
       FieldKind = fkData
-      FieldName = 'DesSimp'
+      FieldName = 'note'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1020
-    end
-    object qCalMacch: TStringField
-      FieldKind = fkData
-      FieldName = 'Macch'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 80
-    end
-    object qCaltbl: TMemoField
-      FieldKind = fkData
-      FieldName = 'tbl'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
       BlobType = ftMemo
       Transliterate = False
@@ -18261,10 +17980,10 @@ object Fmain: TFmain
     object qCalnotes: TMemoField
       FieldKind = fkData
       FieldName = 'notes'
-      Index = 6
+      Index = 4
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
       BlobType = ftMemo
       Transliterate = False
@@ -18272,22 +17991,42 @@ object Fmain: TFmain
     object qCaldata: TDateField
       FieldKind = fkData
       FieldName = 'data'
-      Index = 7
+      Index = 5
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
     end
     object qCalnoteint: TMemoField
       FieldKind = fkData
       FieldName = 'noteint'
-      Index = 8
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
       BlobType = ftMemo
       Transliterate = False
+    end
+    object qCaldessimp: TMemoField
+      FieldKind = fkData
+      FieldName = 'dessimp'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qCalscad: TDateField
+      FieldKind = fkData
+      FieldName = 'scad'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
     end
     object qCaltipop: TLongintField
       FieldKind = fkData
@@ -18295,7 +18034,7 @@ object Fmain: TFmain
       Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
     end
     object qCalperiod: TLongintField
@@ -18304,7 +18043,7 @@ object Fmain: TFmain
       Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
     end
     object qCali2: TLongintField
@@ -18313,7 +18052,7 @@ object Fmain: TFmain
       Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
     end
     object qCalreg: TFloatField
@@ -18322,9 +18061,9 @@ object Fmain: TFmain
       Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
-      Precision = -1
+      Precision = 8
     end
     object qCalrif: TFloatField
       FieldKind = fkData
@@ -18332,28 +18071,24 @@ object Fmain: TFmain
       Index = 13
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
+      ReadOnly = True
       Required = False
-      Precision = -1
+      Precision = 8
     end
   end
-  object dsGg: TDataSource
-    DataSet = qGg
-    Left = 496
-    Top = 416
-  end
-  object qGg: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <>
+  object qGg: TZQuery
+    DisableZFields = True
     OnCalcFields = qGgCalcFields
-    Database = fd.PQConn
-    Transaction = fd.SQLTransact
+    Connection = fd.ZConn
     SQL.Strings = (
-      'select cod,notes from rip where garanzia=''x'' and macch=''14'' and tipop=1 and period=1'
+      'select cod,notes '
+      'from rip '
+      'where garanzia=''x'' '
+      '  and macch=''14'' '
+      '  and tipop=1 '
+      '  and period=1'
     )
     Params = <>
-    Macros = <>
     Left = 448
     Top = 416
     object qGgcod: TFloatField
@@ -18363,8 +18098,8 @@ object Fmain: TFmain
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
     object qGgnotes: TMemoField
       FieldKind = fkData
@@ -18385,7 +18120,294 @@ object Fmain: TFmain
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Size = 255
+      Size = 30
     end
+  end
+  object qEl: TZQuery
+    DisableZFields = True
+    OnCalcFields = qElCalcFields
+    Connection = fd.ZConn
+    SQL.Strings = (
+      'select t.cod,t.data,t.macch,t.pers,p.descr as operat,t.lav,o.descr as lavoraz,'
+      ''
+      'case coalesce(t.note,'''')'
+      '  when '''' then o.descr'
+      '  else coalesce(t.note,'''') || coalesce(t.noteint,'''')'
+      'end as des,'
+      't.note,t.noteint,'
+      ''
+      't.dalle as oraini,t.tipo,'
+      't.rigalav,'
+      't.dalle,t.alle,'
+      ''
+      'cast(t.dalle as time) as daora,'
+      'cast(t.alle as time) as adora,'
+      ''
+      'rc.commint,tc.descr as cli,tc.cod as oc'
+      'from tempi t'
+      'left join rtempi rt on rt.cod=t.cod'
+      'left join rcomm rc on rt.comm=rc.commint'
+      'left join tcomm tc on rc.cod=tc.cod'
+      'left join op o on t.lav=o.cod'
+      'left join pers p on t.pers=p.cod'
+      'where alle<>''00:00:00'' and t.lav<>''NP'''
+      'limit 1'
+    )
+    Params = <>
+    Left = 632
+    Top = 256
+    object qElcod: TFloatField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = 8
+    end
+    object qEldata: TDateField
+      FieldKind = fkData
+      FieldName = 'data'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qElmacch: TStringField
+      FieldKind = fkData
+      FieldName = 'macch'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qElpers: TStringField
+      FieldKind = fkData
+      FieldName = 'pers'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qEllav: TStringField
+      FieldKind = fkData
+      FieldName = 'lav'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object qEldes: TMemoField
+      FieldKind = fkData
+      FieldName = 'des'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = True
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qElnote: TMemoField
+      FieldKind = fkData
+      FieldName = 'note'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qElnoteint: TMemoField
+      FieldKind = fkData
+      FieldName = 'noteint'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qEltipo: TStringField
+      FieldKind = fkData
+      FieldName = 'tipo'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+    object qElrigalav: TLongintField
+      FieldKind = fkData
+      FieldName = 'rigalav'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qEldaora: TTimeField
+      FieldKind = fkData
+      FieldName = 'daora'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qEladora: TTimeField
+      FieldKind = fkData
+      FieldName = 'adora'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qElcli: TStringField
+      FieldKind = fkData
+      FieldName = 'cli'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object qElDataDes: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'DataDes'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 33
+    end
+    object qElNotes: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'Notes'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1000
+    end
+    object qEldalle: TTimeField
+      FieldKind = fkData
+      FieldName = 'dalle'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qElalle: TTimeField
+      FieldKind = fkData
+      FieldName = 'alle'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+  end
+  object Tpg: TZQuery
+    DisableZFields = True
+    OnCalcFields = qLavsCalcFields
+    Connection = fd.ZConn
+    SQL.Strings = (
+      'select * from pargen'
+    )
+    Params = <>
+    Left = 728
+    Top = 616
+    object Tpgmin_ore_lav: TSmallintField
+      FieldKind = fkData
+      FieldName = 'min_ore_lav'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpggg_ctrl: TSmallintField
+      FieldKind = fkData
+      FieldName = 'gg_ctrl'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpginizio_manut: TDateField
+      FieldKind = fkData
+      FieldName = 'inizio_manut'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpgfinor1: TLongintField
+      FieldKind = fkData
+      FieldName = 'finor1'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpgfinor2: TLongintField
+      FieldKind = fkData
+      FieldName = 'finor2'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpgfinor3: TLongintField
+      FieldKind = fkData
+      FieldName = 'finor3'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpgfinor4: TLongintField
+      FieldKind = fkData
+      FieldName = 'finor4'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Tpgfinor5: TLongintField
+      FieldKind = fkData
+      FieldName = 'finor5'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object dsPg: TDataSource
+    DataSet = Tpg
+    Left = 768
+    Top = 616
   end
 end

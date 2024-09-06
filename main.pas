@@ -13,6 +13,7 @@ uses
   DBCtrls, Buttons, ExtCtrls, DBGrids, Grids, CheckBoxThemed,
   JvThumbImage, JvMovableBevel, JvNavigationPane, BCPanel, BCButton,
   BGRAFlashProgressBar, BGRAShape, ovcrlbl, kedits, SqlDb, DB, RxDBTimeEdit,
+  ZSysUtils, ZDataset, ZAbstractRODataset, ZConnection,
   rxmemds, RxDBGrid, rxdbdateedit, rxctrls, rxtooledit;
 
 const
@@ -34,6 +35,7 @@ type
     BcancRegEff: TBCButton;
     BcfgSave: TBCButton;
     BconfMod: TBCButton;
+    Bquote: TBCButton;
     Bdis1: TButton;
     Bdis10: TButton;
     Bdis11: TButton;
@@ -105,6 +107,7 @@ type
     dgGg: TRxDBGrid;
     dgRes: TRxDBGrid;
     dsAnom: TDataSource;
+    dsPg: TDataSource;
     dsCal: TDataSource;
     dsElc: TDataSource;
     dsElf: TDataSource;
@@ -382,23 +385,20 @@ type
     pTit: TBCPanel;
     pTitDis: TBCPanel;
     pTitMan: TBCPanel;
-    qGg: TSQLQuery;
     qCaldata: TDateField;
+    qCaldessimp: TMemoField;
     qCali2: TLongintField;
+    qCalmacch: TStringField;
+    qCalmacchina: TMemoField;
+    qCalnote: TMemoField;
     qCalnoteint: TMemoField;
     qCalnotes: TMemoField;
     qCalperiod: TLongintField;
     qCalreg: TFloatField;
     qCalrif: TFloatField;
+    qCalscad: TDateField;
     qCaltbl: TMemoField;
     qCaltipop: TLongintField;
-    qCalDesSimp: TStringField;
-    qCalMacch: TStringField;
-    qCalMacchina: TStringField;
-    qCalNote: TMemoField;
-    qCalScad: TDateField;
-    qEl: TSQLQuery;
-    qCal: TSQLQuery;
     qEladora: TTimeField;
     qElalle: TTimeField;
     qElcli: TStringField;
@@ -419,11 +419,11 @@ type
     qGgcod: TFloatField;
     qGgDes: TStringField;
     qGgnotes: TMemoField;
-    qImmLoc: TSQLQuery;
     qImmLocimm: TBlobField;
     qImmLocimmjpg: TBlobField;
+    qEl: TZQuery;
     qImmLocimmnom: TStringField;
-    qLavs: TSQLQuery;
+    Tpg: TZQuery;
     qLavscod: TLongintField;
     qLavscomm: TLongintField;
     qLavsdes: TStringField;
@@ -484,6 +484,14 @@ type
     TlavCtrlDone: TLongintField;
     TlavCtrlTodo: TLongintField;
     TlavIniz: TStringField;
+    Tpgfinor1: TLongintField;
+    Tpgfinor2: TLongintField;
+    Tpgfinor3: TLongintField;
+    Tpgfinor4: TLongintField;
+    Tpgfinor5: TLongintField;
+    Tpggg_ctrl: TSmallintField;
+    Tpginizio_manut: TDateField;
+    Tpgmin_ore_lav: TSmallintField;
     tsDis: TTabSheet;
     tsDone: TTabSheet;
     Tlav: TRxMemoryData;
@@ -514,9 +522,13 @@ type
     TanomNote: TStringField;
     TanomUsc: TLongintField;
     tsLav: TTabSheet;
-    zq2: TSQLQuery;
     tsCfg: TTabSheet;
-    zq: TSQLQuery;
+    qLavs: TZQuery;
+    zq2: TZQuery;
+    zq: TZQuery;
+    qImmLoc: TZQuery;
+    qCal: TZQuery;
+    qGg: TZQuery;
     procedure BallLav1Click(Sender: TObject);
     procedure BallLavClick(Sender: TObject);
     procedure BannManClick(Sender: TObject);
@@ -527,6 +539,7 @@ type
     procedure BcancClick(Sender: TObject);
     procedure BcancRegEffClick(Sender: TObject);
     procedure BcfgSaveClick(Sender: TObject);
+    procedure BquoteClick(Sender: TObject);
     procedure BconfModClick(Sender: TObject);
     procedure BdisFinClick(Sender: TObject);
     procedure BdisIniClick(Sender: TObject);
@@ -554,7 +567,6 @@ type
     procedure BstartClick(Sender: TObject);
     procedure BstopClick(Sender: TObject);
     procedure cbLav1Exit(Sender: TObject);
-    procedure cbLavEnter(Sender: TObject);
     procedure cbLavExit(Sender: TObject);
     procedure dbgIndCellClick(Column: TColumn);
     procedure dbgIndEditButtonClick(Sender: TObject);
@@ -562,6 +574,7 @@ type
     procedure dbgIndPrepareCanvas(sender: TObject; DataCol: Integer;
       Column: TColumn; AState: TGridDrawState);
     procedure dbNavAggIndexClick(Sender: TObject; Button: TDBNavButtonType);
+    procedure dbNavAggLavFinClick(Sender: TObject; Button: TDBNavButtonType);
     procedure dgElPrepareCanvas(sender: TObject; DataCol: Integer;
       Column: TColumn; AState: TGridDrawState);
     procedure dgResCellClick(Column: TColumn);
@@ -586,7 +599,9 @@ type
     procedure imageIndClick(Sender: TObject);
     procedure img1Click(Sender: TObject);
     procedure imgDis1Click(Sender: TObject);
+    procedure imgDisClick(Sender: TObject);
     procedure LhelpLav_Click(Sender: TObject);
+    procedure LlavClick(Sender: TObject);
     procedure PageControlChange(Sender: TObject);
     procedure pCloseImmClick(Sender: TObject);
     procedure qElCalcFields(DataSet: TDataSet);
@@ -638,6 +653,8 @@ var
   riga_corr :word;
   quanti,pag:longint; //per dis.
   condiz_man_eff:string='coalesce(garanzia,'''')<>''x'' and data is not null';
+  firstTimeDis:boolean=True;
+  minHlav,ggCtrl:SmallInt;
 
 procedure pulsanti(inizio,altri:boolean);
 begin
@@ -715,10 +732,23 @@ begin
     with Fmain do begin
       leggiVal(rcfg.blocca,'1'); //unused
 
-      zgo(zq2,'select imprit as min_ore_lav,askarea as gg_ctrl from pargen','op');
-      LminOreLav.Caption:=vts(zq2['min_ore_lav']);
+      //deb('leggicfg');
+      Tpg.Open;
+      Tpg.First;
+      minHlav:=TpgMin_ore_lav.Value;
+      ggCtrl:=TpgGg_ctrl.Value;
+      Tpg.Close;
 
-      x:=trunc(vlr(vts(zq2['gg_ctrl'])));
+      //if _test_ then deb('test') else deb('notest');
+      (*if _test_ then begin
+        zgo(zq2,'select min_ore_lav,gg_ctrl from pargen',op_);
+        deb('lett.ok');
+        end
+      else
+        zgo(zq2,'select imprit as min_ore_lav,askarea as gg_ctrl from pargen',op_);*)
+      LminOreLav.Caption:=i2s(minHlav); //TpgMin_ore_lav.Text; //vts(zq2['min_ore_lav']);
+      //deb('1');
+      x:=ggCtrl; //TpgGg_ctrl.Value; //x:=trunc(vlr(vts(zq2['gg_ctrl'])));
       if x<=0 then
         x:=30;
       Lggctrl.Caption:=i2s(x);
@@ -764,8 +794,18 @@ begin
 
     //cerca rapportini mancanti degli ultimi rcfg.ggCtrl giorni o dalla data di inizio lavoro:
     gg:=30;
-    zgo(zq2,'select askarea as gg_ctrl from pargen',op_);
-    gg:=trunc(vlr(vts(zq2['gg_ctrl'])));
+    (*if _test_ then
+      s:='select gg_ctrl from pargen'
+    else
+      s:='select askarea as gg_ctrl from pargen';
+    deb('lett2 :'+s);
+    zgo(zq2,s,op_);
+    deb('lett2ok'+s);
+    gg:=trunc(vlr(vts(zq2['gg_ctrl'])));*)
+
+    //Tpg.Open;
+    gg:=ggCtrl; //TpgGg_ctrl.Value; //aperto in leggiCfp
+
     if attDal=0 then
       dal:=formatDateTime('dd/mm/yyyy',Now-gg)
     else
@@ -889,20 +929,11 @@ begin
     end;
 
     //ctrl se ore lavorate < min. in cfg:
-    s:='select data,sum(alle-dalle) as ore';
-    agg(s,'from tempi');
-    agg(s,'where data<to_date('+qs(formatDateTime('dd/mm/yyyy',Now))+','+qs('dd/mm/yyyy')+')');
-    agg(s,'and data>=to_date('+qs(formatDateTime('dd/mm/yyyy',Now-gg))+','+qs('dd/mm/yyyy')+')');
-    agg(s,'and dalle<>'+qs('00:00:00')+' and alle<>'+qs('00:00:00'));
-    //agg(s,lav_da_escludere); non dovrebbe servire
-    agg(s,'and extract(dow from data)<>6'); //escluso sabato
-    agg(s,'and pers='+qs(xUser));
-    agg(s,'group by data');
 
-    //dat := '07:00'; //rcfg.Hmin;
-    //old: dat:=rcfg.Hmin;
-    zgo(zq2,'select imprit as min_ore_lav from pargen','op');
-    dat:=vts(zq2['min_ore_lav']);
+    //deb('2');
+    //Tpg.Open;
+    dat:=i2s(minHlav); //TpgMin_ore_lav.Text;
+    //deb('minhl:'+dat+'.');
     x:=pos(',',dat);
     if x=0 then begin
       if length(dat)=1 then
@@ -926,75 +957,95 @@ begin
       dat:=copy(dat,1,pos('.',dat)-1)+':30'
     else
       dat:=copy(dat,1,pos('.',dat)-1)+':00';}
-    agg(s,'having sum(alle-dalle) < '+qs(dat));
-    agg(s,'order by data desc');
-    //sqgo(zq,trZq,s,'op'); deb('a');
 
+    if trim(dat)<>'' then begin
+      s:='select data,sum(alle-dalle) as ore';
+      agg(s,'from tempi');
+      agg(s,'where data<to_date('+qs(formatDateTime('dd/mm/yyyy',Now))+','+qs('dd/mm/yyyy')+')');
+      agg(s,'and data>=to_date('+qs(formatDateTime('dd/mm/yyyy',Now-gg))+','+qs('dd/mm/yyyy')+')');
+      agg(s,'and dalle<>'+qs('00:00:00')+' and alle<>'+qs('00:00:00'));
+      //agg(s,lav_da_escludere); non dovrebbe servire
+      agg(s,'and extract(dow from data)<>6'); //escluso sabato
+      agg(s,'and pers='+qs(xUser));
+      agg(s,'group by data');
+      //dat := '07:00'; //rcfg.Hmin;
+      //old: dat:=rcfg.Hmin;
+      //zgo(zq2,'select imprit as min_ore_lav from pargen','op');
 
-    //if trZq.Active then
-      //trZq.EndTransaction;
-    zq.Close;
-    zq.SQL.Clear;
-    zq.SQL.Add(s);
-    zq.Open;
-
-
-    if not zq.IsEmpty then begin
-      data_:=vts(zq['data']); //nb2
-      ore_ :=vts(zq['ore']); //nb2
-      //s:='';
-      //deb(i2s(zq.RecordCount));
-      zq.First;
-      //if zq.State=dsInactive then deb('zq inact1');
-      while not zq.EOF do begin
-        //if zq.State=dsInactive then deb('zq inact2');
-        s:='select sum(conf) as uscantic from tempi';
-        //sum perché basta un solo check "uscita antic." nella giornata
-        agg(s,'where data=to_date('+qs(vts(zq['data']))+','+qs('dd/mm/yyyy')+')');
-        agg(s,'and pers='+qs(xUser));
-        //zgo(zq2,s,'op');
-
-        //deb('zq20');
-        //if trZq2.Active then
-          //trZq2.EndTransaction;
-        zq2.Close;
-        zq2.SQL.Clear;
-        //deb('zq21');
-        zq2.SQL.Add(s);
-        zq2.Open;
-        //deb('zq22');
-
-        //if zq.State=dsInactive then deb('zq inact3');
-        //deb('b');
-        if vts(zq2['uscantic'])='0' then begin //se non ci sono uscite anticipate
-          //if Tanom.State=dsInactive then Tanom.Open;
-          //deb('c');
-          Tanom.Insert;
-          //deb('d');
-          //dat:=vts(zq['data']); nb2
-          dat:=data_;
-          if trim(dat)='' then
-            gds:=0
-          else
-            gds:=dayOfWeek(strToDate(dat));
-          TanomData.Value:=strToDate(dat);
-          TanomDataGds.Value:=nomeGiorno(gds)+' '+dat;
-          //TanomCod.Value:=vlr(vts(zq['cod']));
-          dat:=ore_; //vts(zq['ore']);
-          dat:=copy(dat,1,length(dat)-3); //toglie secondi
-          TanomNote.Value:='ore lavorate '+dat;
-          Tanom.Post;
-          found:=True;
-        end;
-        //deb('e');
-        //if zq.State=dsInactive then deb('zq inact4');
-        zq.Next;
-      end;
-      //deb('f');
+      (*//if _test_ then deb('test') else deb('notest');
+      if _test_ then
+        zgo(zq2,'select min_ore_lav,gg_ctrl from pargen',op_)
+      else
+        zgo(zq2,'select imprit as min_ore_lav,askarea as gg_ctrl from pargen',op_);
+      deb('lett3ok');
+      dat:=vts(zq2['min_ore_lav']); //nb2 prevedere che manchi *)
+      agg(s,'having sum(alle-dalle) < '+qs(dat));
+      agg(s,'order by data desc');
+      //sqgo(zq,trZq,s,'op'); deb('a');
+      //if trZq.Active then
+        //trZq.EndTransaction;
       zq.Close;
-      //deb('g');
-    end;
-    //deb('anom7');
+      zq.SQL.Clear;
+      zq.SQL.Add(s);
+      zq.Open;
+
+      if not zq.IsEmpty then begin
+        data_:=vts(zq['data']); //nb2
+        ore_ :=vts(zq['ore']); //nb2
+        //s:='';
+        //deb(i2s(zq.RecordCount));
+        zq.First;
+        //if zq.State=dsInactive then deb('zq inact1');
+        while not zq.EOF do begin
+          //if zq.State=dsInactive then deb('zq inact2');
+          s:='select sum(conf) as uscantic from tempi';
+          //sum perché basta un solo check "uscita antic." nella giornata
+          agg(s,'where data=to_date('+qs(vts(zq['data']))+','+qs('dd/mm/yyyy')+')');
+          agg(s,'and pers='+qs(xUser));
+          //zgo(zq2,s,'op');
+
+          //deb('zq20');
+          //if trZq2.Active then
+            //trZq2.EndTransaction;
+          zq2.Close;
+          zq2.SQL.Clear;
+          //deb('zq21');
+          zq2.SQL.Add(s);
+          zq2.Open;
+          //deb('zq22');
+
+          //if zq.State=dsInactive then deb('zq inact3');
+          //deb('b');
+          if vts(zq2['uscantic'])='0' then begin //se non ci sono uscite anticipate
+            //if Tanom.State=dsInactive then Tanom.Open;
+            //deb('c');
+            Tanom.Insert;
+            //deb('d');
+            //dat:=vts(zq['data']); nb2
+            dat:=data_;
+            if trim(dat)='' then
+              gds:=0
+            else
+              gds:=dayOfWeek(strToDate(dat));
+            TanomData.Value:=strToDate(dat);
+            TanomDataGds.Value:=nomeGiorno(gds)+' '+dat;
+            //TanomCod.Value:=vlr(vts(zq['cod']));
+            dat:=ore_; //vts(zq['ore']);
+            dat:=copy(dat,1,length(dat)-3); //toglie secondi
+            TanomNote.Value:='ore lavorate '+dat;
+            Tanom.Post;
+            found:=True;
+          end;
+          //deb('e');
+          //if zq.State=dsInactive then deb('zq inact4');
+          zq.Next;
+        end;
+        //deb('f');
+        zq.Close;
+        //deb('g');
+      end; //if not zq empty
+      //deb('anom7');
+    end; //if dat<>''
 
     //ctrl se orari corretti:
     s := 'select cod,data,dalle,alle';
@@ -1205,6 +1256,7 @@ var
 begin
   with Fmain do begin
     w:=dbgInd.Width-20;
+    //deb('di1');
     dbgInd.Columns[0].Width:= 4 * w div 100; //sel.
     dbgInd.Columns[1].Width:=49 * w div 100; //note old:49
     dbgInd.Columns[2].Width:= 5 * w div 100; //comm.int.
@@ -1216,10 +1268,12 @@ begin
     dbgInd.Columns[col_ctrl_fatti].Width  := 3 * w div 100; dbgInd.Columns[col_ctrl_fatti].Title.Caption:='controlli'+cr+'fatti';
     dbgInd.Columns[9].Width := 6 * w div 100; //merce arrivata
     dbgInd.Columns[10].Width:= 2 * w div 100; //lav. iniziato
+    //deb('di10');
     dbgInd.Columns[11].Width:= 0 * w div 100;
     dbgInd.Columns[12].Width:= 0 * w div 100;
     dbgInd.Columns[13].Width:= 0 * w div 100; //rigalav
     dbgInd.Columns[14].Width:= 0 * w div 100;
+    //deb('di14');
     {if mostra_reg_planner then
       dbgInd.Columns[10].Width:=100
     else
@@ -1250,7 +1304,12 @@ begin
 
     s:='select ord from macch where cod='+qs(xMacch);
     zgo(zq,s,'op');
-    str(vlr(vts(zq['ord'])):1:0,macc); //= a sql seguente
+    if zq.RecordCount=0 then begin
+      mess('posizione macchina non identificata',_info,_icons);
+      exit
+      end
+    else
+      str(vlr(vts(zq['ord'])):1:0,macc); //= a sql seguente
 
     s:=   'select 0 as sel,p.cod,p.note,p.des,p.comm,p.lav,p.rigalav,rc.qta,'; //p.d1 as rigalav,rc.qta,';
     agg(s,'p.riserv as evidenz,p.qta as qta_as_posiz,p.posiz');
@@ -1261,12 +1320,13 @@ begin
     agg(s,'and p.notaint<>1'); //ex d2
     agg(s,'order by p.qta asc,p.comm asc'); //p.qta=posiz
     zgo(qLavs,s,'op');
+    //deb(s);
 
     Tlav.Close;
     Tlav.Open;
 
     //scrive qLavs in Tlav else dà "cannot update a complex query with more than one table" dopo "inizio"
-    qlavs.First;
+    qLavs.First;
     while not qlavs.EOF do begin
       Tlav.Insert;
       TlavSel.Value:=0;
@@ -1291,7 +1351,10 @@ begin
       zq.SQL.Clear;
       zq.SQL.Add(s);
       zq.Open;
-      TlavCtrlTodo.Value:=trunc(vlr(vts(zq['tot'])));
+      if zq.RecordCount=0 then
+        TlavCtrlTodo.Value:=0
+      else
+        TlavCtrlTodo.Value:=trunc(vlr(vts(zq['tot'])));
 
       //controlli fatti:
       s:='select count(*) as tot from quote';
@@ -1302,7 +1365,10 @@ begin
       zq.SQL.Clear;
       zq.SQL.Add(s);
       zq.Open;
-      TlavCtrlDone.Value:=trunc(vlr(vts(zq['tot'])));
+      if zq.RecordCount=0 then
+        TlavCtrlDone.Value:=0
+      else
+        TlavCtrlDone.Value:=trunc(vlr(vts(zq['tot'])));
 
       //lavorazione iniziata:
       if qlavsComm.Value=0 then
@@ -1320,7 +1386,7 @@ begin
         zq.SQL.Clear;
         zq.SQL.Add(s);
         zq.Open;
-        if vts(zq['tot'])='0' then
+        if (zq.RecordCount>0) and (vts(zq['tot'])='0') then
           iniz:='no'
         else
           iniz:='Si'; //con Sì si vede solo S, con ìì solo ì
@@ -1329,7 +1395,8 @@ begin
 
       Tlav.Post;
       qlavs.Next;
-    end;
+    end; //while
+    //deb('fine');
     //Tlav.SortOnFields('qta;comm',true,false); //campi,case ins.,descend.
     Tlav.SortOnFields('qta_as_posiz;posiz',True,False); //campi,case ins.,descend.
     Tlav.First;
@@ -1438,6 +1505,7 @@ begin
       ops+=qs(vts(fd.zq['cod']));
       fd.zq.Next;
     end;
+    fd.zq.Close; //nb2
     if ops='' then
       exit;
 
@@ -1450,8 +1518,10 @@ begin
     agg(s,'and op in ('+ops+')');
     agg(s,'order by data');
     zgo(fd.zq,s,op_);
-    if fd.zq.RecordCount=0 then
+    if fd.zq.RecordCount=0 then begin
+      fd.zq.Close; //nb2
       exit;
+    end;
 
     fd.zq.First;
     s:='';
@@ -1468,6 +1538,7 @@ begin
     Mferie.Font.Size:=8;
     Mferie.Font.Color:=clBlue;
     Mferie.Lines.Add(s);
+    fd.zq.Close; //nb2
   end;
 end;
 
@@ -1537,22 +1608,31 @@ begin
     agg(s,'and coalesce(t.lav,'+qs('')+')<>'+qs('NT')); //non trovato
     agg(s,'and t.macch='+qs(xMacch));
     agg(s,'and t.pers='+qs(xUser));
-    //deb(s);
     //zgo(fd.Ttempi,s,'op');
-
     //if fd.trTempi.Active then
       //fd.trTempi.EndTransaction;
-    fd.Ttempi.Close;
-    fd.Ttempi.SQL.Clear;
-    fd.Ttempi.SQL.Add(s);
-    fd.Ttempi.Open;
 
+    //deb('bef close'); //dà err. dopo qui
+    try
+      fd.Ttempi.Close; //deb('close'); //disab. 28/08/24 else poi dà "cannot perform ... active dataset"
+    finally
+      fd.Ttempi.SQL.Clear; //deb(s);
+      fd.Ttempi.SQL.Add(s); //deb('add');
+      fd.Ttempi.Open; //deb('open tempi');
+      //fd.Ttempi.Refresh; dà out of memory
+    end;
 
-    //deb('ext');
+    //deb(s);
+    //deb('lett.dalle:'+fd.TtempiDalle.text);
 
     if fd.Ttempi.RecordCount>0 then begin
+      //deb('bef puls');
       pulsanti(False,True);
+      //deb('aft puls');
+
+      //nb3 Ldurata.Caption:=formatDateTime('hh:mm',Now-Ztime2time(fd.TtempiDalle.Value));
       Ldurata.Caption:=formatDateTime('hh:mm',Now-fd.TtempiDalle.Value);
+
       Ldurata.Repaint;
       s:='select * from rtempi';
       agg(s,'where cod='+fd.TtempiCod.Text);
@@ -1560,14 +1640,16 @@ begin
       //zgo(fd.Trtem,s,'op');
       //if fd.trRtempi.Active then
         //fd.trRtempi.EndTransaction;
-      fd.Trtem.Close;
-      fd.Trtem.SQL.Clear;
-      fd.Trtem.SQL.Add(s);
-      //deb(s);
-      fd.Trtem.Open;
-      //if fd.trtem.State=dsInactive then deb('trtem inact');
-      //deb('rtem ok');
-
+      try
+        fd.Trtem.Close;
+      finally
+        fd.Trtem.SQL.Clear;
+        fd.Trtem.SQL.Add(s);
+        //deb(s);
+        fd.Trtem.Open;
+        //if fd.trtem.State=dsInactive then deb('trtem inact');
+        //deb('rtem ok');
+      end;
       visDeslav(fd.TtempiLav.Text, LdesLav);
 
       fd.Trtem.First;
@@ -1596,7 +1678,6 @@ begin
         inc(x);
         fd.Trtem.Next;
       end;
-
       //deb('fine');
 
       //shImportante.Color:=clOrange; shImportante.Repaint;
@@ -1738,6 +1819,7 @@ var
           TelcScadenza.Value :=periodic;
           TelcDataScad.Value :=dataScad;
           TelcReg.Value      :=qCalReg.Value;
+          //nb3 TelcData.Value     :=ZDate2Date(qCalData.Value); //data effettuazione
           TelcData.Value     :=qCalData.Value; //data effettuazione
           TelcFatto.Value    :=0;
           //deb('datascad:'+datetostr(datascad));
@@ -1868,6 +1950,7 @@ begin
           p:=qCalPeriod.Value;
           case qCalTipop.Value of
             0:begin
+              //if (ZDate2Date(qCalScad.Value)>=dal_) and (ZDate2Date(qCalScad.Value)<=al_) then
               if (qCalScad.Value>=dal_) and (qCalScad.Value<=al_) then
                 registra('scadenza unica',dat);
             end;
@@ -1948,6 +2031,7 @@ var
   s     :WideString;
   f     :textFile;
 begin
+  //deb('start');
   pulsanti(True,False);
   clOrange:=TColor($0167E5); //l'arancione non esiste, così viene creato ("Orange is much red (E5), green (67) and a bit of blue (01)")
   //lavorazioni:
@@ -2023,7 +2107,6 @@ begin
   Flog.ShowModal;
   if not log_in then
     Halt(0);
-
   (*if xHost='' then
     xHost:='serverdell';
   if xDatabase='' then
@@ -2033,9 +2116,10 @@ begin
     exit;
   end;
   s:='select des from macch where cod='+qs(xMacch);
-  zgo(fd.zq,s,'op');
+  zgo(fd.zq,s,op_);
   if fd.zq.IsEmpty then begin
     mess('codice macchina '+xMacch+' sconosciuto - impossibile proseguire',_info,_icons);
+    fd.zq.Close; //nb2
     exit;
     end
   else
@@ -2043,12 +2127,14 @@ begin
 
   if trim(xUser)='' then begin
     mess('utente non definito - impossibile proseguire',_info,_icons);
+    fd.zq.Close; //nb2
     exit;
   end;
   s:='select descr from pers where cod='+qs(xUser);
   zgo(fd.zq,s,'op');
   if fd.zq.IsEmpty then begin
     mess('codice utente '+xUser+' sconosciuto - impossibile proseguire',_info,_icons);
+    fd.zq.Close; //nb2
     exit;
     end
   else
@@ -2214,6 +2300,7 @@ begin
                     end
                   else
                     begin
+                    mess('formato non PDF',_info,_icons);
                     //e:=ShellExecute(handle,'open',PChar(fn),nil,nil,SW_HIDE); nb2
                     //shellErr(e); nb2
                   end
@@ -2284,11 +2371,24 @@ begin
     leggiDis(cod, '', '', True, False);
 end;
 
+procedure TFmain.imgDisClick(Sender: TObject);
+var
+  cod:string;
+begin
+  cod:=imgDis.Hint;
+  leggiDis(cod,'','',True,False);
+end;
+
 procedure TFmain.LhelpLav_Click(Sender: TObject);
 begin
   fd.Trtem.Edit;
   fd.Trtemcomm.Value:=3645;
   fd.Trtem.post;
+end;
+
+procedure TFmain.LlavClick(Sender: TObject);
+begin
+  deb('db:'+fd.zconn.Database+' port:'+i2s(fd.zconn.Port)+' host:'+fd.zconn.HostName);
 end;
 
 procedure TFmain.dgElPrepareCanvas(sender: TObject; DataCol: Integer;
@@ -2471,12 +2571,12 @@ end;
 
 procedure TFmain.Efine1Exit(Sender: TObject);
 begin
-  Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+  Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
 end;
 
 procedure TFmain.Eini1Exit(Sender: TObject);
 begin
-  Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+  Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
 end;
 
 function sqlLavFin(flt: WideString): WideString;
@@ -2535,7 +2635,7 @@ var
 
 begin
   with Fmain do begin
-    //ampiezza colonne lav.:
+    //ampiezza colonne lav. (dimensiona):
     w:=dgEl.Width-20;
     dgEl.Columns[0].Width :=perc(7);  //data (min.7)
     dgEl.Columns[1].Width :=perc(15); //comm. old:5 (con una sola)
@@ -2554,8 +2654,6 @@ begin
       agg(s,'(dati filtrati)');
     gbLavFin.Caption:=s;
 
-    //if fd.Top.State=dsInactive then fd.Top.Open;
-
     s:=sqlLavFin('');
     agg(s,flt);
     agg(s,'and t.pers='+qs(xUser)); //fa vedere solo reg. utente corrente
@@ -2573,13 +2671,16 @@ begin
     Telf.Open;
     qEl.First;
     while not qEl.EOF do begin
+      //nb3 if ZDate2Date(qElData.Value)<>dataXel then begin
       if qElData.Value<>dataXel then begin
+        //nb3 dataXel:=ZDate2Date(qElData.Value);
         dataXel:=qElData.Value;
         flag:=not flag;
       end;
 
       Telf.Insert;
       TelfCod.Value:=trunc(qElCod.Value); //n; inc(n);
+      //nb3 TelfData.Value:=ZDate2Date(qElData.Value);
       TelfData.Value:=qElData.Value;
       TelfDataDes.Value:=qElDataDes.Value;
       TelfLav.Value:=qElLav.Value;
@@ -2616,20 +2717,35 @@ begin
           end;
         end;
       end;
-      TelfElDiss.Value:=diss;
-
-      TelfNote.Value   :=qElNote.Value; //qElDes.AsString; //qElNote.Value;
-      TelfNoteInt.Value:=qElNoteInt.Value;
+      TelfElDiss.Value :=diss;
+      TelfNote.Value   :=qElNote.Value; //qEl_des.AsString; //qEl_note.Value;
+      TelfNoteInt.Value:=qElNoteint.Value;
       TelfCli.Value    :=qElCli.Value;
       TelfPers.Value   :=qElPers.Value;
+
       TelfDalle.Value  :=qElDalle.Value;
       TelfAlle.Value   :=qElAlle.Value;
+      //TelfDaOra.Value  :=qElDaOra.Text; deb(qElDaOra.Text);
+      //TelfAdOra.Value  :=qElAdOra.Text;
+
       TelfMacc.Value   :=qElMacch.Value;
       TelfCol.Value    :=flag;
+
+      zq.Close;
+      zq.SQL.Text:='select descr from op where cod = :parametro';
+      zq.Prepare;
+      zq.Params.ParamByName('parametro').AsString:=qElLav.Value;
+      zq.Open;
+      TelfDesLav.Value:=vts(zq['descr']);
+
       Telf.Post;
       qEl.Next;
     end; //while
     Telf.SortOnFields('data;dalle;alle',True,True);
+
+    //zq.UnPrepare;
+    zq.Close;
+
     Telf.First;
   end;
 end;
@@ -2663,6 +2779,16 @@ procedure azzera_dis();
 var
   x:byte;
 begin
+  with Fmain do begin //è molto più veloce del loop: (Fmain.Findcomponent('Ldes' + i2s(x)) as TLabel).Caption:='';
+    Ldes1.Caption:=''; Ldes2.Caption:=''; Ldes3.Caption:=''; Ldes4.Caption:='';
+    Ldes5.Caption:=''; Ldes6.Caption:=''; Ldes7.Caption:=''; Ldes8.Caption:='';
+    Ldes9.Caption:=''; Ldes10.Caption:=''; Ldes11.Caption:=''; Ldes12.Caption:='';
+    Ldes13.Caption:=''; Ldes14.Caption:=''; Ldes15.Caption:=''; Ldes16.Caption:='';
+    Ldes17.Caption:=''; Ldes18.Caption:='';
+  end;
+
+  if firstTimeDis then //cambia con clic su "seleziona"
+    exit;
   with Fmain do begin
     BdisIni.Enabled :=False;
     BdisFin.Enabled :=False;
@@ -2671,7 +2797,7 @@ begin
     //Feldis.LdesM.Caption:=''; Feldis.LdesCc.caption:='';
     for x:=1 to maxPic do begin
       (Fmain.FindComponent('Bdis' + i2s(x)) as TButton).Caption:='';
-      (Fmain.Findcomponent('Ldes' + i2s(x)) as TLabel).Caption:='';
+      //(Fmain.Findcomponent('Ldes' + i2s(x)) as TLabel).Caption:='';
       (Fmain.Findcomponent('img' + i2s(x)) as TJvThumbImage).Picture:=nil;
       //(Feldis.Findcomponent('img'+i2s(x)) as TJvThumbImage).Repaint;
       //tipi[x]:='';
@@ -2756,6 +2882,7 @@ var
 
 begin //elabora_dis
   azzera_dis();
+  firstTimeDis:=False;
   with Fmain do begin
 
     if (Edes.Text='') and (Edis.Text='') and (Edadiam.Text='') and (Eadiam.Text='') and (Edalun.Text='')
@@ -2773,7 +2900,7 @@ begin //elabora_dis
       fd.qImm.Close;
       fd.qImm.SQL.Clear;
       fd.qImm.SQL.Add(s);
-      deb(s);
+      //deb(s);
       fd.qImm.Open;
       quanti:=fd.qImm.RecordCount;
       deb(i2s(quanti));
@@ -2887,6 +3014,9 @@ begin
   fd.Trtem1.Close;
   s:='select '+campi_tempi;
   agg(s,'from tempi t where t.cod='+TelfCod.Text);
+
+  deb(s);
+
   //zgo(fd.Ttempi1,s,'op');
   fd.Ttempi1.Close;
   fd.Ttempi1.SQL.Clear;
@@ -2902,11 +3032,10 @@ begin
   deb('aft post t1');
   exit;*)
 
-
-  visDeslav(fd.TtempiLav1.Text, LdesLav1);
+  visDeslav(fd.Ttempi1Lav.Text, LdesLav1);
   Ldurata1.Caption:='';
-  if (fd.TtempiDalle1.Value>0) and (fd.TtempiAlle1.Value>0) then
-    Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+  if (fd.Ttempi1Dalle.Value>0) and (fd.Ttempi1Alle.Value>0) then
+    Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
   azzeraCommesse(Ec1a, Ec2a, Ec3a, Ec4a, Ec5a, Ec6a,
     Ldis1a, Ldis2a, Ldis3a, Ldis4a, Ldis5a, Ldis6a,
     Lcli1a, Lcli2a, Lcli3a, Lcli4a, Lcli5a, Lcli6a,
@@ -2923,10 +3052,10 @@ begin
   fd.Trtem1.First;
   riga:=0;
   while not fd.Trtem1.EOF do begin
-    if trim(fd.TrtemComm1.Text)='' then
+    if trim(fd.Trtem1Comm.Text)='' then
       comm:='0'
     else
-      comm:=trim(fd.TrtemComm1.Text);
+      comm:=trim(fd.Trtem1Comm.Text);
     if vlr(comm)<=0 then begin
       dis:='';
       cli:='';
@@ -2959,23 +3088,23 @@ begin
     inc(riga);
     case riga of
       1:assComm(Ec1a, Ldis1a, Lcli1a, Lpz1a, LrigaLav1, LcodPlann1,
-          comm, dis, cli, pz, fd.TrtemRigalav1.Text, fd.TrtemTmp1.Text);
+          comm, dis, cli, pz, fd.Trtem1Rigalav.Text, fd.Trtem1Tmp.Text);
       2:assComm(Ec2a, Ldis2a, Lcli2a, Lpz2a, LrigaLav2, LcodPlann2,
-          comm, dis, cli, pz, fd.TrtemRigalav1.Text, fd.TrtemTmp1.Text);
+          comm, dis, cli, pz, fd.Trtem1Rigalav.Text, fd.Trtem1Tmp.Text);
       3:assComm(Ec3a, Ldis3a, Lcli3a, Lpz3a, LrigaLav3, LcodPlann3,
-          comm, dis, cli, pz, fd.TrtemRigalav1.Text, fd.TrtemTmp1.Text);
+          comm, dis, cli, pz, fd.Trtem1Rigalav.Text, fd.Trtem1Tmp.Text);
       4:assComm(Ec4a, Ldis4a, Lcli4a, Lpz4a, LrigaLav4, LcodPlann4,
-          comm, dis, cli, pz, fd.TrtemRigalav1.Text, fd.TrtemTmp1.Text);
+          comm, dis, cli, pz, fd.Trtem1Rigalav.Text, fd.Trtem1Tmp.Text);
       5:assComm(Ec5a, Ldis5a, Lcli5a, Lpz5a, LrigaLav5, LcodPlann5,
-          comm, dis, cli, pz, fd.TrtemRigalav1.Text, fd.TrtemTmp1.Text);
+          comm, dis, cli, pz, fd.Trtem1Rigalav.Text, fd.Trtem1Tmp.Text);
       6:assComm(Ec6a, Ldis6a, Lcli6a, Lpz6a, LrigaLav6, LcodPlann6,
-          comm, dis, cli, pz, fd.TrtemRigalav1.Text, fd.TrtemTmp1.Text);
+          comm, dis, cli, pz, fd.Trtem1Rigalav.Text, fd.Trtem1Tmp.Text);
     end;
     fd.Trtem1.Next;
   end; //while
   stop_timer:=False;
 
-  deb('mdis');
+  //deb('mdis');
 
   mostraDis(imgDis1,Ldis1a.Caption);
 
@@ -2999,10 +3128,10 @@ begin
   fd.Ttempi1.Open;
 
   fd.Ttempi1.Insert;
-  fd.TtempiData1.Value:=Now;
-  fd.TtempiCod1.Value :=maxCodNum('tempi','cod',fd.Ttempi1);
-  fd.TtempiPers1.Value:=xUser;
-  fd.TtempiTipo1.Value:='t';
+  fd.Ttempi1Data.Value:=Now;
+  fd.Ttempi1Cod.Value :=maxCodNum('tempi','cod',fd.Ttempi1);
+  fd.Ttempi1Pers.Value:=xUser;
+  fd.Ttempi1Tipo.Value:='t';
   //campo conf (uscita anticipata) è 0 per default
 
   pReg1.Left:=(dgEl.Width-pReg1.Width)   div 2;
@@ -3017,8 +3146,8 @@ begin
     LcodPlann1a, LcodPlann2a, LcodPlann3a, LcodPlann4a, LcodPlann5a, LcodPlann6a);
   pReg1.Show;
 end;
-
-function ctrlCodLav(quale: TDBComboBox): boolean;
+                    //var 27/08/24
+function ctrlCodLav(var quale: TDBComboBox): boolean;
 var
   cod,desLav:string;
   s:WideString;
@@ -3050,6 +3179,7 @@ begin
   if fd.zq.IsEmpty then begin
     mess('codice lavorazione -'+cod+'- inesistente',_info,_icons);
     quale.SetFocus;
+    fd.zq.Close; //nb2
     Result:=False;
     exit;
     end
@@ -3059,7 +3189,8 @@ begin
     case quale.Tag of
       1:begin
         if insEd(fd.Ttempi1) then begin
-          fd.TtempiLav1.Value:=cod;
+          fd.Ttempi1Lav.Value:=cod;
+          Fmain.LdesLav1.Caption:=deslav;
           //fd.TtempiDesLav1.Value:=desLav;
           //fd.Ttem1.Post;
           Fmain.MnoteOp1.SetFocus;
@@ -3069,6 +3200,8 @@ begin
       else
         begin
         Fmain.LdesLav.Caption:=desLav;
+        if insEd(fd.Ttempi) then
+          fd.TtempiLav.Value:=cod;
         (*if insEd(fd.Ttempi) then begin
           fd.TtempiLav.Value:=cod;
           fd.TtempiDesLav.Value:=desLav;
@@ -3080,6 +3213,7 @@ begin
     end; //case
   end;
   //deb('qqq');
+  fd.zq.Close; //nb2
   Result:=True;
 end;
 
@@ -3087,7 +3221,7 @@ procedure TFmain.BokC1aClick(Sender: TObject);
 var
   n: shortint;
 begin
-  Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+  Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
   n:=(Sender as TBCButton).Tag;
   case n of
     1:Ec1a.SetFocus;
@@ -3104,7 +3238,7 @@ procedure TFmain.BokC1Click(Sender: TObject);
 var
   n:byte;
 begin
-  Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+  Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
   n:=(Sender as TBCButton).Tag;
   case n of
     1:Ec1.SetFocus;
@@ -3119,22 +3253,42 @@ end;
 
 procedure TFmain.BokLav1Click(Sender: TObject);
 begin
-  Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+  Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
   //if not controlliReg(cbLav1,fd.TtemTipo1,false,fd.TtemDalle1.Value,fd.TtemAlle1.Value) then
   //exit;
   if ctrlCodLav(cbLav1) then
     MnoteOp1.SetFocus; //cbLav1.SetFocus;
 end;
 
+function codiceLavorazione():Boolean;
+begin
+  with Fmain do begin
+    if pReg.Visible then begin
+
+      //nb3 Ldurata.Caption:=formatDateTime('hh:mm',ZTime2Time(fd.TtempiAlle.Value)-ZTime2Time(fd.TtempiDalle.Value));
+      Ldurata.Caption:=formatDateTime('hh:mm',fd.TtempiAlle.Value-fd.TtempiDalle.Value);
+
+      if trim(cbLav.Text)<>'' then
+        //else non permette di uscire senza indicarlo; fa il ctrl definitivo in "conferma"
+        if ctrlCodLav(cbLav) then begin
+          MnoteOp.SetFocus;
+          result:=True;
+          end
+        else
+          result:=False;
+    end;
+  end;
+end;
+
 procedure TFmain.BokLavClick(Sender: TObject);
 begin
-  Ldurata.Caption:=formatDateTime('hh:mm',fd.TtempiAlle.Value-fd.TtempiDalle.Value);
-  if ctrlCodLav(cbLav) then begin
-    MnoteOp.SetFocus;
-    //if fd.Ttem.State<>dsInsert then fd.Ttem.Edit; no, else sembra non confermato
-    if not insEd(fd.Ttempi) then
-      fd.Ttempi.Edit;
-    fd.Ttempi.Post;
+  if codiceLavorazione() then begin
+    //deb('1:'+fd.ttempilav.text);
+    if insEd(fd.Ttempi) then begin
+      //deb('2:'+fd.ttempilav.text);
+      fd.Ttempi.Post;
+      //deb('3:'+fd.ttempilav.text);
+    end;
   end;
 end;
 
@@ -3150,7 +3304,7 @@ begin
   MnoteOp1.SetFocus;
 end;
 
-function ctrlOrari(tbl:TSqlQuery; dalle,alle,data:TDateTime; cod:string):boolean;
+function ctrlOrari(tbl:TZQuery; dalle,alle,data:TDateTime; cod:string):boolean;
 var
   dat,h:string;
   s:widestring;
@@ -3172,9 +3326,10 @@ begin
       //deb('or2');
       if zq.RecordCount>0 then begin
         mess('il valore "dalle" ['+formatDateTime('hh:mm', dalle)+'] rientra già in '+vts(zq['dalle'])+'-'+vts(zq['alle']),_info,_icons);
-        result:=false;
+        result:=False;
         exit;
       end;
+      //deb('ctrl1 ok');
 
       if alle>0 then begin
         h:=formatDateTime('hh:mm', alle);
@@ -3190,33 +3345,54 @@ begin
         //deb('or4');
         if zq.RecordCount>0 then begin
           mess('"alle" ['+formatDateTime('hh:mm', alle)+'] rientra già in '+vts(zq['dalle'])+'-'+vts(zq['alle']),_info,_icons);
-          result:=false;
+          result:=False;
           exit;
         end;
       end;
+      //deb('ctrl2 ok');
     end; //if
   end; //with
+  result:=True;
 end;
 
 procedure TFmain.BokOreClick(Sender: TObject);
+
+var
+  s:widestring;
+  t:TTime;
 begin
   //if strToTime(formatDateTime('hh:mm',fd.TtemDalle.Value))>strToTime(formatDateTime('hh:mm',Now)) then begin
   if strToTime(formatDateTime('hh:mm',Eini.Time))>strToTime(formatDateTime('hh:mm',Now)) then begin
     mess('ora inizio successiva a ora attuale',_info,_icons);
     Ldurata.Caption:='';
     fd.Ttempi.Edit;
-    fd.TtempiDalle.Value:=0;
+
+    //nb3 fd.TtempiDalle.Value:=Time2ZTime(strToTime('00:00')); //.Value:=0; nb2
+    fd.TtempiDalle.Value:=strToTime('00:00:00');
+
     Eini.SetFocus;
     end
   else
     begin
-    if not ctrlOrari(fd.Ttempi,Eini.Time,0,fd.TtempiData.Value,fd.TtempiCod.Text) then
+    //nb3 if not ctrlOrari(fd.Ttempi,Eini.Time,0,ZDate2Date(fd.TtempiData.Value),fd.TtempiCod.Text) then begin
+    if not ctrlOrari(fd.Ttempi,Eini.Time,0,fd.TtempiData.Value,fd.TtempiCod.Text) then begin
+      deb('ctrl orari non ok');
       exit;
+    end;
     Ldurata.Caption:=formatDateTime('hh:mm',Now-Eini.Time);
     MnoteOp.SetFocus;
     if not insEd(fd.Ttempi) then
       fd.Ttempi.Edit;
+    //t:=Eini.Time;
+    //fd.Ttempi.FieldByName('dalle').AsDateTime:=t;
     fd.Ttempi.Post;
+    //provare:
+    (*deb('dopo post:'+fd.ttempidalle.text);
+    s:='select dalle';
+    agg(s,'from tempi t');
+    agg(s,'where cod='+fd.ttempicod.text);
+    zgo(fd.Ttempi,s,op_);
+    deb('dopo select:'+vts(fd.ttempi['dalle'])+' cod:'+fd.ttempicod.text);*)
   end;
 end;
 
@@ -3351,17 +3527,15 @@ begin
       inc(totc); //totc=nr. righe selezionate
       agg(comms,TlavComm.Text);
       if note='' then
-        note:=trim(TlavNote.AsString)
+        note:=trim(pulisci(TlavNote.AsString))
       else
-        if lowerCase(note)<>lowerCase(trim(TlavNotes.AsString)) then
+        if lowerCase(note)<>lowerCase(trim(pulisci(TlavNotes.AsString))) then
           found_diff:=True;
-      if codLav='' then begin
-        codLav:=TlavLav.Text;
-        end
+      if codLav='' then
+        codLav:=TlavLav.Text
       else
-        if codLav<>TlavLav.Text then begin
+        if codLav<>TlavLav.Text then
           mess('codici lavorazione diversi ('+codLav+'/'+TlavLav.Text+')'+cr+'verrà considerato '+codLav,_info,_icons);
-        end;
     end;
     inc(riga);
     TLav.Next;
@@ -3387,12 +3561,19 @@ begin
   fd.Ttempi.Insert;
   cod:=maxCodNum('tempi','cod',fd.Ttempi);
   fd.TtempiCod.Value  :=cod;
+
+  //nb3 fd.TtempiData.Value :=Date2ZDate(Now);
   fd.TtempiData.Value :=Now;
+
   fd.TtempiPers.Value :=xUser;
   fd.TtempiMacch.Value:=xMacch; //nb: forza su questa macchina anche se lav. prevista per altre
   fd.TtempiLav.Value  :=codLav; //qLavsLav.Value;
+  //nb3 fd.TtempiDalle.Value:=Time2ZTime(strToTime(formatDateTime('hh:mm',Now))); //else tiene secondi
   fd.TtempiDalle.Value:=strToTime(formatDateTime('hh:mm',Now)); //else tiene secondi
-  fd.TtempiAlle.Value :=0; //flag, =aperto
+
+  //nb3 fd.TtempiAlle.Value :=Time2ZTime(strToTime('00:00')); //Value:=0; //flag, =aperto
+  fd.TtempiAlle.Value :=strToTime('00:00:00');
+
   fd.TtempiNote.Value :=note+cr;
   if flag_mot then begin
     desMot:=motivo_salto_prima_lavorazione_+' ';
@@ -3404,10 +3585,12 @@ begin
     fd.TtempiNoteInt.Value:=desMot;
   end;
   fd.Ttempi.Post;
-  //deb('rl2:'+rigalav);
+  //deb('dalle:'+fd.TtempiDalle.text);
 
   stop_timer:=True;
+  //nb3 Ldurata.Caption:=formatDateTime('hh:mm',Now-ZTime2Time(fd.TtempiDalle.Value));
   Ldurata.Caption:=formatDateTime('hh:mm',Now-fd.TtempiDalle.Value);
+
   visDeslav(fd.TtempiLav.Text, LdesLav);
 
   azzeraCommesse(Ec1, Ec2, Ec3, Ec4, Ec5, Ec6,
@@ -3504,9 +3687,12 @@ begin
     exit;
   end;
   //deb('tipo pz ok');
-  if not ctrlCodLav(cb) then
+  if not ctrlCodLav(cb) then begin
+    Result:=False;
     exit;
+  end;
   //deb('cod.lav. pz ok');
+
   with Fmain do begin
     if main then begin
       if Ec1.Focused or Ec2.Focused or Ec3.Focused or Ec4.Focused or Ec5.Focused or Ec6.Focused then begin //se c'è il cursore sul campo
@@ -3540,7 +3726,7 @@ begin
       end;
     end;
   end;
-  //deb('comm. ok');
+  //deb('fin qui ok');
 
   if (lav<>'NP') and (lav<>'NT') and (lav<>'CORSO') and (lav<>'NN') then begin
     if dalle=0 then begin
@@ -3568,8 +3754,12 @@ begin
 
   if main then begin
     //deb('main');
-    if not ctrlOrari(fd.Ttempi,dalle,alle,fd.TtempiData.Value,fd.TtempiCod.Text) then //ctrl orari:
+    //nb3 if not ctrlOrari(fd.Ttempi,dalle,alle,ZDate2Date(fd.TtempiData.Value),fd.TtempiCod.Text) then begin //ctrl orari:
+    if not ctrlOrari(fd.Ttempi,dalle,alle,fd.TtempiData.Value,fd.TtempiCod.Text) then begin //ctrl orari:
+      Result:=False;
       exit;
+    end;
+
     //deb('ore 3 ok');
     //toglie eventuali secondi agli orari e fa post della registrazione:
     //if fd.Ttempi.state=dsedit then deb('tempi in edit');
@@ -3580,16 +3770,21 @@ begin
     //if fd.Ttempi.state=dsedit then deb('tempi in edit 2');
     //if fd.Ttempi.state=dsinsert then deb('tempi in insert 2');
     //if fd.Ttempi.state=dsbrowse then deb('tempi in browse 2');
-    fd.TtempiDalle.Value:=strToTime(formatDateTime('hh:mm',dalle)); //deb(fd.TtempiDalle.AsString);
-    fd.TtempiAlle.Value :=strToTime(formatDateTime('hh:mm',alle));  //deb(fd.TtempiAlle.AsString);
+
+    //nb3 fd.TtempiDalle.Value:=Time2ZTime(strToTime(formatDateTime('hh:mm',dalle))); //deb(fd.TtempiDalle.AsString);
+    fd.TtempiDalle.Value:=strToTime(formatDateTime('hh:mm',dalle));
+
+    //nb3 fd.TtempiAlle.Value :=Time2ZTime(strToTime(formatDateTime('hh:mm',alle)));  //deb(fd.TtempiAlle.AsString);
+    fd.TtempiAlle.Value :=strToTime(formatDateTime('hh:mm',alle));
+
     //deb('bef. post');
-    //fd.Ttempi.Post; ...nb2: riabilitare...
+    fd.Ttempi.Post;
     //deb('tolti secondi ok');
     end
   else
     begin
     //deb('ctrl orari');
-    if not ctrlOrari(fd.Ttempi1,dalle,alle,fd.TtempiData1.Value,fd.TtempiCod1.Text) then begin //ctrl orari:
+    if not ctrlOrari(fd.Ttempi1,dalle,alle,fd.Ttempi1Data.Value,fd.Ttempi1Cod.Text) then begin //ctrl orari:
       Result:=False;
       exit;
     end;
@@ -3600,8 +3795,8 @@ begin
     if not insEd(fd.Ttempi1) then
       fd.Ttempi1.Edit;
     //deb('k3');
-    fd.TtempiDalle1.Value:=strToTime(formatDateTime('hh:mm',dalle));
-    fd.TtempiAlle1.Value :=strToTime(formatDateTime('hh:mm',alle));
+    fd.Ttempi1Dalle.Value:=strToTime(formatDateTime('hh:mm',dalle));
+    fd.Ttempi1Alle.Value :=strToTime(formatDateTime('hh:mm',alle));
     fd.Ttempi1.Post;
     //deb('tempi1 post');
   end;
@@ -3616,7 +3811,7 @@ begin
   if vlr(comm)>0 then begin
 
     if fd.Trtem.State=dsInactive then begin;
-      //deb('open rtempi');
+      deb('read rtempi');
       s:='select * from rtempi';
       agg(s,'where cod='+cod);
       agg(s,'order by comm');
@@ -3648,7 +3843,8 @@ begin
       zq.SQL.Clear;
       zq.SQL.Add(s);
       zq.ExecSQL;
-      fd.PQConn.Transaction.Commit;
+      //fd.PQConn.Transaction.Commit;
+      //deb('pl ok');
     end;
   end;
 end;
@@ -3657,11 +3853,11 @@ procedure scriviComm1(comm: string; cod: double; riga: byte; rigaLav, codPlann: 
 begin
   if vlr(comm)>0 then begin
     fd.Trtem1.Insert;
-    fd.TrtemCod1.Value    :=cod;
-    fd.TrtemRiga1.Value   :=riga;
-    fd.TrtemComm1.Value   :=trunc(vlr(comm));
-    fd.TrtemRigaLav1.Value:=rigaLav;
-    fd.TrtemTmp1.Value    :=codPlann;
+    fd.Trtem1Cod.Value    :=cod;
+    fd.Trtem1Riga.Value   :=riga;
+    fd.Trtem1Comm.Value   :=trunc(vlr(comm));
+    fd.Trtem1RigaLav.Value:=rigaLav;
+    fd.Trtem1Tmp.Value    :=codPlann;
     fd.Trtem1.Post;
     //in modifica non può cambiare lo stato della registrazione planner
   end;
@@ -3673,6 +3869,7 @@ var
   s   :WideString;
   riga:Byte;
 begin
+  //nb3 if not controlliReg(cbLav,fd.TtempiTipo,True,ZTime2Time(fd.TtempiDalle.Value),99,fd.TtempiLav.Text) then
   if not controlliReg(cbLav,fd.TtempiTipo,True,fd.TtempiDalle.Value,99,fd.TtempiLav.Text) then
     exit;
   if messSN('conferma stop?','conferma')<>idYes then //questa istruz. era stranamente in fondo all proc. ...
@@ -3684,7 +3881,10 @@ begin
   fd.TtempiPers.Value:=xUser; //per sicurezza
   ora:=formatDateTime('hh:mm',Now);
   ora+=':00';
+
+  //nb3 fd.TtempiAlle.Value:=Time2ZTime(strToTime(ora)); //else tiene secondi
   fd.TtempiAlle.Value:=strToTime(ora); //else tiene secondi
+
   fd.Ttempi.Post;
   //deb('post ok');
 
@@ -3743,7 +3943,7 @@ end;
 procedure TFmain.cbLav1Exit(Sender: TObject);
 begin
   if pReg1.Visible then begin //potrebbe essere già partito l'hide...
-    Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+    Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
     if trim(cbLav1.Text) <> '' then
       //else non permette di uscire senza indicarlo; fa il ctrl definitivo in "conferma"
       if ctrlCodLav(cbLav1) then
@@ -3751,19 +3951,9 @@ begin
   end;
 end;
 
-procedure TFmain.cbLavEnter(Sender: TObject);
-begin
-end;
-
 procedure TFmain.cbLavExit(Sender: TObject);
 begin
-  if pReg.Visible then begin
-    Ldurata.Caption:=formatDateTime('hh:mm',fd.TtempiAlle.Value-fd.TtempiDalle.Value);
-    if trim(cbLav.Text)<>'' then
-      //else non permette di uscire senza indicarlo; fa il ctrl definitivo in "conferma"
-      if ctrlCodLav(cbLav) then
-        MnoteOp.SetFocus;
-  end;
+  codiceLavorazione();
 end;
 
 procedure TFmain.dbgIndCellClick(Column: TColumn);
@@ -3794,9 +3984,8 @@ begin
         mess(msg_, _info, _icons);
         exit;
       end;
-
       AProcess:=TProcess.Create(nil);
-      exe:='quote.exe'; //'c:\lazarus\prgs\quote\quote.exe';
+      exe:=pLoc+'\quote.exe'; //'c:\lazarus\prgs\quote\quote.exe'; nb2 fare cfg
       if not fileExists(exe) then begin
         mess(exe+' non trovato',_info,_icons);
         exit;
@@ -3804,7 +3993,7 @@ begin
       AProcess.Executable:=exe;
       params:='daprodmacc rclrl='+rl+' rccod='+cod_+' rcriga='+rig_+' nrcert=-1 debug';
       AProcess.Parameters.Add(params);
-      AProcess.Options:=AProcess.Options + [poWaitOnExit, poUsePipes];
+      AProcess.Options:=[poWaitOnExit]; //[poWaitOnExit, poUsePipes];
       AProcess.Execute;
       AProcess.Free; //This is not reached until ppc386 stops running.
       end;
@@ -3944,6 +4133,11 @@ begin
   end;
 end;
 
+procedure TFmain.dbNavAggLavFinClick(Sender: TObject; Button: TDBNavButtonType);
+begin
+  elenco_lavorazioni_finite('');
+end;
+
 procedure TFmain.BcancRegEffClick(Sender: TObject);
 var
   s:WideString;
@@ -3998,6 +4192,57 @@ begin
   leggiCfg();
 end;
 
+procedure TFmain.BquoteClick(Sender: TObject);
+var
+  AProcess:TProcess;
+  exe,cod_,rig_,rl,params:string;
+  s:WideString;
+begin
+  rl:=trim(fd.Ttempi1RigaLav.Text);
+  if rl='' then begin
+    mess('non ci sono quote associate',_info,_icons);
+    exit;
+  end;
+  s:='select cod,riga from rclav where rigalav='+rl;
+  zq.Close;
+  zq.SQL.Clear;
+  zq.SQL.Add(s);
+  zq.Open;
+  if zq.RecordCount=0 then begin
+    mess('non trovate quote associate',_info,_icons);
+    exit;
+  end;
+  cod_:=vts(zq['cod']);
+  rig_:=vts(zq['riga']);
+
+  s:='select tipo,anno,cod,riga,rr,r,';
+  agg(s,'nr,pz,posiz,quota,rich,valore,note');
+  agg(s,'from quote');
+  agg(s,'where tipo='+qs('q')); //q=cq intermedio
+  agg(s,'and cod='+cod_);
+  agg(s,'and riga='+rig_);
+  agg(s,'and rr='+rl); //rr=riga lav.
+  zq.Close;
+  zq.SQL.Clear;
+  zq.SQL.Add(s);
+  zq.Open;
+
+  if zq.RecordCount>0 then begin //se ci sono cq da fare, apri finestra quote
+    AProcess:=TProcess.Create(nil);
+    exe:=pLoc+'\quote.exe'; //'c:\lazarus\prgs\quote\quote.exe';
+    if not fileExists(exe) then begin
+      mess(exe+' non trovato',_info,_icons);
+      exit;
+    end;
+    AProcess.Executable:=exe; //'"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"'; //path necessario
+    params:='daprodmacc rclrl='+rl+' rccod='+cod_+' rcriga='+rig_+' nrcert=-1 debug';
+    AProcess.Parameters.Add(params);
+    AProcess.Options:=[poWaitOnExit,poUsePipes];
+    AProcess.Execute;
+    AProcess.Free; //This is not reached until ppc386 stops running.
+  end;
+end;
+
 procedure TFmain.BconfModClick(Sender: TObject);
 var
   s   :WideString;
@@ -4010,39 +4255,37 @@ begin
 
   //...dà err. dopo qui...
 
-  if not controlliReg(cbLav1,fd.TtempiTipo1,False,fd.TtempiDalle1.Value,fd.TtempiAlle1.Value,fd.TtempiLav.Text) then
+  if not controlliReg(cbLav1,fd.Ttempi1Tipo,False,fd.Ttempi1Dalle.Value,fd.Ttempi1Alle.Value,fd.Ttempi1Lav.Text) then
     exit;
 
   //deb('ctrls ok');
-  cod:=fd.TtempiCod1.Value;
+  cod:=fd.Ttempi1Cod.Value;
   if insEd(fd.Ttempi1) then begin
     //toglie secondi:
-    h:=formatDateTime('hh:mm',fd.TtempiDalle1.Value);
+    h:=formatDateTime('hh:mm',fd.Ttempi1Dalle.Value);
     h:=h+':00';
-    fd.TtempiDalle1.Value:=strToTime(h);
-    h:=formatDateTime('hh:mm',fd.TtempiAlle1.Value);
+    fd.Ttempi1Dalle.Value:=strToTime(h);
+    h:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value);
     h:=h+':00';
-    fd.TtempiAlle1.Value:=strToTime(h);
+    fd.Ttempi1Alle.Value:=strToTime(h);
     //
 
     //deb('bef post');
 
     //...se disab. controlliReg, dà err. dopo qui, v. come salva "conclusa" ...
 
-  (*forse così?:
-  zq.Close;
-  zq.SQL.Clear;
-  zq.SQL.Add(s);
-  zq.ExecSQL;
-  fd.PQConn.Transaction.Commit;*)
-
-
+    (*forse così?:
+    zq.Close;
+    zq.SQL.Clear;
+    zq.SQL.Add(s);
+    zq.ExecSQL;
+    fd.PQConn.Transaction.Commit;*)
 
     fd.Ttempi1.Post;
     //deb('aft post');
   end;
   //cancella righe attuali per poi riscriverle (NB: comm. a video in TEdit, non TDBEdit):
-  s:='delete from rtempi where cod='+fd.TtempiCod1.Text;
+  s:='delete from rtempi where cod='+fd.Ttempi1Cod.Text;
   zq.Close;
   zq.SQL.Clear;
   zq.SQL.Add(s);
@@ -4122,7 +4365,7 @@ var
   s:WideString;
   riga:byte;
   ok:boolean;
-  AProcess : TProcess;
+  AProcess:TProcess;
   //res      : TStringList;
   //OutputStr: string;
   f:textFile;
@@ -4133,23 +4376,23 @@ begin
   //deb('edit');
   fd.TtempiPers.Value:=xUser; //per sicurezza
   ora:=formatDateTime('hh:mm',Now);
+
+  //nb3 fd.TtempiAlle.Value:=Time2ZTime(strToTime(ora)); //else tiene secondi
   fd.TtempiAlle.Value:=strToTime(ora); //else tiene secondi
 
-  deb('ctrls:');
-
-  if not controlliReg(cbLav,fd.TtempiTipo,True,fd.TtempiDalle.Value,fd.TtempiAlle.Value,fd.TtempiLav.Text) then
+  //deb('ctrls:');
+  //deb('lav:'+fd.TtempiLav.Text);
+  if not controlliReg(cbLav,fd.TtempiTipo,True,fd.TtempiDalle.Value,fd.TtempiAlle.Value,fd.TtempiLav.Text) then begin
+    //deb('ctrls non ok');
     exit;
-
-  deb('fine ctrls');
-
+  end;
+  //deb('fine ctrls');
   rl:=trim(LrigaLav1.Caption);
-  deb('rigalav:'+rl);
-
+  //deb('rigalav:'+rl);
+  ok:=true; //nb2 27/08/24 (aggiorna reg. lav. in Prod)
   if rl<>'' then begin
     s:='select cod,riga from rclav where rigalav='+rl;
-
-    deb(s);
-
+    //deb(s);
     zq.Close;
     zq.SQL.Clear;
     zq.SQL.Add(s);
@@ -4158,7 +4401,7 @@ begin
       cod_:=vts(zq['cod']);
       rig_:=vts(zq['riga']);
       ok:=true;
-      repeat
+      //repeat
         s:='select tipo,anno,cod,riga,rr,r,';
         agg(s,'nr,pz,posiz,quota,rich,valore,note');
         agg(s,'from quote');
@@ -4166,9 +4409,7 @@ begin
         agg(s,'and cod='+cod_);
         agg(s,'and riga='+rig_);
         agg(s,'and rr='+rl); //rr=riga lav.
-
-        deb(s);
-
+        //deb(s);
         //zgo(zq,s,op_);
         zq.Close;
         zq.SQL.Clear;
@@ -4180,7 +4421,7 @@ begin
         if zq.RecordCount>0 then begin //se ci sono cq da fare, apri finestra quote
           AProcess:=TProcess.Create(nil);
           //res:=TStringList.Create;
-          exe:='quote.exe'; //'c:\lazarus\prgs\quote\quote.exe';
+          exe:=pLoc+'\quote.exe'; //'c:\lazarus\prgs\quote\quote.exe';
           if not fileExists(exe) then begin
             mess(exe+' non trovato',_info,_icons);
             exit;
@@ -4189,11 +4430,13 @@ begin
           params:='daprodmacc rclrl='+rl+' rccod='+cod_+' rcriga='+rig_+' nrcert=-1 debug';
           //deb('parametri: '+params);
           AProcess.Parameters.Add(params);
-          AProcess.Options:=AProcess.Options + [poWaitOnExit, poUsePipes];
+          AProcess.Options:=[poWaitOnExit,poUsePipes];
           AProcess.Execute;
+          //deb('a');
           //res.LoadFromStream(AProcess.Output);
           //OutputStr:=res.Text;
           AProcess.Free; //This is not reached until ppc386 stops running.
+          //deb('b');
           //res.Free;
 
           (* ...messo ctrl in quote.pas...
@@ -4227,40 +4470,52 @@ begin
           end; *)
 
         end;
-      until ok;
+      //until ok;
+      //deb('c');
 
       {$i-}
-      assignFile(f,'quote_exit.inf');
+      assignFile(f,pLoc+'\quote_exit.inf');
       reset(f);
       {$i+}
       if IOResult=0 then begin //se file esiste = uscito da quote senza salvare
         mess('lavorazione non conclusa perché misurazioni non confermate',_info,_icons);
         ok:=false; //exit;
         {$i-}
-        assignFile(f,'quote_exit.inf');
+        assignFile(f,pLoc+'\quote_exit.inf');
         erase(f);
         {$i+}
         if IOResult=0 then ;
       end;
-
+      //deb('d');
     end;
   end;
   if not ok then
     exit;
 
-  //deb('ok');
+  //deb('e');
   pulsanti(True,False); //nasconde anche pReg
   //= a Bstop: unificare?
 
+  //deb('f');
   codTempi:=fd.TtempiCod.Text;
   ora:=formatDateTime('hh:mm:ss',Now);
-  s:='update tempi set pers='+qs(xUser)+',alle='+qs(ora)+' where cod='+codTempi;
-  //deb(s);
+  s:='update tempi set pers='+qs(xUser)+',alle='+qs(ora);
+  if trim(rl)<>'' then
+    s+=',rigalav='+rl;
+  s+=' where cod='+codTempi;
+  deb(s);
+
   zq.Close;
   zq.SQL.Clear;
   zq.SQL.Add(s);
   zq.ExecSQL;
-  fd.PQConn.Transaction.Commit;
+  //deb('bef close');
+  zq.Close;
+  //deb('aft close');
+
+  //zq.ApplyUpdates(0); no
+
+  //fd.PQConn.Transaction.Commit; //nb2 disab. 27/08/24
   //deb('update ok');
 
   (* old:cod:=fd.TtempiCod.Value;
@@ -4278,6 +4533,9 @@ begin
   zq.SQL.Clear;
   zq.SQL.Add(s);
   zq.ExecSQL;
+  zq.Close;
+  //deb('del rt ok');
+
   //scrive righe:
   for riga:=1 to maxComm do begin
     case riga of
@@ -4296,8 +4554,10 @@ begin
     end;
   end;
   //refresh:
-  fd.Ttempi.Close;
-  fd.Ttempi.Open;
+  //fd.Ttempi.Close; //non serve e dà err.
+  //fd.Ttempi.Open;
+  //deb('2!');
+
   indice(attivo_);
 end;
 
@@ -4362,7 +4622,7 @@ begin
     zq.SQL.Clear;
     zq.SQL.Add(s);
     zq.ExecSQL;
-    //deb('del ok');
+    //deb('del rt ok');
     //zgo(zq,s,'ex'); //cancella commesse da reg. tempi
   end;
   s:='delete from tempi where cod='+cod;
@@ -4371,14 +4631,16 @@ begin
   zq.SQL.Clear;
   zq.SQL.Add(s);
   zq.ExecSQL;
-  //deb('del ok');
+  //deb('del t ok');
 
-  fd.Ttempi.Close; //all new 01/09/23
+  (*fd.Ttempi.Close; //all new 01/09/23; disab. 27/08/24 else poi dà "cannot perform ... active dataset"
   fd.Ttempi.Open;
   fd.Trtem.Close;
-  fd.Trtem.Open;
+  fd.Trtem.Open;*)
 
+  //deb('bef ind');
   indice(attivo_); //new 01/08/23
+  //deb('aft ind');
 
   pulsanti(True, False);
 end;
@@ -4434,9 +4696,7 @@ begin
         begin
         pageControl.ActivePageIndex:=0; //perché anomalie() attiva la pagina 2
         tsLav.Caption:=astx(tsLav.Caption);
-
         inizializza();
-
       end;
     end;
     1:begin
@@ -4466,13 +4726,14 @@ end;
 
 procedure TFmain.qElCalcFields(DataSet: TDataSet);
 var
-  //dat:string;
   gds:longint;
 begin
   qElNotes.Value:=qElNote.Value;
 
-  //dat:=qElData.Text;
+  //dat:=qEl_data.Text;
+  //nb3 gds:=dayOfWeek(ZDate2Date(qElData.Value));
   gds:=dayOfWeek(qElData.Value);
+  //nb3 qElDataDes.Value:=nomeGiorno(gds)+' '+formatDateTime('dd/mm',ZDate2Date(qElData.Value));
   qElDataDes.Value:=nomeGiorno(gds)+' '+formatDateTime('dd/mm',qElData.Value);
 end;
 
@@ -4486,11 +4747,10 @@ var
   dis:string;
   s:WideString;
   merce:string[11];
-  p,x:word;
 begin
   s:=qLavsNote.AsString;
 
-  p:=pos('pz]',s);
+  (*p:=pos('pz]',s);
   if p>0 then begin
     x:=p-1;
     while (x>1) and (s[x]<>'[') do
@@ -4499,8 +4759,8 @@ begin
       s:=copy(s,1,x);
   end;
   if pos('{',s)>0 then
-    s:=copy(s,1,pos('{',s)-1); //toglie posizione (es.{10})
-  qLavsNotes.Value:=s;
+    s:=copy(s,1,pos('{',s)-1); //toglie posizione (es.{10}) *)
+  qLavsNotes.Value:=pulisci(s);
 
   if qLavsComm.Text<>'' then begin
     s:='select dis from rcomm where commint='+qLavsComm.Text;
@@ -4570,12 +4830,18 @@ begin
   fd.Ttempi.Insert;
   cod:= maxCodNum('tempi','cod',fd.Ttempi);
   fd.TtempiCod.Value  :=cod;
+  //nb3 fd.TtempiData.Value :=Date2ZDate(strToDate(sg.Cells[6, riga_corr])); //sg.Cells[5,riga_corr]);
   fd.TtempiData.Value :=strToDate(sg.Cells[6, riga_corr]); //sg.Cells[5,riga_corr]);
   fd.TtempiPers.Value :=xUser;
   fd.TtempiMacch.Value:='';
   fd.TtempiLav.Value  :='NP'; //"non presente", parametrizzare
-  fd.TtempiDalle.Value:=0;
-  fd.TtempiAlle.Value :=0;
+
+  //nb3 fd.TtempiDalle.Value:=Time2ZTime(strToTime('00:00:00')); //Value:=0;
+  fd.TtempiDalle.Value:=strToTime('00:00:00'); //Value:=0;
+
+  //nb3 fd.TtempiAlle.Value :=Time2ZTime(strToTime('00:00:00')); //Value :=0;
+  fd.TtempiAlle.Value :=strToTime('00:00:00'); //Value :=0;
+
   fd.TtempiTipo.Value :='A';
   fd.TtempiNote.Value :='Assente per '+des+'.'+cr+'Registrato da '+
     Ltit_ut.Caption+' il '+formatDateTime('dd/mm/yyyy hh:mm',Now);
@@ -4627,11 +4893,14 @@ begin
         fd.Ttempi1.Open;
       fd.Ttempi1.Insert;
       cod := maxCodNum('tempi','cod',fd.Ttempi1);
-      fd.TtempiCod1.Value:=cod;
-      fd.TtempiData1.Value:=strToDate(dat);
-      fd.TtempiDalle1.Value:=strToTime('00:00:00'); //per evitare "dalle is null"
-      fd.TtempiPers1.Value:=xUser;
-      fd.TtempiMacch1.Value:=xMacch;
+      fd.Ttempi1Cod.Value:=cod;
+      fd.Ttempi1Data.Value:=strToDate(dat);
+
+      //nb3 fd.TtempiDalle1.Value:=Time2ZTime(strToTime('00:00:00')); //per evitare "dalle is null"
+      fd.Ttempi1Dalle.Value:=strToTime('00:00:00'); //per evitare "dalle is null"
+
+      fd.Ttempi1Pers.Value:=xUser;
+      fd.Ttempi1Macch.Value:=xMacch;
       //nb: forza su questa macchina anche se lav. prevista per altre
 
       pReg1.Show;
@@ -4672,8 +4941,8 @@ begin
       pReg1.Top:=(screen.Height-pReg1.Height) div 10 * 8;
 
       Ldurata1.Caption:='';
-      if (fd.TtempiDalle1.Value>0) and (fd.TtempiAlle1.Value>0) then
-        Ldurata1.Caption:=formatDateTime('hh:mm',fd.TtempiAlle1.Value-fd.TtempiDalle1.Value);
+      if (fd.Ttempi1Dalle.Value>0) and (fd.Ttempi1Alle.Value>0) then
+        Ldurata1.Caption:=formatDateTime('hh:mm',fd.Ttempi1Alle.Value-fd.Ttempi1Dalle.Value);
 
       azzeraCommesse(Ec1a, Ec2a, Ec3a, Ec4a, Ec5a, Ec6a,
         Ldis1a, Ldis2a, Ldis3a, Ldis4a, Ldis5a, Ldis6a,
@@ -4691,10 +4960,10 @@ begin
       fd.Trtem1.First;
       riga:=0;
       while not fd.Trtem1.EOF do begin
-        if trim(fd.TrtemComm1.Text)='' then
+        if trim(fd.Trtem1Comm.Text)='' then
           comm:='0'
         else
-          comm:=trim(fd.TrtemComm1.Text);
+          comm:=trim(fd.Trtem1Comm.Text);
         if vlr(comm)<=0 then begin
           dis:='';
           cli:='';
@@ -4723,17 +4992,17 @@ begin
         inc(riga);
         case riga of
           1:assComm(Ec1a,Ldis1a,Lcli1a,Lpz1a,LrigaLav1,LcodPlann1,
-              comm,dis,cli,pz,fd.TrtemRigalav1.Text,fd.TrtemTmp1.Text);
+              comm,dis,cli,pz,fd.Trtem1Rigalav.Text,fd.Trtem1Tmp.Text);
           2:assComm(Ec2a,Ldis2a,Lcli2a,Lpz2a,LrigaLav2,LcodPlann2,
-              comm,dis,cli, pz,fd.TrtemRigalav1.Text,fd.TrtemTmp1.Text);
+              comm,dis,cli, pz,fd.Trtem1Rigalav.Text,fd.Trtem1Tmp.Text);
           3:assComm(Ec3a,Ldis3a,Lcli3a,Lpz3a,LrigaLav3,LcodPlann3,
-              comm,dis,cli, pz,fd.TrtemRigalav1.Text,fd.TrtemTmp1.Text);
+              comm,dis,cli, pz,fd.Trtem1Rigalav.Text,fd.Trtem1Tmp.Text);
           4:assComm(Ec4a,Ldis4a,Lcli4a,Lpz4a,LrigaLav4,LcodPlann4,
-              comm,dis,cli, pz,fd.TrtemRigalav1.Text,fd.TrtemTmp1.Text);
+              comm,dis,cli, pz,fd.Trtem1Rigalav.Text,fd.Trtem1Tmp.Text);
           5:assComm(Ec5a,Ldis5a,Lcli5a,Lpz5a,LrigaLav5,LcodPlann5,
-              comm,dis,cli,pz,fd.TrtemRigalav1.Text,fd.TrtemTmp1.Text);
+              comm,dis,cli,pz,fd.Trtem1Rigalav.Text,fd.Trtem1Tmp.Text);
           6:assComm(Ec6a,Ldis6a,Lcli6a,Lpz6a,LrigaLav6,LcodPlann6,
-              comm,dis,cli,pz,fd.TrtemRigalav1.Text,fd.TrtemTmp1.Text);
+              comm,dis,cli,pz,fd.Trtem1Rigalav.Text,fd.Trtem1Tmp.Text);
         end;
 
         fd.Trtem1.Next;
@@ -4782,9 +5051,13 @@ begin
     end;
 
   if fd.Ttempi.State<>dsInactive then ;
-    if fd.TtempiDalle.Value>0 then
+    //nb3 if fd.TtempiDalle.Value<>Time2ZTime(strToTime('00:00')) then //if not fd.TtempiDalle.IsNull then //Value>0 then
+    if fd.TtempiDalle.Value<>strToTime('00:00:00') then //if not fd.TtempiDalle.IsNull then //Value>0 then
       if pReg.Visible then begin
+
+        //nb3 Ldurata.Caption:=formatDateTime('hh:mm',Now-ZTime2Time(fd.TtempiDalle.Value));
         Ldurata.Caption:=formatDateTime('hh:mm',Now-fd.TtempiDalle.Value);
+
         Ldurata.Repaint;
       end;
 
@@ -4794,11 +5067,10 @@ end;
 procedure TFmain.TlavCalcFields(DataSet: TDataSet);
 var
   d,d2:widestring;
-  x,p :word;
 begin
   d:=TlavNote.Value;
   d2:=d; //:='';
-  //toglie note come [2pz], [2h], {100°}<-posizione
+  (* //toglie note come [2pz], [2h], {100°}<-posizione
   p:=pos('pz]',lowerCase(d2));
   if p>0 then begin
     x:=p-1;
@@ -4807,12 +5079,11 @@ begin
     if d2[x]='[' then
       d2:=copy(d2,1,x-1);
   end;
-
   x:=pos('{',d2);
   if x>1 then //else copia da 1 a 0
-    d2:=copy(d2,1,x-1); //toglie posizione (es.{10})
+    d2:=copy(d2,1,x-1); //toglie posizione (es.{10}) *)
 
-  TlavDes2.AsString:=d2;
+  TlavDes2.AsString:=pulisci(d2);
 end;
 
 end.

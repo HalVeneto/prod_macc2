@@ -45,6 +45,7 @@ const
 var
   Flog: TFlog;
   xHost,xUser,xMacch,xDatabase,xUserProd,xUserPers,xPassword:string;
+  xPort:word;
   log_in:boolean;
 
 implementation
@@ -379,27 +380,29 @@ var
   x:word;
   p:byte;
 begin
+  //deb('log1');
   Flog.BorderIcons:=[];
   volte:=0;
 
-  (*xMacch:='2';
-  xHost:='192.168.1.11';
-  xUser:='postgres';
-  xPassword:='postgres';
-  xDatabase:='prod';*)
-  //xMacch:='2';
-  (*xHost:='192.168.1.11';
-  xUser:='postgres'; //'hal';
-  xPassword:=''; //'bdr529';
-  xDatabase:='prod';*)
-
-  (*xMacch:='';
-  xHost:='192.168.1.11';
-  xUser:='';
-  xPassword:='';
-  xDatabase:='prod';*)
-
   xUser:=''; xMacch:=''; xHost:=''; xDatabase:='';
+  //if _test_ then deb('test') else deb('notest');
+  (*if _test_ then begin
+    xHost:='localhost';
+    xUser:='postgres';
+    xPassword:='postgres';
+    xDatabase:='prod2';
+    xPort:=5434;
+    end
+  else
+    begin
+    xHost:='192.168.1.11';
+    xUser:='postgres';
+    xPassword:='postgres';
+    xPort:=5432;
+    xDatabase:='prod';
+  end;*)
+
+  //xUser:=''; xMacch:=''; xHost:=''; xDatabase:='';
   for x:=1 to application.ParamCount do begin
     par:=lowerCase(paramStr(x));
     p:=pos('macc=',par);
@@ -412,7 +415,7 @@ begin
         xUser:=upperCase(copy(par,p+3,255))
       else
         begin
-        p:=pos('server=',par);
+        (*p:=pos('server=',par);
         if p>0 then
           xHost:=lowerCase(copy(par,p+7,255))
         else
@@ -420,12 +423,12 @@ begin
           p:=pos('db=',par);
           if p>0 then
             xDatabase:=lowerCase(copy(par,p+3,255));
-        end;
+        end;*)
       end;
     end;
   end; //for
 
-  if xHost='' then
+  (*if xHost='' then
     xHost:='192.168.1.11'; //'serverdell';
   if xDatabase='' then
     xDatabase:='prod';
@@ -434,7 +437,8 @@ begin
     cbMacc.Text:=xMacch;
   cbUser.Text:='';
   if xUser<>'' then //da param. icona
-    cbUser.Text:=xUser;
+    cbUser.Text:=xUser; *)
+  //deb('log2');
 
   //deb('ante login');
   (*//deve connettersi "anonimamente" per leggere utenti e macchine:
@@ -454,16 +458,16 @@ begin
     close;
   end;*)
 
-
   (*try
     with fd do begin
-      Zconnection.Connected:=false;
-      //Zconnection.LibraryLocation:=pLoc+'\libpq.dll';
-      Zconnection.User:=xUser; //des;
-      Zconnection.Password:=xPassword;
-      Zconnection.HostName:=xHost; //'localhost'
-      Zconnection.Database:=xDatabase;
-      Zconnection.Connect;
+      Zconn.Disconnect;
+      Zconn.Connected:=false; //Zconn.LibraryLocation:=pLoc+'\libpq.dll';
+      Zconn.User:=xUser; //des;
+      Zconn.Password:=xPassword;
+      Zconn.HostName:=xHost; //'localhost'
+      Zconn.Database:=xDatabase;
+      Zconn.Port:=xPort;
+      Zconn.Connect;
     end;
   except
     on E:Exception do begin
@@ -477,6 +481,7 @@ begin
   //if fd.Zconnection.Connected then deb('connesso');
   s:='select cod,descr from pers where att=1 and macch<>''''';
   zgo(fd.zq,s,'op');
+  //deb('log3');
   //deb('query ok');
   //deb(i2s(fd.zq.recordcount)+' recs');
   if fd.zq.IsEmpty then begin
@@ -531,13 +536,12 @@ begin
 
   fd.zq.Close;
   //fd.Zconnection.Connected:=false; //poi si riconnette con il nome utente
-
   cbUser.SetFocus;
 end;
 
 procedure TFlog.LutClick(Sender: TObject);
 begin
-  deb(decrypt(']bYf'));
+  //deb(decrypt(']bYf'));
 end;
 
 end.

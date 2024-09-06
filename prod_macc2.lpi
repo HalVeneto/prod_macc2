@@ -11,6 +11,8 @@
       <UseXPManifest Value="True"/>
       <XPManifest>
         <DpiAware Value="True"/>
+        <TextName Value="Marpa.Prod.Prod2"/>
+        <TextDesc Value="Prod - gestione produzione"/>
       </XPManifest>
       <Icon Value="0"/>
     </General>

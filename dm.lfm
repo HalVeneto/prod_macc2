@@ -1,150 +1,62 @@
 object fd: Tfd
-  OnCreate = DataModuleCreate
   OldCreateOrder = True
   Height = 647
-  HorizontalOffset = 362
-  VerticalOffset = 199
-  Width = 836
-  object PQConn: TPQConnection
-    Connected = True
-    LoginPrompt = False
-    DatabaseName = 'prod'
-    KeepConnection = False
-    Params.Strings = (
-      'port=5432'
-    )
-    Password = 'postgres'
-    Transaction = SQLTransact
-    UserName = 'postgres'
-    HostName = '192.168.1.11'
-    Role = 'postgres'
-    Left = 48
+  HorizontalOffset = 359
+  VerticalOffset = 179
+  Width = 903
+  object dsZq: TDataSource
+    DataSet = zq
+    Left = 664
     Top = 32
   end
-  object Ttempi: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'data'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'macch'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'pers'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'lav'
-        DataType = ftString
-        Precision = -1
-        Size = 30
-      end    
-      item
-        Name = 'note'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'noteint'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'ncr'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'tipo'
-        DataType = ftString
-        Precision = -1
-        Size = 1
-      end    
-      item
-        Name = 'dalle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'alle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'tipoman'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'olio'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'sost'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'oliog'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'oliod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'dessost'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'sugg'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'ctrore'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'ctrmin'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'conf'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'rigalav'
-        DataType = ftInteger
-        Precision = -1
-      end>
-    AfterDelete = TtempiAfterPost
-    AfterPost = TtempiAfterPost
-    BeforePost = TtempiBeforePost
+  object dsRtem: TDataSource
+    DataSet = Trtem
+    Left = 352
+    Top = 27
+  end
+  object dsRtem1: TDataSource
+    DataSet = Trtem1
+    Left = 352
+    Top = 88
+  end
+  object dsImm: TDataSource
+    AutoEdit = False
+    DataSet = qImm
+    Left = 672
+    Top = 104
+  end
+  object dsMeff: TDataSource
+    DataSet = TmEff
+    Left = 176
+    Top = 168
+  end
+  object ZConn: TZConnection
+    ControlsCodePage = cCP_UTF8
+    ClientCodepage = 'WIN1252'
+    Properties.Strings = (
+      'codepage=WIN1252'
+      'RawStringEncoding=DB_CP'
+    )
+    Connected = True
+    RaiseWarningMessages = True
+    DisableSavepoints = False
+    HostName = 'localhost'
+    Port = 5434
+    Database = 'prod2'
+    User = 'postgres'
+    Password = 'postgres'
+    Protocol = 'postgresql'
+    LibraryLocation = 'C:\Lazarus\prgs\prod_macc2\libpq.dll'
+    Left = 40
+    Top = 32
+  end
+  object Ttempi: TZQuery
+    DisableZFields = True
     OnCalcFields = TtempiCalcFields
-    Database = PQConn
-    Transaction = SQLTransact
+    Connection = ZConn
+    BeforePost = TtempiBeforePost
+    AfterPost = TtempiAfterPost
+    AfterDelete = TtempiAfterPost
     SQL.Strings = (
       'select'
       't.cod,t.data,t.macch,t.pers,t.lav,'
@@ -153,35 +65,14 @@ object fd: Tfd
       'tipoman,olio,sost,oliog,oliod,'
       'dessost,sugg,'
       'ctrore,ctrmin,'
-      'conf,'
       'rigalav'
       'from tempi t'
+      'order by cod desc'
       'limit 1'
-      ''
-    )
-    UpdateSQL.Strings = (
-      'update tempi'
-      'set'
-      'data=    :data,'
-      'macch=   :macch,'
-      'pers=    :pers,'
-      'lav=     :lav,'
-      'note=    :note,'
-      'noteint= :noteint,'
-      'ncr=     :ncr,'
-      'tipo=    :tipo,'
-      'dalle=   :dalle,'
-      'alle=    :alle'
-      ''
-      'where cod= :old_cod'
-      ''
-      ''
-      ''
     )
     Params = <>
-    Macros = <>
-    Left = 152
-    Top = 32
+    Left = 128
+    Top = 24
     object Ttempicod: TFloatField
       FieldKind = fkData
       FieldName = 'cod'
@@ -189,8 +80,8 @@ object fd: Tfd
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
     object Ttempidata: TDateField
       FieldKind = fkData
@@ -199,7 +90,7 @@ object fd: Tfd
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
+      Required = True
     end
     object Ttempimacch: TStringField
       FieldKind = fkData
@@ -237,22 +128,14 @@ object fd: Tfd
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
+      OnGetText = TtempinoteGetText
       BlobType = ftMemo
       Transliterate = False
-    end
-    object TtempiDesNote: TWideStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesNote'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = []
-      ReadOnly = False
-      Required = False
     end
     object Ttempinoteint: TMemoField
       FieldKind = fkData
       FieldName = 'noteint'
-      Index = 7
+      Index = 6
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -263,7 +146,7 @@ object fd: Tfd
     object Ttempincr: TLongintField
       FieldKind = fkData
       FieldName = 'ncr'
-      Index = 8
+      Index = 7
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -272,7 +155,7 @@ object fd: Tfd
     object Ttempitipo: TStringField
       FieldKind = fkData
       FieldName = 'tipo'
-      Index = 9
+      Index = 8
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -282,25 +165,25 @@ object fd: Tfd
     object Ttempidalle: TTimeField
       FieldKind = fkData
       FieldName = 'dalle'
-      Index = 10
+      Index = 9
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
+      Required = True
     end
     object Ttempialle: TTimeField
       FieldKind = fkData
       FieldName = 'alle'
-      Index = 11
+      Index = 10
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
+      Required = True
     end
     object Ttempitipoman: TLongintField
       FieldKind = fkData
       FieldName = 'tipoman'
-      Index = 12
+      Index = 11
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -309,7 +192,7 @@ object fd: Tfd
     object Ttempiolio: TLongintField
       FieldKind = fkData
       FieldName = 'olio'
-      Index = 13
+      Index = 12
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -318,7 +201,7 @@ object fd: Tfd
     object Ttempisost: TLongintField
       FieldKind = fkData
       FieldName = 'sost'
-      Index = 14
+      Index = 13
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -327,27 +210,27 @@ object fd: Tfd
     object Ttempioliog: TFloatField
       FieldKind = fkData
       FieldName = 'oliog'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object Ttempioliod: TFloatField
+      FieldKind = fkData
+      FieldName = 'oliod'
       Index = 15
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Precision = -1
-    end
-    object Ttempioliod: TFloatField
-      FieldKind = fkData
-      FieldName = 'oliod'
-      Index = 16
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
+      Precision = 8
     end
     object Ttempidessost: TMemoField
       FieldKind = fkData
       FieldName = 'dessost'
-      Index = 17
+      Index = 16
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -358,7 +241,7 @@ object fd: Tfd
     object Ttempisugg: TMemoField
       FieldKind = fkData
       FieldName = 'sugg'
-      Index = 18
+      Index = 17
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
@@ -369,170 +252,53 @@ object fd: Tfd
     object Ttempictrore: TFloatField
       FieldKind = fkData
       FieldName = 'ctrore'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object Ttempictrmin: TFloatField
+      FieldKind = fkData
+      FieldName = 'ctrmin'
       Index = 19
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Precision = -1
+      Precision = 8
     end
-    object Ttempictrmin: TFloatField
+    object Ttempirigalav: TLongintField
       FieldKind = fkData
-      FieldName = 'ctrmin'
+      FieldName = 'rigalav'
       Index = 20
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Precision = -1
     end
-    object Ttempirigalav: TLongintField
-      FieldKind = fkData
-      FieldName = 'rigalav'
+    object TtempiDesNote: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'DesNote'
       Index = 21
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-    end
-    object TtempiDesLav: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesLav'
-      Index = 22
-      LookupCache = False
-      ProviderFlags = []
-      ReadOnly = False
-      Required = False
+      Size = 1000
     end
   end
   object dsTempi: TDataSource
-    Tag = 1
     DataSet = Ttempi
-    Left = 200
-    Top = 32
+    Left = 180
+    Top = 27
   end
-  object SQLTransact: TSQLTransaction
-    Active = True
-    Database = PQConn
-    Options = [stoUseImplicit]
-    Left = 48
-    Top = 112
-  end
-  object zq: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'data'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'macch'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'pers'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'lav'
-        DataType = ftString
-        Precision = -1
-        Size = 30
-      end    
-      item
-        Name = 'note'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'noteint'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'ncr'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'tipo'
-        DataType = ftString
-        Precision = -1
-        Size = 1
-      end    
-      item
-        Name = 'dalle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'alle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'tipoman'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'olio'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'sost'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'oliog'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'oliod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'dessost'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'sugg'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'ctrore'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'ctrmin'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'conf'
-        DataType = ftInteger
-        Precision = -1
-      end>
-    Database = PQConn
-    Transaction = SQLTransact
+  object Ttempi1: TZQuery
+    DisableZFields = True
+    Connection = ZConn
+    AfterPost = Ttempi1AfterPost
+    AfterDelete = Ttempi1AfterPost
     SQL.Strings = (
       'select'
       't.cod,t.data,t.macch,t.pers,t.lav,'
@@ -541,39 +307,362 @@ object fd: Tfd
       'tipoman,olio,sost,oliog,oliod,'
       'dessost,sugg,'
       'ctrore,ctrmin,'
-      'conf'
+      'rigalav'
       'from tempi t'
       'limit 1'
-      ''
     )
     Params = <>
-    Macros = <>
-    Left = 712
-    Top = 40
+    Left = 128
+    Top = 88
+    object Ttempi1cod: TFloatField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = 8
+    end
+    object Ttempi1data: TDateField
+      FieldKind = fkData
+      FieldName = 'data'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object Ttempi1macch: TStringField
+      FieldKind = fkData
+      FieldName = 'macch'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1pers: TStringField
+      FieldKind = fkData
+      FieldName = 'pers'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1lav: TStringField
+      FieldKind = fkData
+      FieldName = 'lav'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 30
+    end
+    object Ttempi1note: TMemoField
+      FieldKind = fkData
+      FieldName = 'note'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object Ttempi1noteint: TMemoField
+      FieldKind = fkData
+      FieldName = 'noteint'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object Ttempi1ncr: TLongintField
+      FieldKind = fkData
+      FieldName = 'ncr'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1tipo: TStringField
+      FieldKind = fkData
+      FieldName = 'tipo'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1
+    end
+    object Ttempi1dalle: TTimeField
+      FieldKind = fkData
+      FieldName = 'dalle'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object Ttempi1alle: TTimeField
+      FieldKind = fkData
+      FieldName = 'alle'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object Ttempi1tipoman: TLongintField
+      FieldKind = fkData
+      FieldName = 'tipoman'
+      Index = 11
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1olio: TLongintField
+      FieldKind = fkData
+      FieldName = 'olio'
+      Index = 12
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1sost: TLongintField
+      FieldKind = fkData
+      FieldName = 'sost'
+      Index = 13
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1oliog: TFloatField
+      FieldKind = fkData
+      FieldName = 'oliog'
+      Index = 14
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object Ttempi1oliod: TFloatField
+      FieldKind = fkData
+      FieldName = 'oliod'
+      Index = 15
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object Ttempi1dessost: TMemoField
+      FieldKind = fkData
+      FieldName = 'dessost'
+      Index = 16
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object Ttempi1sugg: TMemoField
+      FieldKind = fkData
+      FieldName = 'sugg'
+      Index = 17
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object Ttempi1ctrore: TFloatField
+      FieldKind = fkData
+      FieldName = 'ctrore'
+      Index = 18
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object Ttempi1ctrmin: TFloatField
+      FieldKind = fkData
+      FieldName = 'ctrmin'
+      Index = 19
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object Ttempi1rigalav: TLongintField
+      FieldKind = fkData
+      FieldName = 'rigalav'
+      Index = 20
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object Ttempi1DesNote: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'DesNote'
+      Index = 21
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 1000
+    end
   end
-  object dsZq: TDataSource
-    DataSet = zq
-    Left = 760
-    Top = 40
+  object dsTempi1: TDataSource
+    DataSet = Ttempi1
+    Enabled = False
+    Left = 180
+    Top = 88
   end
-  object Trtem: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <>
-    AfterDelete = TrtemAfterPost
-    AfterPost = TrtemAfterPost
+  object zq: TZQuery
+    DisableZFields = True
+    Connection = ZConn
+    Params = <>
+    Left = 616
+    Top = 32
+  end
+  object qImm: TZQuery
+    DisableZFields = True
+    Connection = ZConn
+    SQL.Strings = (
+      'select distinct d.cod,'
+      'd.des,'
+      'd.lungh,d.diam,'
+      'd.immnom,d.immjpg,tc.descr as cli,'
+      'tc.data,rc.commint'
+      'from dis d'
+      'left join rcomm rc on rc.dis=d.cod'
+      'left join tcomm tc on tc.cod=rc.cod'
+      'where d.cod is not null'
+      'limit 1'
+      '                   '
+    )
+    Params = <>
+    Left = 616
+    Top = 104
+    object qImmcod: TStringField
+      FieldKind = fkData
+      FieldName = 'cod'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Size = 40
+    end
+    object qImmdes: TStringField
+      FieldKind = fkData
+      FieldName = 'des'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object qImmlungh: TFloatField
+      FieldKind = fkData
+      FieldName = 'lungh'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object qImmdiam: TFloatField
+      FieldKind = fkData
+      FieldName = 'diam'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Precision = 8
+    end
+    object qImmimmnom: TStringField
+      FieldKind = fkData
+      FieldName = 'immnom'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 255
+    end
+    object qImmimmjpg: TBlobField
+      FieldKind = fkData
+      FieldName = 'immjpg'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmcli: TStringField
+      FieldKind = fkData
+      FieldName = 'cli'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      Size = 40
+    end
+    object qImmdata: TDateField
+      FieldKind = fkData
+      FieldName = 'data'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+    object qImmcommint: TLongintField
+      FieldKind = fkData
+      FieldName = 'commint'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+    end
+  end
+  object Trtem: TZQuery
+    DisableZFields = True
     OnCalcFields = TrtemCalcFields
-    Database = PQConn
-    Transaction = SQLTransact
+    Connection = ZConn
+    AfterPost = TrtemAfterPost
+    AfterDelete = TrtemAfterPost
     SQL.Strings = (
       'select cod,comm,tmp,riga,rigalav'
       'from rtempi'
-      'limit 1'
+      'limit 1   '
     )
     Params = <>
-    Macros = <>
-    Left = 360
-    Top = 32
+    Left = 304
+    Top = 27
     object Trtemcod: TFloatField
       FieldKind = fkData
       FieldName = 'cod'
@@ -581,8 +670,8 @@ object fd: Tfd
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
     object Trtemcomm: TLongintField
       FieldKind = fkData
@@ -601,7 +690,7 @@ object fd: Tfd
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Precision = -1
+      Precision = 8
     end
     object Trtemriga: TFloatField
       FieldKind = fkData
@@ -610,8 +699,8 @@ object fd: Tfd
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
     object Trtemrigalav: TLongintField
       FieldKind = fkData
@@ -627,7 +716,7 @@ object fd: Tfd
       FieldName = 'Dis'
       Index = 5
       LookupCache = False
-      ProviderFlags = []
+      ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 40
@@ -637,7 +726,7 @@ object fd: Tfd
       FieldName = 'Cli'
       Index = 6
       LookupCache = False
-      ProviderFlags = []
+      ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 40
@@ -647,76 +736,36 @@ object fd: Tfd
       FieldName = 'Pz'
       Index = 7
       LookupCache = False
-      ProviderFlags = []
+      ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
     end
   end
-  object dsRtem: TDataSource
-    DataSet = Trtem
-    Left = 408
-    Top = 32
-  end
-  object dsTempi1: TDataSource
-    DataSet = Ttempi1
-    Left = 200
-    Top = 88
-  end
-  object Trtem1: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'comm'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'tmp'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'riga'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'rigalav'
-        DataType = ftInteger
-        Precision = -1
-      end>
-    AfterDelete = Trtem1AfterPost
+  object Trtem1: TZQuery
+    DisableZFields = True
+    Connection = ZConn
     AfterPost = Trtem1AfterPost
-    OnCalcFields = Trtem1CalcFields
-    Database = PQConn
-    Transaction = SQLTransact
+    AfterDelete = Trtem1AfterPost
     SQL.Strings = (
       'select cod,comm,tmp,riga,rigalav'
       'from rtempi'
-      'limit 1'
+      'limit 1   '
     )
     Params = <>
-    Macros = <>
-    Left = 360
+    Left = 304
     Top = 88
-    object Trtemcod1: TFloatField
+    object Trtem1cod: TFloatField
       FieldKind = fkData
       FieldName = 'cod'
       Index = 0
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
-    object Trtemcomm1: TLongintField
+    object Trtem1comm: TLongintField
       FieldKind = fkData
       FieldName = 'comm'
       Index = 1
@@ -725,7 +774,7 @@ object fd: Tfd
       ReadOnly = False
       Required = False
     end
-    object Trtemtmp1: TFloatField
+    object Trtem1tmp: TFloatField
       FieldKind = fkData
       FieldName = 'tmp'
       Index = 2
@@ -733,19 +782,19 @@ object fd: Tfd
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Precision = -1
+      Precision = 8
     end
-    object Trtemriga1: TFloatField
+    object Trtem1riga: TFloatField
       FieldKind = fkData
       FieldName = 'riga'
       Index = 3
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
-    object Trtemrigalav1: TLongintField
+    object Trtem1rigalav: TLongintField
       FieldKind = fkData
       FieldName = 'rigalav'
       Index = 4
@@ -754,624 +803,52 @@ object fd: Tfd
       ReadOnly = False
       Required = False
     end
-    object TrtemDis1: TStringField
+    object Trtem1Dis: TStringField
       FieldKind = fkCalculated
       FieldName = 'Dis'
       Index = 5
       LookupCache = False
-      ProviderFlags = []
+      ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 40
     end
-    object TrtemCli1: TStringField
+    object Trtem1Cli: TStringField
       FieldKind = fkCalculated
       FieldName = 'Cli'
       Index = 6
       LookupCache = False
-      ProviderFlags = []
+      ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 40
     end
-    object TrtemPz1: TStringField
+    object Trtem1Pz: TStringField
       FieldKind = fkCalculated
       FieldName = 'Pz'
       Index = 7
       LookupCache = False
-      ProviderFlags = []
+      ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
       Size = 5
     end
   end
-  object dsRtem1: TDataSource
-    DataSet = Trtem1
-    Left = 408
-    Top = 88
-  end
-  object Ttempi1: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'data'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'macch'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'pers'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'lav'
-        DataType = ftString
-        Precision = -1
-        Size = 30
-      end    
-      item
-        Name = 'note'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'noteint'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'ncr'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'tipo'
-        DataType = ftString
-        Precision = -1
-        Size = 1
-      end    
-      item
-        Name = 'dalle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'alle'
-        DataType = ftTime
-        Precision = -1
-      end    
-      item
-        Name = 'tipoman'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'olio'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'sost'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'oliog'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'oliod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'dessost'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'sugg'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'ctrore'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'ctrmin'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'conf'
-        DataType = ftInteger
-        Precision = -1
-      end>
-    AfterDelete = Ttempi1AfterPost
-    AfterPost = Ttempi1AfterPost
-    OnCalcFields = Ttempi1CalcFields
-    Database = PQConn
-    Transaction = SQLTransact
-    SQL.Strings = (
-      'select'
-      't.cod,t.data,t.macch,t.pers,t.lav,'
-      't.note,t.noteint,'
-      't.ncr,t.tipo,t.dalle,t.alle,'
-      'tipoman,olio,sost,oliog,oliod,'
-      'dessost,sugg,'
-      'ctrore,ctrmin,'
-      'conf'
-      'from tempi t'
-      'limit 1'
-      ''
-    )
-    UpdateSQL.Strings = (
-      'update tempi'
-      'set'
-      'data=    :data,'
-      'macch=   :macch,'
-      'pers=    :pers,'
-      'lav=     :lav,'
-      'note=    :note,'
-      'noteint= :noteint,'
-      'ncr=     :ncr,'
-      'tipo=    :tipo,'
-      'dalle=   :dalle,'
-      'alle=    :alle'
-      ''
-      'where cod= :old_cod'
-      ''
-    )
-    Params = <>
-    Macros = <>
-    Left = 152
-    Top = 88
-    object Ttempicod1: TFloatField
-      FieldKind = fkData
-      FieldName = 'cod'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object Ttempidata1: TDateField
-      FieldKind = fkData
-      FieldName = 'data'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempimacch1: TStringField
-      FieldKind = fkData
-      FieldName = 'macch'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempipers1: TStringField
-      FieldKind = fkData
-      FieldName = 'pers'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempilav1: TStringField
-      FieldKind = fkData
-      FieldName = 'lav'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 30
-    end
-    object Ttempinote1: TMemoField
-      FieldKind = fkData
-      FieldName = 'note'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object TtempiDesNote1: TWideStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesNote'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = []
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempinoteint1: TMemoField
-      FieldKind = fkData
-      FieldName = 'noteint'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object Ttempincr1: TLongintField
-      FieldKind = fkData
-      FieldName = 'ncr'
-      Index = 8
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempitipo1: TStringField
-      FieldKind = fkData
-      FieldName = 'tipo'
-      Index = 9
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 1
-    end
-    object Ttempidalle1: TTimeField
-      FieldKind = fkData
-      FieldName = 'dalle'
-      Index = 10
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempialle1: TTimeField
-      FieldKind = fkData
-      FieldName = 'alle'
-      Index = 11
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempitipoman1: TLongintField
-      FieldKind = fkData
-      FieldName = 'tipoman'
-      Index = 12
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempiolio1: TLongintField
-      FieldKind = fkData
-      FieldName = 'olio'
-      Index = 13
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempisost1: TLongintField
-      FieldKind = fkData
-      FieldName = 'sost'
-      Index = 14
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object Ttempioliog1: TFloatField
-      FieldKind = fkData
-      FieldName = 'oliog'
-      Index = 15
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object Ttempioliod1: TFloatField
-      FieldKind = fkData
-      FieldName = 'oliod'
-      Index = 16
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object Ttempidessost1: TMemoField
-      FieldKind = fkData
-      FieldName = 'dessost'
-      Index = 17
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object Ttempisugg1: TMemoField
-      FieldKind = fkData
-      FieldName = 'sugg'
-      Index = 18
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftMemo
-      Transliterate = False
-    end
-    object Ttempictrore1: TFloatField
-      FieldKind = fkData
-      FieldName = 'ctrore'
-      Index = 19
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object Ttempictrmin1: TFloatField
-      FieldKind = fkData
-      FieldName = 'ctrmin'
-      Index = 20
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Precision = -1
-    end
-    object Ttempi1DesLav: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'DesLav'
-      Index = 21
-      LookupCache = False
-      ProviderFlags = []
-      ReadOnly = False
-      Required = False
-    end
-  end
-  object SQLDBLibraryLoader: TSQLDBLibraryLoader
-    Enabled = False
-    ConnectionType = 'PostgreSQL'
-    LibraryName = 'C:\Lazarus\prgs\prod_macc2\libpq.dll'
-    Left = 48
-    Top = 192
-  end
-  object dsImm: TDataSource
-    AutoEdit = False
-    DataSet = qImm
-    Left = 768
-    Top = 112
-  end
-  object qImm: TSQLQuery
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'imm'
-        DataType = ftBlob
-        Precision = -1
-      end    
-      item
-        Name = 'immjpg'
-        DataType = ftBlob
-        Precision = -1
-      end    
-      item
-        Name = 'immnom'
-        DataType = ftString
-        Precision = -1
-        Size = 255
-      end>
-    Database = PQConn
-    Transaction = SQLTransact
-    SQL.Strings = (
-      'select distinct d.cod,'
-      '((replace(d.des,chr(157),''ø''))::character varying) as des,'
-      'd.lungh,d.diam,'
-      'd.immnom,d.immjpg,tc.descr as cli,'
-      'tc.data,rc.commint'
-      'from dis d'
-      'left join rcomm rc on rc.dis=d.cod'
-      'left join tcomm tc on tc.cod=rc.cod'
-      'where cod is not null'
-      'limit 1'
-      ''
-    )
-    Params = <>
-    Macros = <>
-    ParseSQL = False
-    Left = 712
-    Top = 112
-    object qImmimmnom1: TStringField
-      FieldKind = fkData
-      FieldName = 'immnom'
-      Index = 0
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 255
-    end
-    object qImmLungh: TWordField
-      FieldKind = fkData
-      FieldName = 'Lungh'
-      Index = 1
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qImmDiam: TWordField
-      FieldKind = fkData
-      FieldName = 'Diam'
-      Index = 2
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qImmCod: TStringField
-      FieldKind = fkData
-      FieldName = 'Cod'
-      Index = 3
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 40
-    end
-    object qImmDes: TStringField
-      FieldKind = fkData
-      FieldName = 'Des'
-      Index = 4
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 255
-    end
-    object qImmCli: TStringField
-      FieldKind = fkData
-      FieldName = 'Cli'
-      Index = 5
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      Size = 40
-    end
-    object qImmCommInt: TLargeintField
-      FieldKind = fkData
-      FieldName = 'CommInt'
-      Index = 6
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-    end
-    object qImmImmJpg: TGraphicField
-      FieldKind = fkData
-      FieldName = 'ImmJpg'
-      Index = 7
-      LookupCache = False
-      ProviderFlags = [pfInUpdate, pfInWhere]
-      ReadOnly = False
-      Required = False
-      BlobType = ftGraphic
-    end
-  end
-  object TmEff: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
-    MaxIndexesCount = 4
-    FieldDefs = <    
-      item
-        Name = 'cod'
-        DataType = ftFloat
-        Precision = -1
-      end    
-      item
-        Name = 'data'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'macch'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'garanzia'
-        DataType = ftString
-        Precision = -1
-        Size = 1
-      end    
-      item
-        Name = 'notes'
-        DataType = ftMemo
-        Precision = -1
-      end    
-      item
-        Name = 'scad'
-        DataType = ftDate
-        Precision = -1
-      end    
-      item
-        Name = 'codcli'
-        DataType = ftString
-        Precision = -1
-        Size = 20
-      end    
-      item
-        Name = 'cliente'
-        DataType = ftString
-        Precision = -1
-        Size = 90
-      end    
-      item
-        Name = 'apparecchio'
-        DataType = ftString
-        Precision = -1
-        Size = 90
-      end    
-      item
-        Name = 'period'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'tipop'
-        DataType = ftInteger
-        Precision = -1
-      end    
-      item
-        Name = 'f1'
-        DataType = ftFloat
-        Precision = -1
-      end>
-    AfterDelete = Trtem1AfterPost
-    AfterPost = Trtem1AfterPost
-    OnCalcFields = Trtem1CalcFields
-    Database = PQConn
-    Transaction = SQLTransact
+  object TmEff: TZQuery
+    DisableZFields = True
+    OnCalcFields = TmEffCalcFields
+    Connection = ZConn
     SQL.Strings = (
       'select cod,data,macch,garanzia,notes,scad,codcli,cliente,apparecchio,'
       'period,tipop,f1'
       'from rip'
       'where garanzia<>''x'''
       'order by cod'
-      ''
+      '                '
     )
     Params = <>
-    Macros = <>
-    Left = 152
-    Top = 192
+    Left = 128
+    Top = 168
     object TmEffcod: TFloatField
       FieldKind = fkData
       FieldName = 'cod'
@@ -1379,8 +856,8 @@ object fd: Tfd
       LookupCache = False
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
-      Required = False
-      Precision = -1
+      Required = True
+      Precision = 8
     end
     object TmEffdata: TDateField
       FieldKind = fkData
@@ -1485,12 +962,7 @@ object fd: Tfd
       ProviderFlags = [pfInUpdate, pfInWhere]
       ReadOnly = False
       Required = False
-      Precision = -1
+      Precision = 8
     end
-  end
-  object dsMeff: TDataSource
-    DataSet = TmEff
-    Left = 200
-    Top = 192
   end
 end

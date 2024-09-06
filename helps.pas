@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, db, SQLDB, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, Rxdbgrid;
+  Buttons, ZDataset, Rxdbgrid;
 
 type
 
@@ -21,7 +21,7 @@ type
     dbgH: TRxDBGrid;
     Ecerca: TEdit;
     Lhint: TLabel;
-    zqH: TSQLQuery;
+    zqH: TZQuery;
     procedure BcercaClick(Sender: TObject);
     procedure BcloseClick(Sender: TObject);
     procedure Bok(Sender: TObject);
